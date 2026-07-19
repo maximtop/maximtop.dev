@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+
+<Layout>
+  <div class="mx-auto max-w-2xl px-6 py-10 sm:py-16">
+    <header class="mb-16 flex items-center justify-between sm:mb-24">
+      <span class="text-xs tracking-[0.2em] text-muted">MAXIMTOP.DEV</span>
+      <button
+        id="theme-toggle"
+        type="button"
+        role="switch"
+        aria-checked="false"
+        aria-label="Dark theme"
+        class="theme-switch"
+      >
+        <span class="knob">
+          <Icon name="sun" class="sun h-3 w-3" />
+          <Icon name="moon" class="moon h-3 w-3" />
+        </span>
+      </button>
+    </header>
+
+    <main>
+      <section class="mb-16 sm:mb-20">
+        <h1
+          class="font-display text-5xl leading-tight font-medium [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl"
+        >
+          {site.name}
+        </h1>
+        <p class="font-display mt-4 text-2xl italic sm:text-3xl">
+          I build <span class="text-accent">browser extensions</span>
+        </p>
+        <div
+          class="mt-8 max-w-[62ch] space-y-4 text-base leading-relaxed text-secondary"
+        >
+          {site.bio.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </section>
+
+      <section class="mb-16 sm:mb-20">
+        <h2 class="font-display mb-6 text-2xl font-medium">Day job</h2>
+        <div
+          class="group relative rounded-xl border border-line bg-card p-5 transition-colors hover:border-accent"
+        >
+          <label
+            class="absolute top-4 right-4 z-10"
+            title="Can't turn this one off — it pays the bills."
+          >
+            <span class="sr-only">{site.work.name} is always on</span>
+            <input type="checkbox" checked disabled class="sr-only" />
+            <span class="switch"></span>
+          </label>
+          <div class="flex items-start gap-4 pr-12">
+            <span
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent"
+            >
+              <Icon name={site.work.icon} class="h-6 w-6" />
+            </span>
+            <div>
+              <a
+                href={site.work.url}
+                target="_blank"
+                rel="noopener"
+                class="font-medium after:absolute after:inset-0 group-hover:text-accent"
+              >
+                {site.work.name}
+              </a>
+              <p class="mt-1 text-sm text-secondary">{site.work.description}</p>
+            </div>
+          </div>
+          <div
+            class="mt-4 flex items-center justify-between border-t border-line pt-3 text-xs text-muted"
+          >
+            <span>{site.work.meta}</span>
+            <span class="font-medium text-accent">Always on</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-16 sm:mb-20">
+        <h2 class="font-display mb-2 text-2xl font-medium">My extensions</h2>
+        <p class="mb-6 text-sm text-muted">
+          Side projects, all live on the Chrome Web Store. Try flipping one —
+          just like chrome://extensions.
+        </p>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {
+            site.projects.map((project) => (
+              <div class="group relative rounded-xl border border-line bg-card p-5 transition-colors hover:border-accent has-[input:not(:checked)]:hover:border-line">
+                <label class="absolute top-4 right-4 z-10 -m-3 cursor-pointer p-3">
+                  <span class="sr-only">Enable {project.name}</span>
+                  <input type="checkbox" checked class="peer sr-only" />
+                  <span class="switch" />
+                </label>
+                <div class="transition-[opacity,filter] duration-300 group-has-[input:not(:checked)]:opacity-50 group-has-[input:not(:checked)]:grayscale">
+                  <div class="flex items-start gap-3 pr-10">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                      <Icon name={project.icon} class="h-5 w-5" />
+                    </span>
+                    <div class="min-w-0 flex-1">
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener"
+                        class="font-medium after:absolute after:inset-0 hover:text-accent"
+                      >
+                        {project.name}
+                      </a>
+                      {'badge' in project && (
+                        <span class="ml-1.5 inline-block rounded bg-accent-soft px-1.5 py-0.5 align-middle text-[10px] font-medium tracking-wide text-accent uppercase">
+                          {project.badge}
+                        </span>
+                      )}
+                      <p class="mt-1 text-sm leading-snug text-secondary">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 flex items-center justify-between border-t border-line pt-3 text-xs text-muted">
+                  <span>Chrome Web Store</span>
+                  <span class="font-medium text-accent group-has-[input:not(:checked)]:hidden">
+                    Enabled
+                  </span>
+                  <span class="hidden group-has-[input:not(:checked)]:inline">
+                    Disabled
+                  </span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-line pt-8 pb-4">
+      <p class="font-display text-lg italic text-secondary">
+        This site serves no ads — your ad blocker can take the day off.
+      </p>
+      <nav class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+        {
+          site.links.map((link, index) => (
+            <>
+              {index > 0 && <span class="text-muted">·</span>}
+              <a
+                href={link.url}
+                target={link.url.startsWith('http') ? '_blank' : undefined}
+                rel={link.url.startsWith('http') ? 'noopener' : undefined}
+                class="text-secondary underline decoration-transparent underline-offset-4 transition-colors hover:text-accent hover:decoration-accent/40"
+              >
+                {link.name}
+              </a>
+            </>
+          ))
+        }
+      </nav>
+      <p class="mt-6 text-xs text-muted">
+        © {new Date().getFullYear()} {site.name}
+      </p>
+    </footer>
+  </div>
+</Layout>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const syncTheme = () => {
+    toggle?.setAttribute(
+      'aria-checked',
+      String(document.documentElement.dataset.theme === 'dark'),
+    );
+  };
+  syncTheme();
+  toggle?.addEventListener('click', () => {
+    const next =
+      document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('theme', next);
+    syncTheme();
+  });
+</script>
