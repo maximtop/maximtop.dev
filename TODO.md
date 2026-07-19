@@ -1,0 +1,1 @@
+- [x] create favicon.ico
