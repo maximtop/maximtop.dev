@@ -42,8 +42,9 @@ export const site = {
     {
       name: 'Kode Injector',
       description: 'Inject JavaScript and CSS from local files into websites.',
-      url: 'https://chromewebstore.google.com/detail/fgdehkdkmaiedleekbjpfoicpmodbicg',
+      url: '/extensions/kode-injector/',
       icon: 'code',
+      meta: 'Product page',
     },
     {
       name: 'Website Blocker: MT',

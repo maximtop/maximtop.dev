@@ -1,0 +1,99 @@
+---
+import KodeInjectorShell from '../../../../components/KodeInjectorShell.astro';
+import { kodeInjector } from '../../../../data/kode-injector';
+
+const description =
+  'Kode Injector privacy policy: what the extension processes locally, how browser storage and the read-only Helper work, retention, sharing, and contact details.';
+---
+
+<KodeInjectorShell
+  title="Kode Injector Privacy Policy"
+  description={description}
+  current="privacy"
+>
+  <article class="pt-16 sm:pt-24">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        Privacy policy
+      </p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">
+        Kode Injector Privacy Policy
+      </h1>
+      <p class="mt-6 text-sm text-muted">
+        Effective date: <time datetime="2026-07-27">July 27, 2026</time>
+      </p>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary">
+        Kode Injector associates local JavaScript and CSS files with website hostnames and applies that code when a matching page opens. This policy explains what information the extension processes and how it is handled.
+      </p>
+    </header>
+
+    <aside class="mt-12 rounded-2xl border border-accent/25 bg-accent-soft p-6 sm:p-8" aria-labelledby="summary-title">
+      <h2 id="summary-title" class="font-display text-2xl font-medium">Plain-language summary</h2>
+      <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-secondary sm:grid-cols-2">
+        <li class="rounded-lg bg-card/70 px-4 py-3">No developer-operated server or analytics service</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Rules and preferences stay in browser storage</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Local files are read only when needed for a rule</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">The Helper cannot write, execute, list, or use the network</li>
+      </ul>
+    </aside>
+
+    <div class="mt-16 max-w-4xl space-y-14 sm:mt-20">
+      <section aria-labelledby="processed-title">
+        <h2 id="processed-title" class="font-display text-3xl font-medium">Information processed by the extension</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Kode Injector processes the following information locally on the user’s device:</p>
+        <ul class="mt-5 list-disc space-y-3 pl-6 leading-relaxed text-secondary marker:text-accent">
+          <li>Injection rules created by the user, including website hostnames, local file paths, per-file state, and enable or disable settings.</li>
+          <li>The URL and hostname of an open browser tab, so the extension can determine which user-created rules apply and display the matching state in its popup.</li>
+          <li>The contents of local JavaScript and CSS files explicitly selected by the user. The extension reads those files only to apply the configured rule to a matching website.</li>
+          <li>Interface preferences such as language, theme, and local-file access method.</li>
+        </ul>
+        <p class="mt-5 leading-relaxed text-secondary">These values are application data required to provide the extension’s single purpose. They are not used for advertising, profiling, or analytics.</p>
+      </section>
+
+      <section aria-labelledby="storage-title">
+        <h2 id="storage-title" class="font-display text-3xl font-medium">Storage and transmission</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Rules and preferences are stored in the browser’s local extension storage. Kode Injector does not operate a server and does not transmit rules, browsing activity, local file paths, or local file contents to the developer or an analytics service.</p>
+        <p class="mt-5 leading-relaxed text-secondary">In Chrome and Microsoft Edge, local files are read through browser-managed file-URL access by default. If the user explicitly selects the optional Native Host method, Kode Injector Helper reads only the exact local regular file path requested by the extension. The Helper is read-only: it cannot write files, list directories, execute programs, start subprocesses, or access the network.</p>
+        <p class="mt-5 leading-relaxed text-secondary">In Safari for macOS, the same read-only Go reader is embedded inside the Safari extension. macOS displays its standard folder authorization panel when the user adds or saves a rule whose immediate containing folder has not yet been authorized. The native extension stores a read-only security-scoped bookmark for that folder in local preferences. Bookmark data, file paths, and file contents are not logged or transmitted by the native bridge.</p>
+        <p class="mt-5 leading-relaxed text-secondary">The Safari native bridge may keep up to two file snapshots totaling 10 MiB in memory for 30 seconds. The WebExtension can also keep up to 64 last-known-good rule snapshots totaling 10 MiB in memory, with no fixed lifetime, so it can inject promptly while refreshing files for a future page load. Neither cache is written to disk, and both disappear when their processes stop. Removing the containing application prevents further use of grants; clearing its local application data also removes stored bookmarks.</p>
+        <p class="mt-5 leading-relaxed text-secondary">When a rule matches, the user-selected JavaScript or CSS is applied to that website in the browser. CSS is inserted into the page DOM, JavaScript runs in the page’s main world, and injected JavaScript logs its configured local file URL in that page’s console for diagnostics. The website can process or transmit information available to its page under its own privacy policy. Users should configure only code and websites they trust.</p>
+        <p class="mt-5 leading-relaxed text-secondary">Links to GitHub Releases, documentation, or support open only after a user action. Those sites process requests under their own privacy policies.</p>
+      </section>
+
+      <section aria-labelledby="sharing-title">
+        <h2 id="sharing-title" class="font-display text-3xl font-medium">Sharing and sale</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Kode Injector does not sell personal information. It does not share personal information with the developer, advertisers, data brokers, or other third parties, except for the user-directed disclosure of selected source code and the JavaScript file URL to the website configured for that rule as described above.</p>
+      </section>
+
+      <section aria-labelledby="retention-title">
+        <h2 id="retention-title" class="font-display text-3xl font-medium">Retention and deletion</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Rules and preferences remain in local browser storage until the user deletes them, clears the extension’s data, or uninstalls the extension. The developer does not hold a server-side copy.</p>
+      </section>
+
+      <section aria-labelledby="children-title">
+        <h2 id="children-title" class="font-display text-3xl font-medium">Children</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Kode Injector is a developer tool and is not directed to children. It does not knowingly collect personal information from children.</p>
+      </section>
+
+      <section aria-labelledby="changes-title">
+        <h2 id="changes-title" class="font-display text-3xl font-medium">Changes to this policy</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Material changes will be published on this page and in the public source repository with a new effective date. The repository’s version history records previous revisions.</p>
+      </section>
+
+      <section aria-labelledby="contact-title">
+        <h2 id="contact-title" class="font-display text-3xl font-medium">Contact</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          Questions or privacy requests can be sent to
+          <a class="text-accent underline underline-offset-4" href={`mailto:${kodeInjector.contactEmail}`}>{kodeInjector.contactEmail}</a>
+          or filed through
+          <a class="text-accent underline underline-offset-4" href={kodeInjector.issuesUrl} target="_blank" rel="noopener">GitHub Issues</a>.
+        </p>
+      </section>
+    </div>
+
+    <p class="mt-16 border-t border-line pt-6 text-sm leading-relaxed text-muted">
+      Source version:
+      <a class="text-accent underline underline-offset-4" href={`${kodeInjector.githubUrl}/blob/master/PRIVACY.md`} target="_blank" rel="noopener">PRIVACY.md on GitHub</a>.
+    </p>
+  </article>
+</KodeInjectorShell>

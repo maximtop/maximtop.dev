@@ -1,0 +1,308 @@
+---
+import { Image } from 'astro:assets';
+import KodeInjectorShell from '../../../components/KodeInjectorShell.astro';
+import { kodeInjector } from '../../../data/kode-injector';
+import promo from '../../../assets/extensions/kode-injector/promo.png';
+import screenshot from '../../../assets/extensions/kode-injector/screenshot.png';
+
+const description =
+  'Inject local JavaScript and CSS into websites automatically. Kode Injector is a free, open-source browser extension for developers, QA, and designers.';
+
+const features = [
+  {
+    title: 'Local files, live websites',
+    description:
+      'Map a site hostname to a local JavaScript file, CSS file, or both. Your latest saved code runs on every matching visit.',
+  },
+  {
+    title: 'Rules you can control',
+    description:
+      'Create, edit, duplicate, pause, and delete rules without repeatedly pasting snippets into DevTools.',
+  },
+  {
+    title: 'Pause at any level',
+    description:
+      'Toggle one file, every rule for the current site, or all injection globally from the options page and toolbar popup.',
+  },
+  {
+    title: 'Built for real workflows',
+    description:
+      'Test a fix, automate a repetitive check, adjust a live layout, or compare local code against staging and production.',
+  },
+];
+
+const audiences = [
+  {
+    title: 'Developers',
+    description:
+      'Run local utilities and work-in-progress code against pages you do not control.',
+  },
+  {
+    title: 'QA engineers',
+    description:
+      'Keep repeatable checks and diagnostics available across reloads and test environments.',
+  },
+  {
+    title: 'Designers',
+    description:
+      'Preview CSS adjustments on a live interface without rebuilding or editing the source site.',
+  },
+];
+
+const softwareApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': `${kodeInjector.pageUrl}#software`,
+  name: kodeInjector.name,
+  description,
+  url: kodeInjector.pageUrl,
+  image: `https://maximtop.dev${kodeInjector.ogImageUrl}`,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Browser extension',
+  operatingSystem: 'Chrome, Microsoft Edge, Mozilla Firefox, macOS Safari',
+  browserRequirements: 'Requires a supported browser with WebExtensions support',
+  isAccessibleForFree: true,
+  downloadUrl: kodeInjector.storeUrl,
+  featureList: features.map((feature) => feature.title),
+  offers: {
+    '@type': 'Offer',
+    price: 0,
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: kodeInjector.storeUrl,
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Maxim Topciu',
+    url: 'https://maximtop.dev/',
+  },
+  license: `${kodeInjector.githubUrl}/blob/master/LICENSE`,
+  sameAs: [kodeInjector.githubUrl, kodeInjector.storeUrl],
+};
+---
+
+<KodeInjectorShell
+  title="Kode Injector — Inject Local JavaScript & CSS into Websites"
+  description={description}
+  current="overview"
+  structuredData={softwareApplicationSchema}
+>
+  <section class="pt-16 sm:pt-24" aria-labelledby="page-title">
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_9rem] lg:gap-16">
+      <div>
+        <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+          Free, open-source browser extension
+        </p>
+        <h1
+          id="page-title"
+          class="font-display max-w-4xl text-5xl leading-[1.04] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl lg:text-7xl"
+        >
+          Inject local JavaScript and CSS into any website
+        </h1>
+        <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+          Connect local code files to the sites where you need them. Kode Injector
+          applies your JavaScript and CSS automatically on every visit — no more
+          pasting the same snippet into DevTools after each reload.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a
+            href={kodeInjector.storeUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#075443] dark:text-[#08261f] dark:hover:bg-[#6ee7b7]"
+          >
+            Add to Chrome
+            <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <a
+            href={`${kodeInjector.baseUrl}how-it-works/`}
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+          >
+            See how it works
+          </a>
+        </div>
+        <ul
+          class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted"
+          aria-label="Extension highlights"
+        >
+          <li>✓ Free & open source</li>
+          <li>✓ No account</li>
+          <li>✓ No analytics</li>
+          <li>✓ 30 interface languages</li>
+        </ul>
+      </div>
+
+      <img
+        src={kodeInjector.iconUrl}
+        width="128"
+        height="128"
+        alt=""
+        class="order-first h-24 w-24 rounded-[1.35rem] shadow-lg lg:order-none lg:h-36 lg:w-36 lg:rounded-[2rem]"
+      />
+    </div>
+
+    <figure class="mt-14 overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:mt-20 sm:p-5">
+      <Image
+        src={promo}
+        alt="Kode Injector rule for github.com with local JavaScript and CSS files enabled"
+        widths={[640, 960, 1280, 1400]}
+        sizes="(max-width: 1024px) calc(100vw - 3rem), 1024px"
+        loading="eager"
+        fetchpriority="high"
+        class="h-auto w-full rounded-lg"
+      />
+      <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted sm:text-sm">
+        Map local files to a hostname, then toggle each file, site, or all rules whenever you need.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="features-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+      A faster feedback loop
+    </p>
+    <h2 id="features-title" class="font-display max-w-3xl text-3xl font-medium sm:text-4xl">
+      Your code stays local. The result appears on the page.
+    </h2>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      {
+        features.map((feature) => (
+          <article class="rounded-xl border border-line bg-card p-6">
+            <h3 class="font-medium">{feature.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-secondary">
+              {feature.description}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-y border-line py-20 sm:py-24" aria-labelledby="workflow-title">
+    <div class="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+      <div>
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+          Three steps
+        </p>
+        <h2 id="workflow-title" class="font-display text-3xl font-medium sm:text-4xl">
+          From local file to live page
+        </h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          Install the extension, create a rule for a hostname, then reload the target page. Your configured files are applied automatically.
+        </p>
+        <a
+          href={`${kodeInjector.baseUrl}how-it-works/`}
+          class="mt-6 inline-block text-sm font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+        >
+          Follow the complete setup guide →
+        </a>
+      </div>
+      <ol class="grid gap-4 sm:grid-cols-3">
+        <li class="rounded-xl border border-line bg-card p-5">
+          <span class="text-xs font-medium tracking-[0.18em] text-accent">01</span>
+          <h3 class="mt-4 font-medium">Choose a site</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">Enter a hostname such as <code>example.com</code>.</p>
+        </li>
+        <li class="rounded-xl border border-line bg-card p-5">
+          <span class="text-xs font-medium tracking-[0.18em] text-accent">02</span>
+          <h3 class="mt-4 font-medium">Select local code</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">Add a <code>file:///</code> JavaScript path, CSS path, or both.</p>
+        </li>
+        <li class="rounded-xl border border-line bg-card p-5">
+          <span class="text-xs font-medium tracking-[0.18em] text-accent">03</span>
+          <h3 class="mt-4 font-medium">Reload</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">Open the matching website and your code runs automatically.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="audiences-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+      Made for practical work
+    </p>
+    <h2 id="audiences-title" class="font-display text-3xl font-medium sm:text-4xl">
+      One tool, three kinds of workflow
+    </h2>
+    <div class="mt-8 grid gap-4 sm:grid-cols-3">
+      {
+        audiences.map((audience) => (
+          <article class="rounded-xl border border-line bg-card p-6">
+            <h3 class="font-medium">{audience.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-secondary">
+              {audience.description}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+
+    <figure class="mt-12 overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:p-5">
+      <Image
+        src={screenshot}
+        alt="Kode Injector options page showing rules for GitHub, a staging shop, and an internal app"
+        widths={[640, 960, 1280]}
+        sizes="(max-width: 1024px) calc(100vw - 3rem), 1024px"
+        loading="lazy"
+        class="h-auto w-full rounded-lg"
+      />
+      <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted sm:text-sm">
+        Keep rules organized, filter them by site, and pause any rule without deleting it.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="pb-20 sm:pb-28" aria-labelledby="privacy-title">
+    <div class="rounded-2xl border border-accent/25 bg-accent-soft p-7 sm:p-10">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        Local by design
+      </p>
+      <h2 id="privacy-title" class="font-display text-3xl font-medium sm:text-4xl">
+        No developer-operated backend or analytics
+      </h2>
+      <p class="mt-5 max-w-3xl leading-relaxed text-secondary">
+        Rules, preferences, file paths, and local file contents stay on your device. Kode Injector reads only files you configure and applies them only to matching websites. Selected code becomes available to that page, so use trusted code on trusted sites.
+      </p>
+      <div class="mt-8 grid gap-3 text-sm sm:grid-cols-2">
+        <p class="rounded-lg bg-card/70 px-4 py-3">No advertising or profiling</p>
+        <p class="rounded-lg bg-card/70 px-4 py-3">No developer-operated server</p>
+        <p class="rounded-lg bg-card/70 px-4 py-3">Rules remain in browser storage</p>
+        <p class="rounded-lg bg-card/70 px-4 py-3">Native Helper is read-only</p>
+      </div>
+      <a
+        href={`${kodeInjector.baseUrl}privacy/`}
+        class="mt-8 inline-block text-sm font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+      >
+        Read the full privacy policy →
+      </a>
+    </div>
+  </section>
+
+  <section class="rounded-2xl bg-[#0f766e] px-6 py-12 text-center text-white sm:px-12 sm:py-16" aria-labelledby="install-title">
+    <h2 id="install-title" class="font-display text-3xl font-medium sm:text-4xl">
+      Stop re-pasting code after every reload
+    </h2>
+    <p class="mx-auto mt-4 max-w-2xl leading-relaxed text-[#ccfbf1]">
+      Add Kode Injector to Chrome, connect a local JavaScript or CSS file, and keep your testing loop moving.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a
+        href={kodeInjector.storeUrl}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#0f5f58] transition-transform hover:-translate-y-0.5 focus-visible:outline-white"
+      >
+        Add to Chrome
+        <span aria-hidden="true" class="ml-2">↗</span>
+      </a>
+      <a
+        href={kodeInjector.githubUrl}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-medium text-white transition-colors hover:border-white"
+      >
+        View source on GitHub
+      </a>
+    </div>
+  </section>
+</KodeInjectorShell>

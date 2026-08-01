@@ -1,0 +1,137 @@
+---
+import KodeInjectorShell from '../../../../components/KodeInjectorShell.astro';
+import { kodeInjector } from '../../../../data/kode-injector';
+
+const description =
+  'Get Kode Injector support: troubleshoot local file access and injection rules, report reproducible bugs on GitHub, or contact the developer about privacy.';
+
+const checks = [
+  'Confirm the rule hostname matches the current page and does not include a path.',
+  'Confirm at least one JavaScript or CSS path points to an existing local file.',
+  'Make sure the rule, its file toggle, the current site, and global injection are all enabled.',
+  'In Chrome or Edge, enable “Allow access to file URLs” in the extension details.',
+  'In Firefox or Native Host mode, check that the current Kode Injector Helper is installed.',
+  'Reload the target tab after correcting the rule or file-access setting.',
+];
+---
+
+<KodeInjectorShell
+  title="Kode Injector Support"
+  description={description}
+  current="support"
+>
+  <article class="pt-16 sm:pt-24">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        Help and bug reports
+      </p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">
+        Kode Injector Support
+      </h1>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+        Most problems come from a hostname mismatch, a disabled toggle, or missing local file access. Run the checks below before opening a report.
+      </p>
+    </header>
+
+    <section class="py-16 sm:py-20" aria-labelledby="checks-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        Quick diagnosis
+      </p>
+      <h2 id="checks-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Check these six things first
+      </h2>
+      <ol class="mt-8 grid gap-4 sm:grid-cols-2">
+        {
+          checks.map((check, index) => (
+            <li class="flex gap-4 rounded-xl border border-line bg-card p-5">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-xs font-semibold text-accent">
+                {index + 1}
+              </span>
+              <p class="pt-1 text-sm leading-relaxed text-secondary">{check}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <a
+        href={`${kodeInjector.baseUrl}faq/`}
+        class="mt-6 inline-block text-sm font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+      >
+        Read detailed troubleshooting →
+      </a>
+    </section>
+
+    <section class="border-y border-line py-16 sm:py-20" aria-labelledby="report-title">
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div>
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+            Reproducible reports
+          </p>
+          <h2 id="report-title" class="font-display text-3xl font-medium sm:text-4xl">
+            Include enough context to diagnose the issue
+          </h2>
+          <p class="mt-5 leading-relaxed text-secondary">
+            Remove secrets and private source code before sharing logs or screenshots. A minimal safe example is usually more useful than a full project file.
+          </p>
+        </div>
+        <dl class="divide-y divide-line overflow-hidden rounded-xl border border-line bg-card">
+          <div class="grid gap-2 p-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt class="font-medium">Environment</dt>
+            <dd class="text-sm leading-relaxed text-secondary">Browser and version, operating system, Kode Injector version, and selected file-access method.</dd>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt class="font-medium">Reproduction</dt>
+            <dd class="text-sm leading-relaxed text-secondary">Exact steps, expected result, actual result, and whether the problem happens with a minimal file.</dd>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt class="font-medium">Diagnostics</dt>
+            <dd class="text-sm leading-relaxed text-secondary">Visible error text and relevant browser console output with local usernames, paths, tokens, and private code removed.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20" aria-labelledby="channels-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        Contact
+      </p>
+      <h2 id="channels-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Choose the right channel
+      </h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <a
+          href={kodeInjector.issuesUrl}
+          target="_blank"
+          rel="noopener"
+          class="rounded-xl border border-line bg-card p-6 transition-colors hover:border-accent"
+        >
+          <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Public bugs and features</p>
+          <h3 class="mt-3 text-lg font-medium">Open a GitHub issue ↗</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">Best for reproducible defects, compatibility reports, and feature proposals that do not contain private information.</p>
+        </a>
+        <a
+          href={`mailto:${kodeInjector.contactEmail}`}
+          class="rounded-xl border border-line bg-card p-6 transition-colors hover:border-accent"
+        >
+          <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Privacy and sensitive contact</p>
+          <h3 class="mt-3 text-lg font-medium">Email {kodeInjector.contactEmail}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">Use email for privacy questions or a concern that should not be posted in a public issue.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="rounded-2xl bg-[#0f766e] px-6 py-12 text-center text-white sm:px-12 sm:py-14" aria-labelledby="resources-title">
+      <h2 id="resources-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Looking for installation help?
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl leading-relaxed text-[#ccfbf1]">
+        The setup guide covers browser file access, creating a first rule, example files, and platform differences.
+      </p>
+      <a
+        href={`${kodeInjector.baseUrl}how-it-works/`}
+        class="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#0f5f58] transition-transform hover:-translate-y-0.5 focus-visible:outline-white"
+      >
+        Open the setup guide
+      </a>
+    </section>
+  </article>
+</KodeInjectorShell>
