@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button
+  type="button"
+  role="switch"
+  aria-checked="false"
+  aria-label="Dark theme"
+  class="theme-switch"
+  data-theme-toggle
+>
+  <span class="knob">
+    <Icon name="sun" class="sun h-3 w-3" />
+    <Icon name="moon" class="moon h-3 w-3" />
+  </span>
+</button>
+
+<script>
+  const toggles = document.querySelectorAll<HTMLButtonElement>(
+    '[data-theme-toggle]',
+  );
+
+  const syncTheme = () => {
+    const isDark = document.documentElement.dataset.theme === 'dark';
+    toggles.forEach((toggle) => {
+      toggle.setAttribute('aria-checked', String(isDark));
+    });
+  };
+
+  syncTheme();
+  toggles.forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const next =
+        document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem('theme', next);
+      syncTheme();
+    });
+  });
+</script>

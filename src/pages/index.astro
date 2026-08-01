@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import { site } from '../data/site';
 ---
 
@@ -8,19 +9,7 @@ import { site } from '../data/site';
   <div class="mx-auto max-w-2xl px-6 py-10 sm:py-16">
     <header class="mb-16 flex items-center justify-between sm:mb-24">
       <span class="text-xs tracking-[0.2em] text-muted">MAXIMTOP.DEV</span>
-      <button
-        id="theme-toggle"
-        type="button"
-        role="switch"
-        aria-checked="false"
-        aria-label="Dark theme"
-        class="theme-switch"
-      >
-        <span class="knob">
-          <Icon name="sun" class="sun h-3 w-3" />
-          <Icon name="moon" class="moon h-3 w-3" />
-        </span>
-      </button>
+      <ThemeToggle />
     </header>
 
     <main>
@@ -103,8 +92,8 @@ import { site } from '../data/site';
                     <div class="min-w-0 flex-1">
                       <a
                         href={project.url}
-                        target="_blank"
-                        rel="noopener"
+                        target={project.url.startsWith('http') ? '_blank' : undefined}
+                        rel={project.url.startsWith('http') ? 'noopener' : undefined}
                         class="font-medium after:absolute after:inset-0 hover:text-accent"
                       >
                         {project.name}
@@ -121,7 +110,7 @@ import { site } from '../data/site';
                   </div>
                 </div>
                 <div class="mt-4 flex items-center justify-between border-t border-line pt-3 text-xs text-muted">
-                  <span>Chrome Web Store</span>
+                  <span>{'meta' in project ? project.meta : 'Chrome Web Store'}</span>
                   <span class="font-medium text-accent group-has-[input:not(:checked)]:hidden">
                     Enabled
                   </span>
@@ -163,21 +152,3 @@ import { site } from '../data/site';
     </footer>
   </div>
 </Layout>
-
-<script>
-  const toggle = document.getElementById('theme-toggle');
-  const syncTheme = () => {
-    toggle?.setAttribute(
-      'aria-checked',
-      String(document.documentElement.dataset.theme === 'dark'),
-    );
-  };
-  syncTheme();
-  toggle?.addEventListener('click', () => {
-    const next =
-      document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem('theme', next);
-    syncTheme();
-  });
-</script>
