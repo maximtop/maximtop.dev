@@ -19,6 +19,14 @@ export const site = {
   },
   projects: [
     {
+      name: 'Hide Upgrade Button',
+      badge: 'New',
+      description: 'Hide the Upgrade and Ask Gemini buttons in Gmail, Drive, and Docs.',
+      url: '/extensions/hide-upgrade-button/',
+      icon: 'hide',
+      meta: 'Product page',
+    },
+    {
       name: 'Extensions Update Tracker',
       description: 'Track and manage your Chrome extension updates in one place.',
       url: 'https://chromewebstore.google.com/detail/cdgepknigaiclfdmjckaknepgcighbnh',

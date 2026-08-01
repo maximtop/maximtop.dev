@@ -1,0 +1,357 @@
+---
+import { Image } from 'astro:assets';
+import ThemeToggle from '../../../components/ThemeToggle.astro';
+import beforeAfter from '../../../assets/extensions/hide-upgrade-button/before-after.png';
+import Layout from '../../../layouts/Layout.astro';
+
+const pageUrl = 'https://maximtop.dev/extensions/hide-upgrade-button/';
+const storeUrl =
+  'https://chromewebstore.google.com/detail/hide-upgrade-button-for-g/flakajdfnklpgiefoffmecgbfbckmpcb';
+const githubUrl = 'https://github.com/maximtop/hide-gmail-upgrade-button';
+const privacyUrl = `${githubUrl}/blob/master/PRIVACY.md`;
+const issuesUrl = `${githubUrl}/issues`;
+const description =
+  'Hide the Upgrade and Ask Gemini buttons in Gmail, Google Drive, and Google Docs. Free, open-source Chrome extension with no tracking or data collection.';
+
+const products = [
+  {
+    name: 'Gmail',
+    description: 'Keep the mail header focused on the tools you actually use.',
+  },
+  {
+    name: 'Google Drive',
+    description: 'Remove the upsell while browsing and organizing your files.',
+  },
+  {
+    name: 'Google Docs',
+    description: 'Works in Docs, Sheets, Slides, and their home screens.',
+  },
+];
+
+const permissions = [
+  {
+    name: 'storage',
+    description: 'Keeps your two on/off preferences locally in your browser.',
+  },
+  {
+    name: 'scripting',
+    description:
+      'Applies your settings to supported tabs that were already open when the extension was installed or updated.',
+  },
+  {
+    name: 'mail.google.com',
+    description: 'Lets the extension hide the selected header buttons in Gmail only.',
+  },
+  {
+    name: 'drive.google.com',
+    description: 'Lets the extension hide the selected header buttons in Google Drive only.',
+  },
+  {
+    name: 'docs.google.com',
+    description: 'Lets the extension work in Google Docs, Sheets, and Slides only.',
+  },
+];
+
+const softwareApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': `${pageUrl}#software`,
+  name: 'Hide Upgrade Button for Gmail, Drive & Docs',
+  alternateName: 'Hide Upgrade Button',
+  description,
+  url: pageUrl,
+  image: `${pageUrl}og.png`,
+  applicationCategory: 'BrowserApplication',
+  applicationSubCategory: 'Productivity',
+  operatingSystem: 'Google Chrome',
+  browserRequirements: 'Requires Google Chrome with Manifest V3 support',
+  isAccessibleForFree: true,
+  downloadUrl: storeUrl,
+  offers: {
+    '@type': 'Offer',
+    price: 0,
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: storeUrl,
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Maxim Topciu',
+    url: 'https://maximtop.dev/',
+  },
+  license: `${githubUrl}/blob/master/LICENSE`,
+  sameAs: [githubUrl, storeUrl],
+};
+---
+
+<Layout
+  title="Hide Upgrade Button for Gmail, Drive & Docs"
+  description={description}
+  ogImage="/extensions/hide-upgrade-button/og.png"
+  ogImageAlt="Hide Upgrade Button for Gmail, Drive and Docs — no upsell in your header"
+  structuredData={softwareApplicationSchema}
+>
+  <div class="mx-auto max-w-5xl px-6 py-8 sm:py-12">
+    <header class="flex items-center justify-between">
+      <a
+        href="/"
+        class="text-xs tracking-[0.2em] text-muted transition-colors hover:text-accent"
+      >
+        MAXIMTOP.DEV
+      </a>
+      <ThemeToggle />
+    </header>
+
+    <main class="pt-16 sm:pt-24">
+      <section aria-labelledby="page-title">
+        <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_10rem] lg:gap-16">
+          <div>
+            <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+              Free, open-source Chrome extension
+            </p>
+            <h1
+              id="page-title"
+              class="font-display max-w-4xl text-5xl leading-[1.04] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl lg:text-7xl"
+            >
+              Hide Upgrade Button for Gmail, Drive & Docs
+            </h1>
+            <p class="mt-7 max-w-2xl text-lg leading-relaxed text-secondary sm:text-xl">
+              Remove the <strong class="font-medium text-ink">Upgrade</strong>{' '}and{' '}
+              <strong class="font-medium text-ink">Ask Gemini</strong>{' '}buttons from
+              Google’s headers — without tracking, data collection, or network requests.
+            </p>
+            <div class="mt-9 flex flex-wrap items-center gap-4">
+              <a
+                href={storeUrl}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#075443] focus-visible:rounded-lg dark:text-[#08261f] dark:hover:bg-[#6ee7b7]"
+              >
+                Install from Chrome Web Store
+                <span aria-hidden="true" class="ml-2">↗</span>
+              </a>
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+              >
+                View source on GitHub
+              </a>
+            </div>
+            <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted" aria-label="Extension highlights">
+              <li>✓ Free & open source</li>
+              <li>✓ No account</li>
+              <li>✓ No analytics</li>
+              <li>✓ No network requests</li>
+            </ul>
+          </div>
+
+          <img
+            src="/extensions/hide-upgrade-button/icon.svg"
+            width="128"
+            height="128"
+            alt=""
+            class="order-first h-24 w-24 rounded-[1.35rem] shadow-lg lg:order-none lg:h-40 lg:w-40 lg:rounded-[2.2rem]"
+          />
+        </div>
+
+        <figure class="mt-14 overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:mt-20 sm:p-5">
+          <Image
+            src={beforeAfter}
+            alt="Before: Upgrade and Ask Gemini buttons take up space in the Google header. After: both buttons are hidden and neighboring controls close the gap."
+            widths={[640, 960, 1280, 1600]}
+            sizes="(max-width: 1024px) calc(100vw - 3rem), 1024px"
+            loading="eager"
+            fetchpriority="high"
+            class="h-auto w-full rounded-lg"
+          />
+          <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted sm:text-sm">
+            A stylized before-and-after view: the extension hides the upsell controls and leaves no empty gap.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="py-20 sm:py-28" aria-labelledby="products-title">
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Supported products</p>
+        <h2 id="products-title" class="font-display text-3xl font-medium sm:text-4xl">
+          One clean header. Three Google products.
+        </h2>
+        <div class="mt-8 grid gap-4 sm:grid-cols-3">
+          {
+            products.map((product) => (
+              <article class="rounded-xl border border-line bg-card p-5">
+                <h3 class="font-medium">{product.name}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-secondary">
+                  {product.description}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="border-y border-line py-20 sm:py-24" aria-labelledby="controls-title">
+        <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <div>
+            <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Your choice</p>
+            <h2 id="controls-title" class="font-display text-3xl font-medium sm:text-4xl">
+              Hide either button — or both.
+            </h2>
+            <p class="mt-5 leading-relaxed text-secondary">
+              Two simple toggles in the extension popup let you control each button independently. Both are on by default, and changes apply live to open tabs.
+            </p>
+          </div>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-5 rounded-xl border border-line bg-card p-5">
+              <div>
+                <h3 class="font-medium">Hide the Upgrade button</h3>
+                <p class="mt-1 text-sm text-secondary">Removes the persistent subscription upsell.</p>
+              </div>
+              <span aria-hidden="true" class="relative h-5 w-9 shrink-0 rounded-full bg-accent">
+                <span class="absolute top-0.5 left-4 h-4 w-4 rounded-full bg-white shadow-sm"></span>
+              </span>
+            </div>
+            <div class="flex items-center justify-between gap-5 rounded-xl border border-line bg-card p-5">
+              <div>
+                <h3 class="font-medium">Hide the Ask Gemini button</h3>
+                <p class="mt-1 text-sm text-secondary">Removes the neighboring AI promotion.</p>
+              </div>
+              <span aria-hidden="true" class="relative h-5 w-9 shrink-0 rounded-full bg-accent">
+                <span class="absolute top-0.5 left-4 h-4 w-4 rounded-full bg-white shadow-sm"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 sm:py-28" aria-labelledby="privacy-title">
+        <div class="rounded-2xl border border-accent/25 bg-accent-soft p-7 sm:p-10">
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Private by design</p>
+          <h2 id="privacy-title" class="font-display text-3xl font-medium sm:text-4xl">
+            Your browsing stays in your browser.
+          </h2>
+          <p class="mt-5 max-w-3xl leading-relaxed text-secondary">
+            The extension has no server and makes no network requests. It inspects only the header controls it needs to hide, in memory, and never reads your email, files, or document contents.
+          </p>
+          <div class="mt-8 grid gap-3 text-sm sm:grid-cols-2">
+            <p class="rounded-lg bg-card/70 px-4 py-3">No analytics or telemetry</p>
+            <p class="rounded-lg bg-card/70 px-4 py-3">No tracking or advertising</p>
+            <p class="rounded-lg bg-card/70 px-4 py-3">No personal data collection</p>
+            <p class="rounded-lg bg-card/70 px-4 py-3">No remote code or network requests</p>
+          </div>
+          <a
+            href={privacyUrl}
+            target="_blank"
+            rel="noopener"
+            class="mt-8 inline-block text-sm font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+          >
+            Read the full privacy policy ↗
+          </a>
+        </div>
+      </section>
+
+      <section class="pb-20 sm:pb-28" aria-labelledby="permissions-title">
+        <div class="max-w-3xl">
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Nothing hidden</p>
+          <h2 id="permissions-title" class="font-display text-3xl font-medium sm:text-4xl">
+            Why each permission is needed
+          </h2>
+          <p class="mt-5 leading-relaxed text-secondary">
+            The extension requests only the browser capabilities and Google sites required for its single purpose.
+          </p>
+        </div>
+        <dl class="mt-8 divide-y divide-line overflow-hidden rounded-xl border border-line bg-card">
+          {
+            permissions.map((permission) => (
+              <div class="grid gap-2 p-5 sm:grid-cols-[12rem_1fr] sm:gap-6">
+                <dt>
+                  <code class="rounded bg-accent-soft px-2 py-1 text-sm text-accent">
+                    {permission.name}
+                  </code>
+                </dt>
+                <dd class="text-sm leading-relaxed text-secondary">
+                  {permission.description}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section class="border-t border-line py-20 sm:py-24" aria-labelledby="faq-title">
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Questions</p>
+        <h2 id="faq-title" class="font-display text-3xl font-medium sm:text-4xl">
+          Frequently asked
+        </h2>
+        <div class="mt-8 divide-y divide-line border-y border-line">
+          <details class="group py-5">
+            <summary class="cursor-pointer list-none pr-8 font-medium marker:hidden">
+              What exactly does Hide Upgrade Button remove?
+            </summary>
+            <p class="mt-3 max-w-3xl leading-relaxed text-secondary">
+              It hides the Upgrade subscription button and the Ask Gemini button in Gmail, Google Drive, and Google Docs. Each can be enabled or disabled separately.
+            </p>
+          </details>
+          <details class="group py-5">
+            <summary class="cursor-pointer list-none pr-8 font-medium marker:hidden">
+              Does the extension read my email, files, or documents?
+            </summary>
+            <p class="mt-3 max-w-3xl leading-relaxed text-secondary">
+              No. It looks only at toolbar controls in supported page headers. Nothing is recorded or transmitted, and there is no server to receive data.
+            </p>
+          </details>
+          <details class="group py-5">
+            <summary class="cursor-pointer list-none pr-8 font-medium marker:hidden">
+              Why does it need access to Google sites?
+            </summary>
+            <p class="mt-3 max-w-3xl leading-relaxed text-secondary">
+              That access lets its content script run only on Gmail, Drive, and Docs, where it finds and hides the selected buttons. It cannot run on other sites.
+            </p>
+          </details>
+          <details class="group py-5">
+            <summary class="cursor-pointer list-none pr-8 font-medium marker:hidden">
+              What happens if Google changes its interface?
+            </summary>
+            <p class="mt-3 max-w-3xl leading-relaxed text-secondary">
+              The extension fails safely: if a match is ambiguous, it leaves the page unchanged. If a button comes back, report it in
+              <a class="text-accent underline underline-offset-4" href={issuesUrl} target="_blank" rel="noopener">GitHub Issues</a>
+              and an extension update can restore hiding.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="rounded-2xl bg-[#0f766e] px-6 py-12 text-center text-white sm:px-12 sm:py-16" aria-labelledby="install-title">
+        <h2 id="install-title" class="font-display text-3xl font-medium sm:text-4xl">
+          A quieter Google header is one click away.
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl leading-relaxed text-[#ccfbf1]">
+          Install the free extension, keep both toggles on, and get back the space used by Upgrade and Ask Gemini.
+        </p>
+        <a
+          href={storeUrl}
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#0f5f58] transition-transform hover:-translate-y-0.5 focus-visible:outline-white"
+        >
+          Install from Chrome Web Store
+          <span aria-hidden="true" class="ml-2">↗</span>
+        </a>
+      </section>
+    </main>
+
+    <footer class="mt-20 border-t border-line pt-8 pb-4 sm:mt-24">
+      <nav aria-label="Product links" class="flex flex-wrap gap-x-5 gap-y-3 text-sm">
+        <a href="/" class="text-secondary hover:text-accent">Maximtop.dev</a>
+        <a href={githubUrl} target="_blank" rel="noopener" class="text-secondary hover:text-accent">GitHub</a>
+        <a href={privacyUrl} target="_blank" rel="noopener" class="text-secondary hover:text-accent">Privacy</a>
+        <a href={issuesUrl} target="_blank" rel="noopener" class="text-secondary hover:text-accent">Support & issues</a>
+      </nav>
+      <p class="mt-7 max-w-3xl text-xs leading-relaxed text-muted">
+        Hide Upgrade Button for Gmail, Drive & Docs is an independent project and is not affiliated with, endorsed by, or sponsored by Google. Gmail, Google Drive, Google Docs, and Gemini are trademarks of Google LLC and are referenced only to describe compatibility.
+      </p>
+      <p class="mt-5 text-xs text-muted">© {new Date().getFullYear()} Maxim Topciu</p>
+    </footer>
+  </div>
+</Layout>

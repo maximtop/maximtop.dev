@@ -3,7 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 ---
 
-<Layout title={`Page not found — ${site.name}`} description="This page does not exist.">
+<Layout
+  title={`Page not found — ${site.name}`}
+  description="This page does not exist."
+  robots="noindex, follow"
+>
   <div class="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-6 py-16">
     <p class="text-xs tracking-[0.2em] text-muted">MAXIMTOP.DEV</p>
     <h1 class="font-display mt-6 text-6xl font-medium [font-variation-settings:'WONK'_1,'SOFT'_40]">
