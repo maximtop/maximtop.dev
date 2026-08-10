@@ -1,0 +1,53 @@
+---
+import ExtensionShell from './ExtensionShell.astro';
+import {
+  splitForHackerNews,
+  splitForHackerNewsNav,
+  type SplitForHackerNewsPage,
+} from '../data/split-for-hacker-news';
+
+interface Props {
+  title: string;
+  description: string;
+  current: SplitForHackerNewsPage;
+  ogType?: 'website' | 'article';
+  articlePublishedTime?: string;
+  articleModifiedTime?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  current,
+  ogType,
+  articlePublishedTime,
+  articleModifiedTime,
+  structuredData,
+} = Astro.props;
+const product = {
+  name: splitForHackerNews.name,
+  baseUrl: splitForHackerNews.baseUrl,
+  iconUrl: splitForHackerNews.iconUrl,
+  ogImageUrl: splitForHackerNews.ogImageUrl,
+  ogImageAlt:
+    'Split for Hacker News — find a discussion and read it beside the article',
+  githubUrl: splitForHackerNews.githubUrl,
+  footerNote:
+    'Split for Hacker News is an unofficial, independent, open-source extension. It is not affiliated with or endorsed by Y Combinator or Hacker News.',
+};
+---
+
+<ExtensionShell
+  title={title}
+  description={description}
+  current={current}
+  product={product}
+  nav={splitForHackerNewsNav}
+  ogType={ogType}
+  articlePublishedTime={articlePublishedTime}
+  articleModifiedTime={articleModifiedTime}
+  structuredData={structuredData}
+>
+  <slot />
+</ExtensionShell>

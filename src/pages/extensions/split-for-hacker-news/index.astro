@@ -1,0 +1,385 @@
+---
+import { Image } from 'astro:assets';
+import SplitForHackerNewsShell from '../../../components/SplitForHackerNewsShell.astro';
+import { splitForHackerNews } from '../../../data/split-for-hacker-news';
+import discussionResults from '../../../assets/extensions/split-for-hacker-news/discussion-results.png';
+import privateDefaults from '../../../assets/extensions/split-for-hacker-news/private-defaults.png';
+
+const description =
+  'Find the exact Hacker News discussion for the article you are reading and open the comments beside it in Chrome. Free, open source, and no telemetry.';
+
+const features = [
+  {
+    title: 'Find the exact thread',
+    description:
+      'Open the toolbar popup on a public article. Split checks conservative URL variants and verifies every result instead of guessing from a similar title.',
+  },
+  {
+    title: 'Choose the discussion',
+    description:
+      'See points and comment counts before opening anything. When an article was submitted more than once, the other discussions stay available as alternatives.',
+  },
+  {
+    title: 'Keep both sides visible',
+    description:
+      'Open the real Hacker News thread in Chrome’s side panel, or use an adjacent discussion tab that you can pair with the article in Chrome Split View.',
+  },
+];
+
+const softwareApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': `${splitForHackerNews.pageUrl}#software`,
+  name: splitForHackerNews.name,
+  description,
+  url: splitForHackerNews.pageUrl,
+  image: `https://maximtop.dev${splitForHackerNews.ogImageUrl}`,
+  applicationCategory: 'UtilitiesApplication',
+  applicationSubCategory: 'Browser extension',
+  operatingSystem: 'ChromeOS, Windows, macOS, Linux',
+  browserRequirements: 'Requires Google Chrome 140 or newer',
+  softwareVersion: '0.1.0',
+  isAccessibleForFree: true,
+  downloadUrl: splitForHackerNews.storeUrl,
+  featureList: features.map((feature) => feature.title),
+  offers: {
+    '@type': 'Offer',
+    price: 0,
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: splitForHackerNews.storeUrl,
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Maxim Topciu',
+    url: 'https://maximtop.dev/',
+  },
+  license: `${splitForHackerNews.githubUrl}/blob/master/LICENSE`,
+  sameAs: [splitForHackerNews.githubUrl, splitForHackerNews.storeUrl],
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${splitForHackerNews.pageUrl}#breadcrumbs`,
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Maximtop.dev',
+      item: 'https://maximtop.dev/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: splitForHackerNews.name,
+      item: splitForHackerNews.pageUrl,
+    },
+  ],
+};
+---
+
+<SplitForHackerNewsShell
+  title="Split for Hacker News — Read HN Comments Beside Articles"
+  description={description}
+  current="overview"
+  structuredData={[softwareApplicationSchema, breadcrumbSchema]}
+>
+  <section class="pt-16 sm:pt-24" aria-labelledby="page-title">
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_9rem] lg:gap-16">
+      <div>
+        <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+          Free, open-source Chrome extension
+        </p>
+        <h1
+          id="page-title"
+          class="font-display max-w-4xl text-5xl leading-[1.04] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl lg:text-7xl"
+        >
+          Read articles with Hacker News comments beside them
+        </h1>
+        <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+          Split for Hacker News finds the exact discussion behind the public
+          article you are reading. Choose a thread, then keep the real Hacker
+          News comments next to the article instead of switching back and forth.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a
+            href={splitForHackerNews.storeUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#c2410c] px-5 py-3 text-sm font-semibold text-white transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#9a3412]"
+          >
+            Add to Chrome
+            <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <a
+            href={`${splitForHackerNews.baseUrl}find-hacker-news-discussion/`}
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+          >
+            Learn how discussion matching works
+          </a>
+        </div>
+        <ul
+          class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted"
+          aria-label="Extension highlights"
+        >
+          <li>✓ Free & open source</li>
+          <li>✓ No telemetry</li>
+          <li>✓ No account</li>
+          <li>✓ 40 interface languages</li>
+        </ul>
+      </div>
+
+      <img
+        src={splitForHackerNews.iconUrl}
+        width="128"
+        height="128"
+        alt=""
+        class="order-first h-24 w-24 rounded-[1.35rem] shadow-lg lg:order-none lg:h-36 lg:w-36 lg:rounded-[2rem]"
+      />
+    </div>
+
+    <figure class="mt-14 overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:mt-20 sm:p-5">
+      <Image
+        src={discussionResults}
+        alt="Split for Hacker News popup showing a primary Hacker News discussion, an alternative submission, comment counts, and the Open in side panel button"
+        widths={[640, 960, 1280]}
+        sizes="(max-width: 1024px) calc(100vw - 3rem), 1024px"
+        loading="eager"
+        fetchpriority="high"
+        class="h-auto w-full rounded-lg"
+      />
+      <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted sm:text-sm">
+        Pick the primary thread or an earlier submission only after you have seen the points and comment counts.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="workflow-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+      From article to discussion
+    </p>
+    <h2 id="workflow-title" class="font-display max-w-3xl text-3xl font-medium sm:text-4xl">
+      Exact matches, deliberate actions
+    </h2>
+    <div class="mt-8 grid gap-4 lg:grid-cols-3">
+      {
+        features.map((feature, index) => (
+          <article class="rounded-xl border border-line bg-card p-6">
+            <span class="text-xs font-medium tracking-[0.18em] text-accent">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3 class="mt-4 text-lg font-medium">{feature.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-secondary">
+              {feature.description}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+    <p class="mt-7 max-w-3xl leading-relaxed text-secondary">
+      Nothing opens, moves, or replaces a tab until you select an action. Read the{' '}
+      <a
+        href={`${splitForHackerNews.baseUrl}find-hacker-news-discussion/`}
+        class="font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+      >
+        guide to finding Hacker News discussions by URL
+      </a>{' '}
+      for the manual method and the matching details.
+    </p>
+  </section>
+
+  <section class="border-y border-line py-20 sm:py-24" aria-labelledby="reading-title">
+    <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+      <div>
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+          Two reading modes
+        </p>
+        <h2 id="reading-title" class="font-display text-3xl font-medium sm:text-4xl">
+          Side panel or adjacent tab
+        </h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          Both modes preserve the article and use the original Hacker News page for the discussion. Choose the one that fits the screen and the task.
+        </p>
+        <a
+          href={`${splitForHackerNews.baseUrl}read-comments-side-by-side/`}
+          class="mt-6 inline-block text-sm font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+        >
+          Compare the side-by-side workflows →
+        </a>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <article class="rounded-xl border border-line bg-card p-6">
+          <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Built into Chrome</p>
+          <h3 class="mt-3 text-lg font-medium">Side panel</h3>
+          <p class="mt-3 text-sm leading-relaxed text-secondary">
+            Keep the current tab untouched while the real Hacker News discussion opens in Chrome’s side panel.
+          </p>
+          <p class="mt-4 text-xs leading-relaxed text-muted">
+            The extension temporarily relaxes Hacker News subframe headers only while the panel is open so the page can be embedded.
+          </p>
+        </article>
+        <article class="rounded-xl border border-line bg-card p-6">
+          <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">More room</p>
+          <h3 class="mt-3 text-lg font-medium">Adjacent discussion tab</h3>
+          <p class="mt-3 text-sm leading-relaxed text-secondary">
+            Open and reuse a discussion tab next to the article, then pair the two tabs yourself with Chrome Split View.
+          </p>
+          <p class="mt-4 text-xs leading-relaxed text-muted">
+            Split for Hacker News cannot create native Split View automatically; Chrome leaves that final layout choice to you.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="shortcuts-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+      Optional shortcuts
+    </p>
+    <h2 id="shortcuts-title" class="font-display max-w-3xl text-3xl font-medium sm:text-4xl">
+      Faster when you want it, quiet by default
+    </h2>
+    <div class="mt-8 grid gap-4 sm:grid-cols-3">
+      <article class="rounded-xl border border-line bg-card p-6">
+        <h3 class="font-medium">Open in Split</h3>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">
+          Right-click a public link. The article opens in that tab and its discussion opens in the side panel only after you choose the menu item.
+        </p>
+      </article>
+      <article class="rounded-xl border border-line bg-card p-6">
+        <h3 class="font-medium">HN story clicks</h3>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">
+          Opt in to open the discussion beside a story when you click its article link on Hacker News. This setting is off by default.
+        </p>
+      </article>
+      <article class="rounded-xl border border-line bg-card p-6">
+        <h3 class="font-medium">Comment-count badge</h3>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">
+          Opt in to see whether the current public article has a discussion before opening the popup. Automatic checks are off by default.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="border-y border-line py-20 sm:py-24" aria-labelledby="privacy-title">
+    <div class="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+      <div>
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+          Private by default
+        </p>
+        <h2 id="privacy-title" class="font-display text-3xl font-medium sm:text-4xl">
+          The URL is enough. The article text stays unread.
+        </h2>
+        <div class="mt-5 space-y-4 leading-relaxed text-secondary">
+          <p>
+            In manual mode, the popup reads the current page URL and its optional canonical URL only after you open it. Eligible sanitized public URLs go directly to Algolia’s public Hacker News Search API.
+          </p>
+          <p>
+            Split for Hacker News has no analytics, telemetry, account, advertising, or developer backend. It never reads or sends article text.
+          </p>
+        </div>
+        <div class="mt-7 flex flex-wrap gap-5 text-sm">
+          <a
+            href={`${splitForHackerNews.baseUrl}privacy/`}
+            class="font-medium text-accent underline underline-offset-4"
+          >
+            Read the privacy summary →
+          </a>
+          <a
+            href={splitForHackerNews.privacySourceUrl}
+            target="_blank"
+            rel="noopener"
+            class="font-medium text-accent underline underline-offset-4"
+          >
+            Full policy on GitHub ↗
+          </a>
+        </div>
+      </div>
+
+      <figure class="overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:p-5">
+        <Image
+          src={privateDefaults}
+          alt="Split for Hacker News settings showing the automatic toolbar badge and discussion-beside-clicked-articles options switched off by default"
+          widths={[640, 960, 1280]}
+          sizes="(max-width: 1024px) calc(100vw - 3rem), 560px"
+          loading="lazy"
+          class="h-auto w-full rounded-lg"
+        />
+        <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted">
+          Automatic checks and the Hacker News story-click shortcut are both opt-in.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="limits-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+      Honest boundaries
+    </p>
+    <h2 id="limits-title" class="font-display text-3xl font-medium sm:text-4xl">
+      Focused on one job
+    </h2>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-xl border border-line bg-card p-5">
+        <p class="font-medium">Chrome 140+</p>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">The public release currently targets desktop Google Chrome.</p>
+      </div>
+      <div class="rounded-xl border border-line bg-card p-5">
+        <p class="font-medium">Hacker News only</p>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">It does not search Reddit, Lobsters, or a general web comments index.</p>
+      </div>
+      <div class="rounded-xl border border-line bg-card p-5">
+        <p class="font-medium">Public URLs only</p>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">Private, local, signed, credential-bearing, and special-use URLs are rejected.</p>
+      </div>
+      <div class="rounded-xl border border-line bg-card p-5">
+        <p class="font-medium">Submitted articles</p>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">A result exists only when Hacker News has a matching indexed submission.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid gap-4 sm:grid-cols-2" aria-label="Learn more">
+    <a
+      href={`${splitForHackerNews.baseUrl}find-hacker-news-discussion/`}
+      class="rounded-xl border border-line bg-card p-6 transition-colors hover:border-accent"
+    >
+      <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Search by URL</p>
+      <h2 class="mt-3 text-lg font-medium">Find the HN discussion for an article</h2>
+      <p class="mt-2 text-sm leading-relaxed text-secondary">
+        Use Hacker News Search manually, understand URL variants, and handle duplicate submissions.
+      </p>
+    </a>
+    <a
+      href={`${splitForHackerNews.baseUrl}read-comments-side-by-side/`}
+      class="rounded-xl border border-line bg-card p-6 transition-colors hover:border-accent"
+    >
+      <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Reading workflow</p>
+      <h2 class="mt-3 text-lg font-medium">Read HN comments side by side</h2>
+      <p class="mt-2 text-sm leading-relaxed text-secondary">
+        Compare the side panel with an adjacent tab and native Chrome Split View.
+      </p>
+    </a>
+  </section>
+
+  <section class="pt-20 sm:pt-28" aria-labelledby="install-title">
+    <div class="rounded-2xl border border-line bg-card p-8 sm:p-12">
+      <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Ready for the next article?</p>
+      <h2 id="install-title" class="font-display mt-3 max-w-3xl text-3xl font-medium sm:text-4xl">
+        Open the discussion without losing the article
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-secondary">
+        Install Split for Hacker News, open a public article, and choose where its exact discussion should appear.
+      </p>
+      <a
+        href={splitForHackerNews.storeUrl}
+        target="_blank"
+        rel="noopener"
+        class="mt-7 inline-flex min-h-12 items-center justify-center rounded-lg bg-[#c2410c] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#9a3412]"
+      >
+        Add to Chrome ↗
+      </a>
+    </div>
+  </section>
+</SplitForHackerNewsShell>
