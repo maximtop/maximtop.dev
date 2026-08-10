@@ -184,7 +184,53 @@ const breadcrumbSchema = {
       </div>
     </section>
 
-    <section class="py-16 sm:py-20" aria-labelledby="panel-title">
+    <section class="py-16 sm:py-20" aria-labelledby="why-side-panel-title">
+      <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+        <div>
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+            The missing Chrome API
+          </p>
+          <h2 id="why-side-panel-title" class="font-display text-3xl font-medium sm:text-4xl">
+            Why a Chrome extension cannot open Split View automatically
+          </h2>
+        </div>
+        <div class="space-y-5 leading-relaxed text-secondary">
+          <p>
+            Chrome provides native Split View in the browser interface, but its
+            current public extension APIs do not expose a way to create a split,
+            place specific tabs into it, or manage that layout on your behalf.
+            Chrome’s official workflow still starts with you choosing Split View
+            in the browser UI.
+          </p>
+          <p>
+            The goal for Split was a one-action workflow that leaves the article
+            untouched and reveals its Hacker News discussion beside it. Chrome’s{' '}
+            <a
+              href="https://developer.chrome.com/docs/extensions/reference/api/sidePanel"
+              target="_blank"
+              rel="noopener"
+              class="font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+            >
+              supported Side Panel API
+            </a>{' '}
+            is the browser surface that makes that automatic path possible. The
+            roomier alternative opens a reusable discussion tab, then hands the
+            final native Split View pairing back to you.
+          </p>
+          <div class="rounded-xl border border-line bg-card p-5 text-sm">
+            <h3 class="font-medium text-ink">A deliberate constraint</h3>
+            <p class="mt-2 leading-relaxed">
+              The extension does not simulate browser clicks, move your current
+              tab, or depend on an undocumented API. The side panel is the
+              reliable one-click layout Chrome extensions can support today;
+              native Split View stays an explicit user action.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-line py-16 sm:py-20" aria-labelledby="panel-title">
       <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
         <div>
           <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Mode 1</p>
