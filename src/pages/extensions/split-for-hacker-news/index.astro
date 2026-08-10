@@ -231,6 +231,20 @@ const breadcrumbSchema = {
         </article>
       </div>
     </div>
+    <aside
+      class="mt-10 rounded-xl border border-[#c2410c]/25 bg-[#c2410c]/6 p-6 sm:p-8"
+      aria-labelledby="why-side-panel-title"
+    >
+      <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        The missing Chrome API
+      </p>
+      <h3 id="why-side-panel-title" class="mt-3 font-display text-2xl font-medium">
+        Why Side Panel instead of automatic Split View?
+      </h3>
+      <p class="mt-4 max-w-4xl leading-relaxed text-secondary">
+        Chrome has native Split View, but its public extension API does not currently expose a way to create or manage that layout. We wanted one explicit action to keep the article and its Hacker News discussion visible together, so Split uses Chrome’s supported Side Panel API for the automatic path. Native Split View remains available as a manual, user-controlled option.
+      </p>
+    </aside>
   </section>
 
   <section class="py-20 sm:py-28" aria-labelledby="shortcuts-title">
