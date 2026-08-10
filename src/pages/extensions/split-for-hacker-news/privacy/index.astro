@@ -1,0 +1,118 @@
+---
+import SplitForHackerNewsShell from '../../../../components/SplitForHackerNewsShell.astro';
+import { splitForHackerNews } from '../../../../data/split-for-hacker-news';
+
+const description =
+  'Split for Hacker News privacy summary: no telemetry or account, sanitized public URL lookups through Algolia, local settings, and side panel framing behavior.';
+---
+
+<SplitForHackerNewsShell
+  title="Split for Hacker News Privacy Policy"
+  description={description}
+  current="privacy"
+>
+  <article class="pt-16 sm:pt-24">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        Privacy policy
+      </p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">
+        Split for Hacker News Privacy
+      </h1>
+      <p class="mt-6 text-sm text-muted">
+        Last updated: <time datetime="2026-08-10">August 10, 2026</time>
+      </p>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+        Split for Hacker News has no analytics, telemetry, account, advertising,
+        or application backend. It reads URLs—not article text—to locate exact
+        Hacker News submissions.
+      </p>
+    </header>
+
+    <aside class="mt-12 rounded-2xl border border-accent/25 bg-accent-soft p-6 sm:p-8" aria-labelledby="summary-title">
+      <h2 id="summary-title" class="font-display text-2xl font-medium">Plain-language summary</h2>
+      <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-secondary sm:grid-cols-2">
+        <li class="rounded-lg bg-card/70 px-4 py-3">Article text and other page content are never read</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">No analytics, account, advertising, or developer backend</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Only eligible, sanitized public URLs can be sent to Algolia</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Settings stay local; lookup data lasts only for the browser session</li>
+      </ul>
+    </aside>
+
+    <div class="mt-16 max-w-4xl space-y-14 sm:mt-20">
+      <section aria-labelledby="lookup-title">
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Manual by default</p>
+        <h2 id="lookup-title" class="font-display text-3xl font-medium">What a discussion lookup processes</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          When you open the extension popup, it reads the active page URL and, if present, the URL in that page’s canonical link. Before a search, it removes fragments and recognized tracking parameters and rejects private, local, special-use, credential-bearing, or apparently secret-bearing URLs. Eligible public URL candidates are sent over HTTPS to Algolia’s public Hacker News Search API and checked locally for an exact match.
+        </p>
+        <p class="mt-4 leading-relaxed text-secondary">
+          The extension does not read the article body, forms, messages, or other page content. Algolia is the only third party that receives lookup candidates from the extension and may process ordinary connection metadata under its own{' '}
+          <a class="text-accent underline underline-offset-4" href="https://www.algolia.com/policies/privacy/" target="_blank" rel="noopener">privacy policy</a>.
+        </p>
+      </section>
+
+      <section aria-labelledby="entrypoints-title">
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">User control</p>
+        <h2 id="entrypoints-title" class="font-display text-3xl font-medium">Optional and explicit entry points</h2>
+        <div class="mt-7 divide-y divide-line overflow-hidden rounded-xl border border-line">
+          <div class="grid gap-2 bg-card p-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
+            <h3 class="font-medium">Automatic badge</h3>
+            <p class="text-sm leading-relaxed text-secondary">Off by default. When enabled, eligible public tab URLs can be sent to Algolia as tabs navigate so the toolbar can show a comment count. Turning it off stops checks and clears badges and lookup cache entries.</p>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
+            <h3 class="font-medium">Open in Split</h3>
+            <p class="text-sm leading-relaxed text-secondary">The context-menu item receives a link URL only after you select it. The extension opens that link in the clicked tab and applies the same eligibility and sanitization boundary before any lookup.</p>
+          </div>
+          <div class="grid gap-2 bg-card p-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
+            <h3 class="font-medium">HN story clicks</h3>
+            <p class="text-sm leading-relaxed text-secondary">Off by default. When enabled, a content script limited to news.ycombinator.com observes a story-link click and reads that link and item ID. This flow stays on the device and performs no Algolia lookup.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="storage-title">
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Storage and retention</p>
+        <h2 id="storage-title" class="font-display text-3xl font-medium">What stays in Chrome</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          The automatic-badge and Hacker News story-click settings are stored in <code>chrome.storage.local</code>. Time-bounded lookup results, selected side-panel content, and article-to-discussion tab associations use <code>chrome.storage.session</code>, which Chrome discards when the browser session ends. The extension does not create a persistent browsing history.
+        </p>
+      </section>
+
+      <section aria-labelledby="panel-title">
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Real Hacker News, embedded</p>
+        <h2 id="panel-title" class="font-display text-3xl font-medium">How the side panel works</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          The side panel embeds the real <code>news.ycombinator.com</code> discussion. Hacker News therefore receives the same ordinary request metadata and cookies it would receive in a normal tab. The extension does not read the framed page, its cookies, or your Hacker News session.
+        </p>
+        <p class="mt-4 leading-relaxed text-secondary">
+          Hacker News normally blocks framing. While the panel is open, the extension temporarily removes <code>X-Frame-Options</code>, <code>Content-Security-Policy</code>, and <code>Content-Security-Policy-Report-Only</code> headers from Hacker News sub-frame responses. The rule is removed when the panel closes, never affects top-level Hacker News pages or another domain, and does not read, block, or redirect requests. Because Chrome cannot scope this rule to one extension frame, the temporary exception applies to any Hacker News sub-frame in that browser profile while the panel is open.
+        </p>
+      </section>
+
+      <section aria-labelledby="permissions-title">
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Documented capabilities</p>
+        <h2 id="permissions-title" class="font-display text-3xl font-medium">Why the extension asks for permissions</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          Chrome permissions support reading eligible tab and canonical URLs after the relevant action, running the short-lived canonical-link check, storing settings and session state, adding the one context-menu item, opening the side panel, and applying the temporary Hacker News sub-frame rule. Host access is limited to Algolia’s Hacker News API and Hacker News itself. The complete permission-by-permission explanation is maintained in the canonical policy linked below.
+        </p>
+      </section>
+
+      <section aria-labelledby="control-title">
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Your choices</p>
+        <h2 id="control-title" class="font-display text-3xl font-medium">Control and contact</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          Keep both optional settings off to use manual lookups only. Uninstalling the extension removes its local storage. Privacy questions can be sent to{' '}
+          <a class="text-accent underline underline-offset-4" href={`mailto:${splitForHackerNews.contactEmail}`}>{splitForHackerNews.contactEmail}</a>{' '}
+          or reported through{' '}
+          <a class="text-accent underline underline-offset-4" href={splitForHackerNews.issuesUrl} target="_blank" rel="noopener">GitHub Issues</a>.
+        </p>
+      </section>
+    </div>
+
+    <p class="mt-16 border-t border-line pt-6 text-sm leading-relaxed text-muted">
+      This page is a readable summary. The canonical, version-controlled policy is{' '}
+      <a class="text-accent underline underline-offset-4" href={splitForHackerNews.privacySourceUrl} target="_blank" rel="noopener">PRIVACY.md on GitHub</a>.
+    </p>
+  </article>
+</SplitForHackerNewsShell>

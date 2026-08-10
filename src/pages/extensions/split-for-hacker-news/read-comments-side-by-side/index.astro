@@ -1,0 +1,377 @@
+---
+import { Image } from 'astro:assets';
+import SplitForHackerNewsShell from '../../../../components/SplitForHackerNewsShell.astro';
+import { splitForHackerNews } from '../../../../data/split-for-hacker-news';
+import discussionResults from '../../../../assets/extensions/split-for-hacker-news/discussion-results.png';
+
+const description =
+  'Keep an article and its exact Hacker News thread visible together with Chrome’s side panel or Split View, without constant tab switching.';
+const publishedDate = '2026-08-10';
+const publishedDateTime = '2026-08-10T00:00:00+03:00';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${splitForHackerNews.pageUrl}read-comments-side-by-side/#article`,
+  headline: 'Read Hacker News Comments Side by Side with an Article',
+  description,
+  url: `${splitForHackerNews.pageUrl}read-comments-side-by-side/`,
+  mainEntityOfPage: `${splitForHackerNews.pageUrl}read-comments-side-by-side/`,
+  image: `https://maximtop.dev${splitForHackerNews.ogImageUrl}`,
+  datePublished: publishedDate,
+  dateModified: publishedDate,
+  author: {
+    '@type': 'Person',
+    name: 'Maxim Topciu',
+    url: 'https://maximtop.dev/',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${splitForHackerNews.pageUrl}read-comments-side-by-side/#breadcrumbs`,
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Maximtop.dev',
+      item: 'https://maximtop.dev/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: splitForHackerNews.name,
+      item: splitForHackerNews.pageUrl,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Read HN comments side by side',
+      item: `${splitForHackerNews.pageUrl}read-comments-side-by-side/`,
+    },
+  ],
+};
+---
+
+<SplitForHackerNewsShell
+  title="Read Hacker News Comments Side by Side with an Article"
+  description={description}
+  current="side-by-side"
+  ogType="article"
+  articlePublishedTime={publishedDateTime}
+  articleModifiedTime={publishedDateTime}
+  structuredData={[articleSchema, breadcrumbSchema]}
+>
+  <article class="pt-16 sm:pt-24">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        A calmer reading workflow
+      </p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">
+        Read the article and its Hacker News discussion side by side
+      </h1>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+        Keep the source visible while you follow the comments. Split for Hacker
+        News supports two Chrome workflows: a discussion in the browser side
+        panel, or an adjacent tab that you can place in native Split View.
+      </p>
+      <p class="mt-5 text-sm text-muted">
+        By <a href="/" class="font-medium text-secondary underline underline-offset-4">Maxim Topciu</a>
+        <span aria-hidden="true"> · </span>
+        Published <time datetime={publishedDate}>August 10, 2026</time>
+      </p>
+      <div class="mt-9 flex flex-wrap gap-4">
+        <a
+          href={splitForHackerNews.storeUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#c2410c] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#9a3412]"
+        >
+          Add to Chrome ↗
+        </a>
+        <a
+          href={`${splitForHackerNews.baseUrl}find-hacker-news-discussion/`}
+          class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+        >
+          First, find the exact discussion
+        </a>
+      </div>
+    </header>
+
+    <section class="py-16 sm:py-20" aria-labelledby="short-answer-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Short answer</p>
+      <h2 id="short-answer-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Put Hacker News beside the web, not in place of it
+      </h2>
+      <div class="mt-8 overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:p-5">
+        <div class="grid min-h-72 gap-3 sm:grid-cols-[1.45fr_0.75fr]">
+          <div class="rounded-xl border border-line bg-paper p-6 sm:p-8">
+            <div class="flex items-center gap-2" aria-hidden="true">
+              <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
+              <span class="ml-3 h-5 flex-1 rounded-full bg-line/70"></span>
+            </div>
+            <p class="mt-8 text-xs font-medium tracking-[0.18em] text-muted uppercase">Article tab</p>
+            <div class="mt-5 h-5 w-3/4 rounded bg-line"></div>
+            <div class="mt-3 h-3 w-full rounded bg-line/70"></div>
+            <div class="mt-2 h-3 w-11/12 rounded bg-line/70"></div>
+            <div class="mt-2 h-3 w-4/5 rounded bg-line/70"></div>
+            <div class="mt-7 h-3 w-full rounded bg-line/70"></div>
+            <div class="mt-2 h-3 w-10/12 rounded bg-line/70"></div>
+          </div>
+          <div class="rounded-xl border border-[#c2410c]/30 bg-[#c2410c]/8 p-6">
+            <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Chrome side panel</p>
+            <h3 class="mt-4 font-medium">Hacker News discussion</h3>
+            <div class="mt-6 space-y-4">
+              <div class="rounded-lg border border-line bg-card p-3">
+                <div class="h-3 w-3/4 rounded bg-line"></div>
+                <div class="mt-2 h-2.5 w-full rounded bg-line/70"></div>
+                <div class="mt-2 h-2.5 w-5/6 rounded bg-line/70"></div>
+              </div>
+              <div class="rounded-lg border border-line bg-card p-3">
+                <div class="h-3 w-2/3 rounded bg-line"></div>
+                <div class="mt-2 h-2.5 w-full rounded bg-line/70"></div>
+                <div class="mt-2 h-2.5 w-4/5 rounded bg-line/70"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted sm:text-sm">
+          The article remains the main tab. The panel contains the original Hacker News item page and your normal HN session.
+        </p>
+      </div>
+    </section>
+
+    <section class="border-y border-line py-16 sm:py-20" aria-labelledby="compare-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Choose a layout</p>
+      <h2 id="compare-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Side panel vs. Chrome Split View
+      </h2>
+      <div class="mt-8 overflow-x-auto rounded-xl border border-line bg-card">
+        <table class="w-full min-w-[42rem] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-line">
+              <th scope="col" class="p-5 font-medium">Question</th>
+              <th scope="col" class="p-5 font-medium">Side panel</th>
+              <th scope="col" class="p-5 font-medium">Adjacent tab + Split View</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-line text-secondary">
+            <tr>
+              <th scope="row" class="p-5 font-medium text-ink">Best for</th>
+              <td class="p-5">Quick reference while the article keeps most of the window</td>
+              <td class="p-5">Long discussions that need more horizontal space</td>
+            </tr>
+            <tr>
+              <th scope="row" class="p-5 font-medium text-ink">What Split opens</th>
+              <td class="p-5">The real HN item page inside Chrome’s side panel</td>
+              <td class="p-5">A reusable discussion tab beside the article tab</td>
+            </tr>
+            <tr>
+              <th scope="row" class="p-5 font-medium text-ink">Layout setup</th>
+              <td class="p-5">One click after selecting the discussion</td>
+              <td class="p-5">You place the two tabs into native Chrome Split View</td>
+            </tr>
+            <tr>
+              <th scope="row" class="p-5 font-medium text-ink">Current article tab</th>
+              <td class="p-5">Never moved or replaced</td>
+              <td class="p-5">Kept next to the discussion tab</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20" aria-labelledby="panel-title">
+      <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+        <div>
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Mode 1</p>
+          <h2 id="panel-title" class="font-display text-3xl font-medium">
+            Open comments in the side panel
+          </h2>
+        </div>
+        <div>
+          <ol class="space-y-5">
+            <li class="flex gap-5">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-xs font-medium text-accent">1</span>
+              <div>
+                <h3 class="font-medium">Open the extension on a public article</h3>
+                <p class="mt-2 text-sm leading-relaxed text-secondary">The popup looks up exact HN submissions for the current page and shows alternatives separately.</p>
+              </div>
+            </li>
+            <li class="flex gap-5">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-xs font-medium text-accent">2</span>
+              <div>
+                <h3 class="font-medium">Choose Open in side panel</h3>
+                <p class="mt-2 text-sm leading-relaxed text-secondary">The selected item opens in Chrome’s panel while the article remains the active page.</p>
+              </div>
+            </li>
+            <li class="flex gap-5">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-xs font-medium text-accent">3</span>
+              <div>
+                <h3 class="font-medium">Read the real HN thread</h3>
+                <p class="mt-2 text-sm leading-relaxed text-secondary">The panel embeds news.ycombinator.com directly, so your ordinary Hacker News session applies there.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="mt-7 text-sm leading-relaxed text-muted">
+            Chrome describes a side panel as browser UI that can remain available alongside the main page. See the official{' '}
+            <a
+              href="https://developer.chrome.com/docs/extensions/reference/api/sidePanel"
+              target="_blank"
+              rel="noopener"
+              class="font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+            >
+              Side Panel API documentation
+            </a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-line py-16 sm:py-20" aria-labelledby="split-view-title">
+      <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+        <div>
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Mode 2</p>
+          <h2 id="split-view-title" class="font-display text-3xl font-medium">
+            Pair an adjacent tab with Chrome Split View
+          </h2>
+        </div>
+        <div class="space-y-5 leading-relaxed text-secondary">
+          <p>
+            Select the discussion itself instead of the side-panel button. Split
+            opens a discussion tab next to the article and remembers the pairing
+            for the browser session, so a later selection can reuse that discussion pane.
+          </p>
+          <p>
+            Then follow Chrome’s{' '}
+            <a
+              href="https://support.google.com/chrome/answer/16971124"
+              target="_blank"
+              rel="noopener"
+              class="font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+            >
+              official Split View instructions
+            </a>{' '}
+            to place the article and discussion tabs in one window. The extension deliberately does not
+            simulate clicks, move your current tab, or claim an undocumented API:
+            native Split View remains your explicit browser action.
+          </p>
+          <div class="rounded-xl border border-line bg-card p-5 text-sm">
+            <h3 class="font-medium text-ink">When this mode is better</h3>
+            <p class="mt-2 leading-relaxed">
+              Use it for deep comment threads, wide screens, or any session where
+              the discussion deserves as much room as the article.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20" aria-labelledby="shortcut-title">
+      <div class="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+        <div>
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">From the HN front page</p>
+          <h2 id="shortcut-title" class="font-display text-3xl font-medium sm:text-4xl">
+            An opt-in shortcut for story clicks
+          </h2>
+          <p class="mt-5 leading-relaxed text-secondary">
+            Enable <strong>Discussions beside clicked articles</strong> in the options page. When you click a story link on Hacker News, the article opens normally in the same tab and its known item discussion opens in the side panel.
+          </p>
+          <p class="mt-4 leading-relaxed text-secondary">
+            The setting is off by default. It works only on <code>news.ycombinator.com</code>, reads the clicked story link and item id already present on that page, and performs no lookup request for that flow.
+          </p>
+        </div>
+        <figure class="overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:p-5">
+          <Image
+            src={discussionResults}
+            alt="Split for Hacker News popup with exact discussion choices and the Open in side panel action"
+            widths={[640, 960, 1280]}
+            sizes="(max-width: 1024px) calc(100vw - 3rem), 560px"
+            loading="lazy"
+            class="h-auto w-full rounded-lg"
+          />
+          <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted">
+            Outside the opt-in shortcut, select a result and reading mode explicitly from the popup.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="rounded-2xl border border-line bg-card p-8 sm:p-10" aria-labelledby="framing-title">
+      <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">A transparent technical boundary</p>
+      <h2 id="framing-title" class="font-display mt-3 max-w-3xl text-3xl font-medium sm:text-4xl">
+        Why the real HN page can appear in a panel
+      </h2>
+      <p class="mt-5 max-w-3xl leading-relaxed text-secondary">
+        Hacker News normally sends headers that prevent subframe embedding. While a Split side panel is open, the extension temporarily removes those framing and content-security-policy headers from Hacker News subframe responses. The rule is removed when the panel closes, never affects top-level HN navigation, and never applies to another host.
+      </p>
+      <p class="mt-4 max-w-3xl leading-relaxed text-secondary">
+        Split does not read the framed page, its cookies, or your HN session. The full scope and limitation are documented in the{' '}
+        <a
+          href={`${splitForHackerNews.baseUrl}privacy/`}
+          class="font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+        >
+          privacy summary
+        </a>.
+      </p>
+    </section>
+
+    <section class="py-16 sm:py-20" aria-labelledby="troubleshooting-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Troubleshooting</p>
+      <h2 id="troubleshooting-title" class="font-display text-3xl font-medium sm:text-4xl">
+        If the expected discussion is not beside the article
+      </h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-3">
+        <article class="rounded-xl border border-line bg-card p-6">
+          <h3 class="font-medium">No result</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">
+            The article may never have been submitted, may use an older URL, or may not be eligible for public lookup.
+          </p>
+        </article>
+        <article class="rounded-xl border border-line bg-card p-6">
+          <h3 class="font-medium">Several discussions</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">
+            Compare date and comment count. Reposts are separate threads, and Split keeps exact alternatives visible.
+          </p>
+        </article>
+        <article class="rounded-xl border border-line bg-card p-6">
+          <h3 class="font-medium">Panel closed</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">
+            Open the popup again and select Open in side panel. The temporary framing exception exists only while a panel is open.
+          </p>
+        </article>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-5 text-sm">
+        <a href={`${splitForHackerNews.baseUrl}find-hacker-news-discussion/`} class="font-medium text-accent underline underline-offset-4">
+          Diagnose a missing HN discussion →
+        </a>
+        <a href={`${splitForHackerNews.baseUrl}support/`} class="font-medium text-accent underline underline-offset-4">
+          Open the support guide →
+        </a>
+      </div>
+    </section>
+
+    <section class="pb-4" aria-labelledby="install-title">
+      <div class="rounded-2xl border border-[#c2410c]/25 bg-[#c2410c]/8 p-8 sm:p-12">
+        <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Keep the context</p>
+        <h2 id="install-title" class="font-display mt-3 max-w-3xl text-3xl font-medium sm:text-4xl">
+          Open comments beside your next article
+        </h2>
+        <p class="mt-5 max-w-2xl leading-relaxed text-secondary">
+          Split for Hacker News is free, open source, and available for Chrome 140 or newer.
+        </p>
+        <a
+          href={splitForHackerNews.storeUrl}
+          target="_blank"
+          rel="noopener"
+          class="mt-7 inline-flex min-h-12 items-center justify-center rounded-lg bg-[#c2410c] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#9a3412]"
+        >
+          Add to Chrome ↗
+        </a>
+      </div>
+    </section>
+  </article>
+</SplitForHackerNewsShell>

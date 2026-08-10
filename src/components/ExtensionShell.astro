@@ -1,0 +1,136 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import Layout from '../layouts/Layout.astro';
+
+interface ExtensionNavItem {
+  name: string;
+  href: string;
+  key: string;
+}
+
+interface ExtensionProduct {
+  name: string;
+  baseUrl: string;
+  iconUrl: string;
+  ogImageUrl: string;
+  ogImageAlt: string;
+  githubUrl?: string;
+  footerNote: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  current: string;
+  product: ExtensionProduct;
+  nav: readonly ExtensionNavItem[];
+  ogType?: 'website' | 'article';
+  articlePublishedTime?: string;
+  articleModifiedTime?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  current,
+  product,
+  nav,
+  ogType,
+  articlePublishedTime,
+  articleModifiedTime,
+  structuredData,
+} = Astro.props;
+const privacyUrl = nav.find((item) => item.key === 'privacy')?.href;
+const supportUrl = nav.find((item) => item.key === 'support')?.href;
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogImage={product.ogImageUrl}
+  ogImageAlt={product.ogImageAlt}
+  ogType={ogType}
+  articlePublishedTime={articlePublishedTime}
+  articleModifiedTime={articleModifiedTime}
+  structuredData={structuredData}
+>
+  <div class="mx-auto max-w-5xl px-6 py-8 sm:py-12">
+    <header>
+      <div class="flex items-center justify-between gap-5">
+        <a
+          href={product.baseUrl}
+          class="flex items-center gap-3 font-medium transition-colors hover:text-accent"
+        >
+          <img
+            src={product.iconUrl}
+            width="40"
+            height="40"
+            alt=""
+            class="h-9 w-9 rounded-lg"
+          />
+          <span>{product.name}</span>
+        </a>
+        <div class="flex items-center gap-4">
+          <a
+            href="/"
+            class="hidden text-xs tracking-[0.18em] text-muted transition-colors hover:text-accent sm:block"
+          >
+            MAXIMTOP.DEV
+          </a>
+          <ThemeToggle />
+        </div>
+      </div>
+
+      <nav
+        aria-label={product.name}
+        class="mt-7 flex flex-wrap gap-x-3 gap-y-3 border-b border-line pb-4 text-sm sm:gap-x-5"
+      >
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              aria-current={item.key === current ? 'page' : undefined}
+              class:list={[
+                'transition-colors hover:text-accent',
+                item.key === current
+                  ? 'font-medium text-accent'
+                  : 'text-secondary',
+              ]}
+            >
+              {item.name}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="mt-20 border-t border-line pt-8 pb-4 sm:mt-24">
+      <nav aria-label="Product links" class="flex flex-wrap gap-x-5 gap-y-3 text-sm">
+        <a href="/" class="text-secondary hover:text-accent">Maximtop.dev</a>
+        {
+          product.githubUrl && (
+            <a
+              href={product.githubUrl}
+              target="_blank"
+              rel="noopener"
+              class="text-secondary hover:text-accent"
+            >
+              GitHub
+            </a>
+          )
+        }
+        {privacyUrl && <a href={privacyUrl} class="text-secondary hover:text-accent">Privacy</a>}
+        {supportUrl && <a href={supportUrl} class="text-secondary hover:text-accent">Support</a>}
+      </nav>
+      <p class="mt-7 max-w-3xl text-xs leading-relaxed text-muted">
+        {product.footerNote}
+      </p>
+      <p class="mt-5 text-xs text-muted">© {new Date().getFullYear()} Maxim Topciu</p>
+    </footer>
+  </div>
+</Layout>

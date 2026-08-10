@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import sharp from 'sharp';
 
 const og = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
@@ -56,6 +57,20 @@ const kodeInjectorOg = `<svg width="1200" height="630" xmlns="http://www.w3.org/
   <text x="874" y="482" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#0c735c">Free · open source</text>
 </svg>`;
 
+const splitForHackerNewsMarquee = await fs.readFile(
+  'src/assets/extensions/split-for-hacker-news/marquee.png',
+);
+const splitForHackerNewsMarqueeUrl =
+  `data:image/png;base64,${splitForHackerNewsMarquee.toString('base64')}`;
+
+const splitForHackerNewsOg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#151922"/>
+  <text x="48" y="48" font-family="Helvetica, Arial, sans-serif" font-size="18" letter-spacing="5" fill="#a9b2c3">MAXIMTOP.DEV</text>
+  <image href="${splitForHackerNewsMarqueeUrl}" x="0" y="75" width="1200" height="480"/>
+  <text x="48" y="598" font-family="Helvetica, Arial, sans-serif" font-size="18" letter-spacing="2" fill="#a9b2c3">FREE · OPEN SOURCE · NO TELEMETRY</text>
+  <text x="1152" y="598" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#ff761b">ADD TO CHROME</text>
+</svg>`;
+
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#0d7a5f"/>
   <rect x="10" y="22" width="44" height="20" rx="10" fill="#ffffff" opacity="0.3"/>
@@ -76,6 +91,11 @@ await sharp(Buffer.from(kodeInjectorOg), { density: 144 })
   .resize(1200, 630)
   .png()
   .toFile('public/extensions/kode-injector/og.png');
+
+await sharp(Buffer.from(splitForHackerNewsOg), { density: 144 })
+  .resize(1200, 630)
+  .png()
+  .toFile('public/extensions/split-for-hacker-news/og.png');
 
 await sharp(Buffer.from(favicon), { density: 300 })
   .resize(180, 180)

@@ -1,0 +1,192 @@
+---
+import SplitForHackerNewsShell from '../../../../components/SplitForHackerNewsShell.astro';
+import { splitForHackerNews } from '../../../../data/split-for-hacker-news';
+
+const description =
+  'Split for Hacker News support and troubleshooting for missing discussions, ineligible pages, side panel loading, toolbar badges, Chrome versions, and bug reports.';
+
+const checks = [
+  `Confirm you are using Google Chrome ${splitForHackerNews.minimumChromeVersion} or newer.`,
+  'Confirm Split for Hacker News is enabled at chrome://extensions.',
+  'Try a public http:// or https:// article rather than a browser, local, private, or sign-in page.',
+  'Open the extension popup again after the article finishes navigating.',
+  'If the side panel is blank, confirm the same Hacker News discussion opens in a regular tab.',
+  'Check the extension version and visible status message before reporting the problem.',
+];
+---
+
+<SplitForHackerNewsShell
+  title="Split for Hacker News Support & Troubleshooting"
+  description={description}
+  current="support"
+>
+  <article class="pt-16 sm:pt-24">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        Help and bug reports
+      </p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">
+        Split for Hacker News Support
+      </h1>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+        Start with the browser version, page eligibility, and the exact status
+        shown in the popup. Most lookup and side-panel problems can be narrowed
+        down without sharing private browsing information.
+      </p>
+    </header>
+
+    <section class="py-16 sm:py-20" aria-labelledby="checks-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Quick diagnosis</p>
+      <h2 id="checks-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Check these six things first
+      </h2>
+      <ol class="mt-8 grid gap-4 sm:grid-cols-2">
+        {
+          checks.map((check, index) => (
+            <li class="flex gap-4 rounded-xl border border-line bg-card p-5">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-xs font-semibold text-accent">
+                {index + 1}
+              </span>
+              <p class="pt-1 text-sm leading-relaxed text-secondary">{check}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="border-y border-line py-16 sm:py-20" aria-labelledby="symptoms-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Troubleshooting by symptom</p>
+      <h2 id="symptoms-title" class="font-display text-3xl font-medium sm:text-4xl">
+        What the status usually means
+      </h2>
+      <div class="mt-8 divide-y divide-line border-y border-line">
+        <details class="group py-6" open>
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden">
+            <span>No Hacker News discussion was found</span>
+            <span aria-hidden="true" class="text-accent group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-4 max-w-3xl leading-relaxed text-secondary">
+            Matching is based on exact normalized URLs, not similar titles. The article may not be on Hacker News, or the submission may point to an original source, mirror, older edition, or different canonical URL. See the finding guide for practical alternatives.
+          </p>
+        </details>
+        <details class="group py-6">
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden">
+            <span>The page is not eligible for lookup</span>
+            <span aria-hidden="true" class="text-accent group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-4 max-w-3xl leading-relaxed text-secondary">
+            The extension accepts public HTTP and HTTPS article URLs. It rejects local and private networks, special-use names, embedded credentials, and query strings that appear to contain authentication or signing secrets. Browser pages such as <code>chrome://</code> are not article pages.
+          </p>
+        </details>
+        <details class="group py-6">
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden">
+            <span>The Hacker News side panel is blank or fails to load</span>
+            <span aria-hidden="true" class="text-accent group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-4 max-w-3xl leading-relaxed text-secondary">
+            Open the same discussion in a normal tab to confirm Hacker News is reachable, then close and reopen the panel. The panel loads the real Hacker News site and depends on a temporary sub-frame header rule; browser policy or another extension can affect that request. Include those details in a report if the tab works but the panel does not.
+          </p>
+        </details>
+        <details class="group py-6">
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden">
+            <span>The toolbar does not show a comment-count badge</span>
+            <span aria-hidden="true" class="text-accent group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-4 max-w-3xl leading-relaxed text-secondary">
+            Automatic availability badges are off by default. Enable them on the extension’s Options page if you want eligible public tab URLs checked during navigation. Manual popup lookups work without this option.
+          </p>
+        </details>
+        <details class="group py-6">
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden">
+            <span>Clicking an article on Hacker News does not open comments beside it</span>
+            <span aria-hidden="true" class="text-accent group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-4 max-w-3xl leading-relaxed text-secondary">
+            This shortcut is also off by default. Enable the Hacker News article-click option, then click a story title on <code>news.ycombinator.com</code>. It applies only to Hacker News story links and can be disabled at any time.
+          </p>
+        </details>
+        <details class="group py-6">
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden">
+            <span>Open in Split replaced the page in my current tab</span>
+            <span aria-hidden="true" class="text-accent group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-4 max-w-3xl leading-relaxed text-secondary">
+            This is the current context-menu behavior: after you explicitly select Open in Split, the chosen link loads in the tab where you clicked it and its discussion opens beside that article. Use the toolbar popup on an already-open article if you do not want to navigate the source tab.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20" aria-labelledby="report-title">
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div>
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Useful reports get fixed faster</p>
+          <h2 id="report-title" class="font-display text-3xl font-medium sm:text-4xl">
+            Include a safe, reproducible example
+          </h2>
+          <p class="mt-5 leading-relaxed text-secondary">
+            Never post a private URL, access token, signed link, account detail, or full browser profile. A public article or another minimal example is enough.
+          </p>
+        </div>
+        <dl class="divide-y divide-line overflow-hidden rounded-xl border border-line bg-card">
+          <div class="grid gap-2 p-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt class="font-medium">Environment</dt>
+            <dd class="text-sm leading-relaxed text-secondary">Chrome version, operating system, and Split for Hacker News version.</dd>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt class="font-medium">Reproduction</dt>
+            <dd class="text-sm leading-relaxed text-secondary">Exact safe steps, expected result, actual result, and whether you used the popup, side panel, or context menu.</dd>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt class="font-medium">Visible status</dt>
+            <dd class="text-sm leading-relaxed text-secondary">The complete popup or panel message and whether the same discussion works in a normal Hacker News tab.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section aria-labelledby="channels-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Contact</p>
+      <h2 id="channels-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Choose the right channel
+      </h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <a
+          href={splitForHackerNews.issuesUrl}
+          target="_blank"
+          rel="noopener"
+          class="rounded-xl border border-line bg-card p-6 transition-colors hover:border-accent"
+        >
+          <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Public bugs and features</p>
+          <h3 class="mt-3 text-lg font-medium">Open a GitHub issue ↗</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">Best for reproducible defects, compatibility reports, and feature requests without private information.</p>
+        </a>
+        <a
+          href={`mailto:${splitForHackerNews.contactEmail}`}
+          class="rounded-xl border border-line bg-card p-6 transition-colors hover:border-accent"
+        >
+          <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Privacy and sensitive contact</p>
+          <h3 class="mt-3 text-lg font-medium">Email {splitForHackerNews.contactEmail}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">Use email for privacy questions or a concern that should not be posted publicly.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="mt-16 rounded-2xl bg-[#9a3412] px-6 py-12 text-center text-white sm:px-12 sm:py-14" aria-labelledby="install-title">
+      <h2 id="install-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Need a clean reinstall?
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl leading-relaxed text-[#ffedd5]">
+        Install the current public build from the Chrome Web Store. Google Chrome 140 or newer is required.
+      </p>
+      <a
+        href={splitForHackerNews.storeUrl}
+        target="_blank"
+        rel="noopener"
+        class="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#9a3412] transition-transform hover:-translate-y-0.5 focus-visible:outline-white"
+      >
+        Open the Chrome Web Store ↗
+      </a>
+    </section>
+  </article>
+</SplitForHackerNewsShell>

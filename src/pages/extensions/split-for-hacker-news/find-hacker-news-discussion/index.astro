@@ -1,0 +1,290 @@
+---
+import SplitForHackerNewsShell from '../../../../components/SplitForHackerNewsShell.astro';
+import { splitForHackerNews } from '../../../../data/split-for-hacker-news';
+
+const description =
+  'Search Hacker News by URL, find duplicate submissions, and open the exact discussion for a public article—manually or with a Chrome extension.';
+const publishedDate = '2026-08-10';
+const publishedDateTime = '2026-08-10T00:00:00+03:00';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${splitForHackerNews.pageUrl}find-hacker-news-discussion/#article`,
+  headline: 'How to Find the Hacker News Discussion for an Article',
+  description,
+  url: `${splitForHackerNews.pageUrl}find-hacker-news-discussion/`,
+  mainEntityOfPage: `${splitForHackerNews.pageUrl}find-hacker-news-discussion/`,
+  image: `https://maximtop.dev${splitForHackerNews.ogImageUrl}`,
+  datePublished: publishedDate,
+  dateModified: publishedDate,
+  author: {
+    '@type': 'Person',
+    name: 'Maxim Topciu',
+    url: 'https://maximtop.dev/',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${splitForHackerNews.pageUrl}find-hacker-news-discussion/#breadcrumbs`,
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Maximtop.dev',
+      item: 'https://maximtop.dev/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: splitForHackerNews.name,
+      item: splitForHackerNews.pageUrl,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Find a Hacker News discussion',
+      item: `${splitForHackerNews.pageUrl}find-hacker-news-discussion/`,
+    },
+  ],
+};
+---
+
+<SplitForHackerNewsShell
+  title="How to Find the Hacker News Discussion for an Article"
+  description={description}
+  current="find-discussion"
+  ogType="article"
+  articlePublishedTime={publishedDateTime}
+  articleModifiedTime={publishedDateTime}
+  structuredData={[articleSchema, breadcrumbSchema]}
+>
+  <article class="pt-16 sm:pt-24">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        Search Hacker News by URL
+      </p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">
+        Find the Hacker News discussion behind an article
+      </h1>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+        A title search can miss a renamed story or mix in unrelated results.
+        Searching for the article URL is usually the shortest path to its exact
+        Hacker News thread—and to earlier discussions of the same link.
+      </p>
+      <p class="mt-5 text-sm text-muted">
+        By <a href="/" class="font-medium text-secondary underline underline-offset-4">Maxim Topciu</a>
+        <span aria-hidden="true"> · </span>
+        Published <time datetime={publishedDate}>August 10, 2026</time>
+      </p>
+      <div class="mt-9 flex flex-wrap gap-4">
+        <a
+          href="https://hn.algolia.com/"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+        >
+          Open Hacker News Search ↗
+        </a>
+        <a
+          href={splitForHackerNews.storeUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#c2410c] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#9a3412]"
+        >
+          Find it automatically in Chrome ↗
+        </a>
+      </div>
+    </header>
+
+    <section class="py-16 sm:py-20" aria-labelledby="manual-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Manual method</p>
+      <h2 id="manual-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Search the page address, not just its headline
+      </h2>
+      <ol class="mt-8 grid gap-4 lg:grid-cols-4">
+        <li class="rounded-xl border border-line bg-card p-6">
+          <span class="text-xs font-medium tracking-[0.18em] text-accent">01</span>
+          <h3 class="mt-4 font-medium">Copy the public URL</h3>
+          <p class="mt-3 text-sm leading-relaxed text-secondary">
+            Use the final article address from the browser after redirects have finished.
+          </p>
+        </li>
+        <li class="rounded-xl border border-line bg-card p-6">
+          <span class="text-xs font-medium tracking-[0.18em] text-accent">02</span>
+          <h3 class="mt-4 font-medium">Remove obvious tracking</h3>
+          <p class="mt-3 text-sm leading-relaxed text-secondary">
+            Drop the fragment and common campaign parameters so the publisher’s stable page address remains.
+          </p>
+        </li>
+        <li class="rounded-xl border border-line bg-card p-6">
+          <span class="text-xs font-medium tracking-[0.18em] text-accent">03</span>
+          <h3 class="mt-4 font-medium">Paste it into HN Search</h3>
+          <p class="mt-3 text-sm leading-relaxed text-secondary">
+            Search the full address first. If it returns nothing, try the hostname and distinctive path without the protocol.
+          </p>
+        </li>
+        <li class="rounded-xl border border-line bg-card p-6">
+          <span class="text-xs font-medium tracking-[0.18em] text-accent">04</span>
+          <h3 class="mt-4 font-medium">Open the matching story</h3>
+          <p class="mt-3 text-sm leading-relaxed text-secondary">
+            Check the destination, submission date, points, and comment count before choosing a discussion.
+          </p>
+        </li>
+      </ol>
+      <p class="mt-6 text-sm leading-relaxed text-muted">
+        Hacker News Search is powered by Algolia. Its public{' '}
+        <a
+          href="https://hn.algolia.com/api"
+          target="_blank"
+          rel="noopener"
+          class="font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+        >
+          API documentation
+        </a>{' '}
+        describes URL-restricted story search for tools that need a structured result.
+      </p>
+    </section>
+
+    <section class="border-y border-line py-16 sm:py-20" aria-labelledby="variants-title">
+      <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+        <div>
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">URL variants</p>
+          <h2 id="variants-title" class="font-display text-3xl font-medium">
+            The same article can have more than one address
+          </h2>
+        </div>
+        <div class="space-y-5 leading-relaxed text-secondary">
+          <p>
+            Publishers redirect domains, add or remove <code>www</code>, change{' '}
+            <code>http</code> to <code>https</code>, and attach campaign parameters.
+            A page can also declare a canonical URL that differs from the address in the bar.
+          </p>
+          <div class="overflow-hidden rounded-xl border border-line bg-card">
+            <div class="border-b border-line p-5">
+              <p class="text-xs font-medium tracking-[0.16em] text-muted uppercase">Shared address</p>
+              <code class="mt-2 block overflow-x-auto text-sm text-secondary">https://example.com/story?utm_source=newsletter#comments</code>
+            </div>
+            <div class="p-5">
+              <p class="text-xs font-medium tracking-[0.16em] text-muted uppercase">Stable candidate</p>
+              <code class="mt-2 block overflow-x-auto text-sm text-secondary">https://example.com/story</code>
+            </div>
+          </div>
+          <p>
+            Avoid deleting arbitrary query parameters: some are part of the real
+            content address. Remove only parameters you recognize as tracking,
+            then try the publisher’s canonical version when the first search misses.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20" aria-labelledby="duplicates-title">
+      <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+        <div>
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Reposts and updates</p>
+          <h2 id="duplicates-title" class="font-display text-3xl font-medium">
+            One URL can have several HN discussions
+          </h2>
+        </div>
+        <div class="space-y-5 leading-relaxed text-secondary">
+          <p>
+            A useful article may be submitted again after the original thread has
+            aged out, or a publisher may reuse the same canonical page for an update.
+            Those submissions are separate conversations with different dates,
+            points, and commenters.
+          </p>
+          <p>
+            Hacker News documents when a good story may be submitted again in its{' '}
+            <a
+              href="https://news.ycombinator.com/newsfaq.html#reposts"
+              target="_blank"
+              rel="noopener"
+              class="font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
+            >
+              official FAQ on reposts
+            </a>.
+          </p>
+          <p>
+            Do not assume the newest submission is always the best one. A larger
+            earlier thread may contain the substantive discussion; a newer thread
+            may be more relevant to an updated article. Compare both before opening.
+          </p>
+          <div class="rounded-xl border border-line bg-card p-5 text-sm">
+            <h3 class="font-medium text-ink">What Split does</h3>
+            <p class="mt-2 leading-relaxed">
+              The popup keeps exact duplicate submissions as alternatives instead
+              of collapsing them into one guessed result. You choose which conversation matters.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-line py-16 sm:py-20" aria-labelledby="missing-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">No result?</p>
+      <h2 id="missing-title" class="font-display text-3xl font-medium sm:text-4xl">
+        Four common reasons a discussion is not found
+      </h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <article class="rounded-xl border border-line bg-card p-6">
+          <h3 class="font-medium">It was never submitted</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">
+            HN Search can only return indexed Hacker News stories. No tool can recover a thread that does not exist.
+          </p>
+        </article>
+        <article class="rounded-xl border border-line bg-card p-6">
+          <h3 class="font-medium">The submitted URL redirects</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">
+            Search the older domain or path if the publisher moved the page after it appeared on Hacker News.
+          </p>
+        </article>
+        <article class="rounded-xl border border-line bg-card p-6">
+          <h3 class="font-medium">The page uses a different canonical URL</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">
+            Syndicated articles and mirrored posts can declare an original source that differs from the current address.
+          </p>
+        </article>
+        <article class="rounded-xl border border-line bg-card p-6">
+          <h3 class="font-medium">The URL is not a public lookup candidate</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">
+            Local, private, credential-bearing, signed, and special-use addresses should not be sent to a public search service.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20" aria-labelledby="automatic-title">
+      <div class="rounded-2xl border border-line bg-card p-8 sm:p-10">
+        <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Automate the careful parts</p>
+        <h2 id="automatic-title" class="font-display mt-3 max-w-3xl text-3xl font-medium sm:text-4xl">
+          Find the thread from the page you are already reading
+        </h2>
+        <p class="mt-5 max-w-3xl leading-relaxed text-secondary">
+          Split for Hacker News reads the active page URL and optional canonical URL only after you open its popup. It strips recognized tracking data, rejects non-public or sensitive candidates, searches the public Algolia endpoint, verifies exact matches, and lists duplicate submissions.
+        </p>
+        <p class="mt-4 max-w-3xl leading-relaxed text-secondary">
+          Article text is never read. The result stays closed until you choose a discussion and a reading mode.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-4">
+          <a
+            href={splitForHackerNews.storeUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#c2410c] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#9a3412]"
+          >
+            Add Split for Hacker News ↗
+          </a>
+          <a
+            href={`${splitForHackerNews.baseUrl}read-comments-side-by-side/`}
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+          >
+            Read comments beside the article
+          </a>
+        </div>
+      </div>
+    </section>
+  </article>
+</SplitForHackerNewsShell>

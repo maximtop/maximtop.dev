@@ -19,6 +19,14 @@ export const site = {
   },
   projects: [
     {
+      name: 'Split for Hacker News',
+      badge: 'New',
+      description: 'Find exact Hacker News discussions and read them beside the article.',
+      url: '/extensions/split-for-hacker-news/',
+      icon: 'comments',
+      meta: 'Product page',
+    },
+    {
       name: 'Hide Upgrade Button',
       badge: 'New',
       description: 'Hide the Upgrade and Ask Gemini buttons in Gmail, Drive, and Docs.',
