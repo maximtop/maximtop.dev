@@ -64,20 +64,33 @@ const softwareApplicationSchema = {
   isAccessibleForFree: true,
   downloadUrl: kodeInjector.storeUrl,
   featureList: features.map((feature) => feature.title),
-  offers: {
-    '@type': 'Offer',
-    price: 0,
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
-    url: kodeInjector.storeUrl,
-  },
+  offers: [
+    {
+      '@type': 'Offer',
+      price: 0,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: kodeInjector.storeUrl,
+    },
+    {
+      '@type': 'Offer',
+      price: 0,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: kodeInjector.edgeStoreUrl,
+    },
+  ],
   author: {
     '@type': 'Person',
     name: 'Maxim Topciu',
     url: 'https://maximtop.dev/',
   },
   license: `${kodeInjector.githubUrl}/blob/master/LICENSE`,
-  sameAs: [kodeInjector.githubUrl, kodeInjector.storeUrl],
+  sameAs: [
+    kodeInjector.githubUrl,
+    kodeInjector.storeUrl,
+    kodeInjector.edgeStoreUrl,
+  ],
 };
 ---
 
@@ -115,8 +128,17 @@ const softwareApplicationSchema = {
             <span aria-hidden="true" class="ml-2">↗</span>
           </a>
           <a
-            href={`${kodeInjector.baseUrl}how-it-works/`}
+            href={kodeInjector.edgeStoreUrl}
+            target="_blank"
+            rel="noopener"
             class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+          >
+            Add to Edge
+            <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <a
+            href={`${kodeInjector.baseUrl}how-it-works/`}
+            class="inline-flex min-h-12 items-center justify-center px-2 py-3 text-sm font-medium text-secondary transition-colors hover:text-accent"
           >
             See how it works
           </a>
@@ -283,7 +305,7 @@ const softwareApplicationSchema = {
       Stop re-pasting code after every reload
     </h2>
     <p class="mx-auto mt-4 max-w-2xl leading-relaxed text-[#ccfbf1]">
-      Add Kode Injector to Chrome, connect a local JavaScript or CSS file, and keep your testing loop moving.
+      Add Kode Injector to Chrome or Microsoft Edge, connect a local JavaScript or CSS file, and keep your testing loop moving.
     </p>
     <div class="mt-8 flex flex-wrap justify-center gap-4">
       <a
@@ -293,6 +315,15 @@ const softwareApplicationSchema = {
         class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#0f5f58] transition-transform hover:-translate-y-0.5 focus-visible:outline-white"
       >
         Add to Chrome
+        <span aria-hidden="true" class="ml-2">↗</span>
+      </a>
+      <a
+        href={kodeInjector.edgeStoreUrl}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-medium text-white transition-colors hover:border-white"
+      >
+        Add to Edge
         <span aria-hidden="true" class="ml-2">↗</span>
       </a>
       <a
