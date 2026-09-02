@@ -4,6 +4,8 @@ export const kodeInjector = {
   pageUrl: 'https://maximtop.dev/extensions/kode-injector/',
   storeUrl:
     'https://chromewebstore.google.com/detail/kode-injector/fgdehkdkmaiedleekbjpfoicpmodbicg',
+  edgeStoreUrl:
+    'https://microsoftedge.microsoft.com/addons/detail/kode-injector/allgihdbdjaficgacdildgfdcnnkjmjp',
   githubUrl: 'https://github.com/maximtop/kode-injector',
   issuesUrl: 'https://github.com/maximtop/kode-injector/issues/new',
   releasesUrl: 'https://github.com/maximtop/kode-injector/releases',
