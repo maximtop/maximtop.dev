@@ -1,3 +1,5 @@
+import { extensionStoreLinks } from './store-links';
+
 export const splitForHackerNews = {
   name: 'Split for Hacker News',
   baseUrl: '/extensions/split-for-hacker-news/',
@@ -6,8 +8,8 @@ export const splitForHackerNews = {
     '/extensions/split-for-hacker-news/find-hacker-news-discussion/',
   readSideBySideUrl:
     '/extensions/split-for-hacker-news/read-comments-side-by-side/',
-  storeUrl:
-    'https://chromewebstore.google.com/detail/split-for-hacker-news/jmocibcalpebojmljmhlkeackggnkhfm',
+  storeUrl: extensionStoreLinks.splitForHackerNews.chrome.url,
+  edgeStoreUrl: extensionStoreLinks.splitForHackerNews.edge.url,
   githubUrl: 'https://github.com/maximtop/hn-split',
   issuesUrl: 'https://github.com/maximtop/hn-split/issues/new',
   privacySourceUrl: 'https://github.com/maximtop/hn-split/blob/master/PRIVACY.md',

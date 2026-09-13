@@ -110,7 +110,21 @@ import { site } from '../data/site';
                   </div>
                 </div>
                 <div class="mt-4 flex items-center justify-between border-t border-line pt-3 text-xs text-muted">
-                  <span>{'meta' in project ? project.meta : 'Chrome Web Store'}</span>
+                  <span class="flex flex-wrap gap-x-2 gap-y-1">
+                    {
+                      project.storeLinks.map((storeLink) => (
+                        <a
+                          href={storeLink.url}
+                          target="_blank"
+                          rel="noopener"
+                          class="relative z-20 hover:text-accent hover:underline"
+                          aria-label={`Install ${project.name} from ${storeLink.label}`}
+                        >
+                          {storeLink.label}
+                        </a>
+                      ))
+                    }
+                  </span>
                   <span class="font-medium text-accent group-has-[input:not(:checked)]:hidden">
                     Enabled
                   </span>

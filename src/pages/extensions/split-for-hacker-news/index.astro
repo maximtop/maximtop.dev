@@ -42,20 +42,26 @@ const softwareApplicationSchema = {
   isAccessibleForFree: true,
   downloadUrl: splitForHackerNews.storeUrl,
   featureList: features.map((feature) => feature.title),
-  offers: {
-    '@type': 'Offer',
-    price: 0,
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
-    url: splitForHackerNews.storeUrl,
-  },
+  offers: [splitForHackerNews.storeUrl, splitForHackerNews.edgeStoreUrl].map(
+    (url) => ({
+      '@type': 'Offer',
+      price: 0,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url,
+    }),
+  ),
   author: {
     '@type': 'Person',
     name: 'Maxim Topciu',
     url: 'https://maximtop.dev/',
   },
   license: `${splitForHackerNews.githubUrl}/blob/master/LICENSE`,
-  sameAs: [splitForHackerNews.githubUrl, splitForHackerNews.storeUrl],
+  sameAs: [
+    splitForHackerNews.githubUrl,
+    splitForHackerNews.storeUrl,
+    splitForHackerNews.edgeStoreUrl,
+  ],
 };
 
 const breadcrumbSchema = {
@@ -110,6 +116,15 @@ const breadcrumbSchema = {
             class="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#c2410c] px-5 py-3 text-sm font-semibold text-white transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#9a3412]"
           >
             Add to Chrome
+            <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <a
+            href={splitForHackerNews.edgeStoreUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+          >
+            Add to Edge
             <span aria-hidden="true" class="ml-2">↗</span>
           </a>
           <a
@@ -386,14 +401,24 @@ const breadcrumbSchema = {
       <p class="mt-5 max-w-2xl leading-relaxed text-secondary">
         Install Split for Hacker News, open a public article, and choose where its exact discussion should appear.
       </p>
-      <a
-        href={splitForHackerNews.storeUrl}
-        target="_blank"
-        rel="noopener"
-        class="mt-7 inline-flex min-h-12 items-center justify-center rounded-lg bg-[#c2410c] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#9a3412]"
-      >
-        Add to Chrome ↗
-      </a>
+      <div class="mt-7 flex flex-wrap gap-4">
+        <a
+          href={splitForHackerNews.storeUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#c2410c] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#9a3412]"
+        >
+          Add to Chrome ↗
+        </a>
+        <a
+          href={splitForHackerNews.edgeStoreUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+        >
+          Add to Edge ↗
+        </a>
+      </div>
     </div>
   </section>
 </SplitForHackerNewsShell>
