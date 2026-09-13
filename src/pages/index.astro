@@ -72,7 +72,7 @@ import { site } from '../data/site';
       <section class="mb-16 sm:mb-20">
         <h2 class="font-display mb-2 text-2xl font-medium">My extensions</h2>
         <p class="mb-6 text-sm text-muted">
-          Side projects, all live on the Chrome Web Store. Try flipping one —
+          Side projects, available from the browser stores below. Try flipping one —
           just like chrome://extensions.
         </p>
         <div class="grid gap-4 sm:grid-cols-2">
@@ -110,7 +110,21 @@ import { site } from '../data/site';
                   </div>
                 </div>
                 <div class="mt-4 flex items-center justify-between border-t border-line pt-3 text-xs text-muted">
-                  <span>{'meta' in project ? project.meta : 'Chrome Web Store'}</span>
+                  <span class="flex flex-wrap gap-x-2 gap-y-1">
+                    {
+                      project.storeLinks.map((storeLink) => (
+                        <a
+                          href={storeLink.url}
+                          target="_blank"
+                          rel="noopener"
+                          class="relative z-20 hover:text-accent hover:underline"
+                          aria-label={`Install ${project.name} from ${storeLink.label}`}
+                        >
+                          {storeLink.label}
+                        </a>
+                      ))
+                    }
+                  </span>
                   <span class="font-medium text-accent group-has-[input:not(:checked)]:hidden">
                     Enabled
                   </span>

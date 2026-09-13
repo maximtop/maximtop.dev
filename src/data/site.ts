@@ -1,3 +1,5 @@
+import { extensionStoreLinks } from './store-links';
+
 export const site = {
   name: 'Maxim Topciu',
   title: 'Maxim Topciu — Browser Extensions Team Lead',
@@ -19,12 +21,21 @@ export const site = {
   },
   projects: [
     {
+      name: 'No More Ago',
+      badge: 'New',
+      description: 'Replace trusted relative timestamps with exact dates.',
+      url: extensionStoreLinks.noMoreAgo.chrome.url,
+      icon: 'clock',
+      storeLinks: Object.values(extensionStoreLinks.noMoreAgo),
+    },
+    {
       name: 'Split for Hacker News',
       badge: 'New',
       description: 'Find exact Hacker News discussions and read them beside the article.',
       url: '/extensions/split-for-hacker-news/',
       icon: 'comments',
       meta: 'Product page',
+      storeLinks: Object.values(extensionStoreLinks.splitForHackerNews),
     },
     {
       name: 'Hide Upgrade Button',
@@ -33,19 +44,22 @@ export const site = {
       url: '/extensions/hide-upgrade-button/',
       icon: 'hide',
       meta: 'Product page',
+      storeLinks: Object.values(extensionStoreLinks.hideUpgradeButton),
     },
     {
       name: 'Extensions Update Tracker',
       description: 'Track and manage your Chrome extension updates in one place.',
-      url: 'https://chromewebstore.google.com/detail/cdgepknigaiclfdmjckaknepgcighbnh',
+      url: extensionStoreLinks.extensionsUpdateTracker.chrome.url,
       icon: 'refresh',
+      storeLinks: Object.values(extensionStoreLinks.extensionsUpdateTracker),
     },
     {
       name: 'AI AdBlocker',
       badge: 'Experimental',
       description: 'Block ads and unwanted content with AI-powered semantic rules.',
-      url: 'https://chromewebstore.google.com/detail/icmfnmnifkggchbpaikgbpoenjgkkofb',
+      url: extensionStoreLinks.aiAdBlocker.chrome.url,
       icon: 'bot',
+      storeLinks: Object.values(extensionStoreLinks.aiAdBlocker),
     },
     {
       name: 'Kode Injector',
@@ -53,12 +67,14 @@ export const site = {
       url: '/extensions/kode-injector/',
       icon: 'code',
       meta: 'Product page',
+      storeLinks: Object.values(extensionStoreLinks.kodeInjector),
     },
     {
       name: 'Website Blocker: MT',
       description: 'Stay focused by blocking distracting websites.',
-      url: 'https://chromewebstore.google.com/detail/enffllmgjpgoifnfeljkfhpedcadnpbj',
+      url: extensionStoreLinks.websiteBlocker.chrome.url,
       icon: 'ban',
+      storeLinks: Object.values(extensionStoreLinks.websiteBlocker),
     },
   ],
   links: [

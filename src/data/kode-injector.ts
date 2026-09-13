@@ -1,11 +1,12 @@
+import { extensionStoreLinks } from './store-links';
+
 export const kodeInjector = {
   name: 'Kode Injector',
   baseUrl: '/extensions/kode-injector/',
   pageUrl: 'https://maximtop.dev/extensions/kode-injector/',
-  storeUrl:
-    'https://chromewebstore.google.com/detail/kode-injector/fgdehkdkmaiedleekbjpfoicpmodbicg',
-  edgeStoreUrl:
-    'https://microsoftedge.microsoft.com/addons/detail/kode-injector/allgihdbdjaficgacdildgfdcnnkjmjp',
+  storeUrl: extensionStoreLinks.kodeInjector.chrome.url,
+  edgeStoreUrl: extensionStoreLinks.kodeInjector.edge.url,
+  firefoxStoreUrl: extensionStoreLinks.kodeInjector.firefox.url,
   githubUrl: 'https://github.com/maximtop/kode-injector',
   issuesUrl: 'https://github.com/maximtop/kode-injector/issues/new',
   releasesUrl: 'https://github.com/maximtop/kode-injector/releases',

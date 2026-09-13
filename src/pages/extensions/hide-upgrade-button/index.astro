@@ -3,10 +3,12 @@ import { Image } from 'astro:assets';
 import ThemeToggle from '../../../components/ThemeToggle.astro';
 import beforeAfter from '../../../assets/extensions/hide-upgrade-button/before-after.png';
 import Layout from '../../../layouts/Layout.astro';
+import { extensionStoreLinks } from '../../../data/store-links';
 
 const pageUrl = 'https://maximtop.dev/extensions/hide-upgrade-button/';
-const storeUrl =
-  'https://chromewebstore.google.com/detail/hide-upgrade-button-for-g/flakajdfnklpgiefoffmecgbfbckmpcb';
+const storeUrl = extensionStoreLinks.hideUpgradeButton.chrome.url;
+const edgeStoreUrl = extensionStoreLinks.hideUpgradeButton.edge.url;
+const firefoxStoreUrl = extensionStoreLinks.hideUpgradeButton.firefox.url;
 const githubUrl = 'https://github.com/maximtop/hide-gmail-upgrade-button';
 const privacyUrl = `${githubUrl}/blob/master/PRIVACY.md`;
 const issuesUrl = `${githubUrl}/issues`;
@@ -67,20 +69,20 @@ const softwareApplicationSchema = {
   browserRequirements: 'Requires Google Chrome with Manifest V3 support',
   isAccessibleForFree: true,
   downloadUrl: storeUrl,
-  offers: {
+  offers: Object.values(extensionStoreLinks.hideUpgradeButton).map((store) => ({
     '@type': 'Offer',
     price: 0,
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
-    url: storeUrl,
-  },
+    url: store.url,
+  })),
   author: {
     '@type': 'Person',
     name: 'Maxim Topciu',
     url: 'https://maximtop.dev/',
   },
   license: `${githubUrl}/blob/master/LICENSE`,
-  sameAs: [githubUrl, storeUrl],
+  sameAs: [githubUrl, ...Object.values(extensionStoreLinks.hideUpgradeButton).map((store) => store.url)],
 };
 ---
 
@@ -128,6 +130,24 @@ const softwareApplicationSchema = {
                 class="inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#075443] focus-visible:rounded-lg dark:text-[#08261f] dark:hover:bg-[#6ee7b7]"
               >
                 Install from Chrome Web Store
+                <span aria-hidden="true" class="ml-2">↗</span>
+              </a>
+              <a
+                href={firefoxStoreUrl}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+              >
+                Install from Firefox Add-ons
+                <span aria-hidden="true" class="ml-2">↗</span>
+              </a>
+              <a
+                href={edgeStoreUrl}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+              >
+                Install from Microsoft Edge Add-ons
                 <span aria-hidden="true" class="ml-2">↗</span>
               </a>
               <a
@@ -329,15 +349,35 @@ const softwareApplicationSchema = {
         <p class="mx-auto mt-4 max-w-xl leading-relaxed text-[#ccfbf1]">
           Install the free extension, keep both toggles on, and get back the space used by Upgrade and Ask Gemini.
         </p>
-        <a
-          href={storeUrl}
-          target="_blank"
-          rel="noopener"
-          class="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#0f5f58] transition-transform hover:-translate-y-0.5 focus-visible:outline-white"
-        >
-          Install from Chrome Web Store
-          <span aria-hidden="true" class="ml-2">↗</span>
-        </a>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+          <a
+            href={storeUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#0f5f58] transition-transform hover:-translate-y-0.5 focus-visible:outline-white"
+          >
+            Install from Chrome Web Store
+            <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <a
+            href={firefoxStoreUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-medium text-white transition-colors hover:border-white"
+          >
+            Install from Firefox Add-ons
+            <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <a
+            href={edgeStoreUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-medium text-white transition-colors hover:border-white"
+          >
+            Install from Microsoft Edge Add-ons
+            <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+        </div>
       </section>
     </main>
 
