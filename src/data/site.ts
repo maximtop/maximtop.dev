@@ -24,7 +24,7 @@ export const site = {
       name: 'No More Ago',
       badge: 'New',
       description: 'Replace trusted relative timestamps with exact dates.',
-      url: extensionStoreLinks.noMoreAgo.chrome.url,
+      url: '/extensions/no-more-ago/',
       icon: 'clock',
       storeLinks: Object.values(extensionStoreLinks.noMoreAgo),
     },
@@ -57,8 +57,8 @@ export const site = {
     {
       name: 'AI AdBlocker',
       badge: 'Experimental',
-      description: 'Block ads and unwanted content with AI-powered semantic rules.',
-      url: extensionStoreLinks.aiAdBlocker.chrome.url,
+      description: 'Experiment with AI rules that blur selected ads and unwanted content.',
+      url: '/extensions/ai-adblocker/',
       icon: 'bot',
       storeLinks: Object.values(extensionStoreLinks.aiAdBlocker),
     },
@@ -73,7 +73,7 @@ export const site = {
     {
       name: 'Website Blocker: MT',
       description: 'Stay focused by blocking distracting websites.',
-      url: extensionStoreLinks.websiteBlocker.chrome.url,
+      url: '/extensions/website-blocker/',
       icon: 'ban',
       storeLinks: Object.values(extensionStoreLinks.websiteBlocker),
     },

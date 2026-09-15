@@ -10,6 +10,7 @@ export const splitForHackerNews = {
     '/extensions/split-for-hacker-news/read-comments-side-by-side/',
   storeUrl: extensionStoreLinks.splitForHackerNews.chrome.url,
   edgeStoreUrl: extensionStoreLinks.splitForHackerNews.edge.url,
+  firefoxStoreUrl: extensionStoreLinks.splitForHackerNews.firefox.url,
   githubUrl: 'https://github.com/maximtop/hn-split',
   issuesUrl: 'https://github.com/maximtop/hn-split/issues/new',
   privacySourceUrl: 'https://github.com/maximtop/hn-split/blob/master/PRIVACY.md',

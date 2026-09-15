@@ -1,0 +1,92 @@
+---
+import NoMoreAgoShell from '../../../../components/NoMoreAgoShell.astro';
+import { noMoreAgo } from '../../../../data/no-more-ago';
+
+const description =
+  'Get help with No More Ago: troubleshoot unchanged or incorrect dates, prepare a safe report, and contact support.';
+---
+
+<NoMoreAgoShell title="No More Ago Support" description={description} current="support">
+  <nav aria-label="Breadcrumb" class="pt-8 text-xs text-muted">
+    <ol class="flex flex-wrap items-center gap-2">
+      <li><a href="/" class="hover:text-accent">Home</a></li><li aria-hidden="true">/</li>
+      <li><a href={noMoreAgo.baseUrl} class="hover:text-accent">No More Ago</a></li><li aria-hidden="true">/</li>
+      <li aria-current="page" class="text-secondary">Support</li>
+    </ol>
+  </nav>
+  <article class="pt-10 sm:pt-16">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">Support</p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">Get No More Ago working</h1>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary">A replacement needs a recognized relative label and a trustworthy timestamp. These checks resolve the common cases and help you prepare a useful report when a website changes.</p>
+    </header>
+
+    <section class="mt-16 sm:mt-20" aria-labelledby="troubleshooting-title">
+      <h2 id="troubleshooting-title" class="font-display text-3xl font-medium sm:text-4xl">Troubleshooting</h2>
+      <div class="mt-8 divide-y divide-line border-y border-line">
+        <details class="group py-6" open>
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden"><span>A relative date did not change</span><span aria-hidden="true" class="text-accent group-open:rotate-45">+</span></summary>
+          <ol class="mt-4 list-decimal space-y-3 pl-6 leading-relaxed text-secondary marker:text-accent">
+            <li>Open the popup and confirm No More Ago is active.</li>
+            <li>Check the current site. In “Selected sites only”, add it to Allowed sites. In “All supported sites”, remove it from Excluded sites.</li>
+            <li>Confirm the visible label is relative. Existing absolute dates, clock-only values, unknown labels, and missing labels stay unchanged.</li>
+            <li>Reload the page. Restricted browser pages cannot run extension content scripts.</li>
+          </ol>
+        </details>
+        <details class="group py-6">
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden"><span>The displayed date looks wrong</span><span aria-hidden="true" class="text-accent group-open:rotate-45">+</span></summary>
+          <p class="mt-4 max-w-3xl leading-relaxed text-secondary">Open Settings and check the selected date format and time zone. A source with a calendar date but no time stays on that same day; changing the time zone does not shift it. Include the expected and observed result in a report.</p>
+        </details>
+        <details class="group py-6">
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden"><span>A supported website stopped working</span><span aria-hidden="true" class="text-accent group-open:rotate-45">+</span></summary>
+          <p class="mt-4 max-w-3xl leading-relaxed text-secondary">Website integrations are best-effort because sites can change their markup. Reload once, test a public example if possible, then report the exact page type and visible label. A site name alone is usually not enough to reproduce the problem.</p>
+        </details>
+        <details class="group py-6">
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden"><span>Bluesky dates do not resolve</span><span aria-hidden="true" class="text-accent group-open:rotate-45">+</span></summary>
+          <p class="mt-4 max-w-3xl leading-relaxed text-secondary">Bluesky support needs access to its public AppView API. Confirm processing is enabled for <code>bsky.app</code> and that your browser or network is not blocking <code>public.api.bsky.app</code>. No More Ago leaves the original label unchanged when identity, response, or timestamp validation fails.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20" aria-labelledby="report-title">
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div>
+          <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">A useful report</p>
+          <h2 id="report-title" class="font-display text-3xl font-medium sm:text-4xl">Share evidence, not private data</h2>
+          <p class="mt-5 leading-relaxed text-secondary">Use a public example when possible. Never post private pages, messages, tokens, account details, or a diagnostic archive you have not reviewed.</p>
+        </div>
+        <dl class="divide-y divide-line overflow-hidden rounded-xl border border-line bg-card">
+          <div class="grid gap-2 p-5 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-medium">Environment</dt><dd class="text-sm leading-relaxed text-secondary">Browser, browser version, operating system, and No More Ago version.</dd></div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-medium">Reproduction</dt><dd class="text-sm leading-relaxed text-secondary">Safe steps, page type, visible label, expected date, and observed result.</dd></div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-medium">Diagnostics</dt><dd class="text-sm leading-relaxed text-secondary">Optional: enable logging, reproduce once, download the journal, inspect it, and attach it only if useful. Turning logging off deletes stored logs.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section aria-labelledby="contact-title">
+      <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Contact</p>
+      <h2 id="contact-title" class="font-display text-3xl font-medium sm:text-4xl">Choose the right channel</h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <a href={noMoreAgo.issuesUrl} target="_blank" rel="noopener" class="rounded-xl border border-line bg-card p-6 transition-colors hover:border-accent">
+          <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Public bugs and site requests</p>
+          <h3 class="mt-3 text-lg font-medium">Open a GitHub issue ↗</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">Best for reproducible compatibility problems and requests that contain no private information.</p>
+        </a>
+        <a href={`mailto:${noMoreAgo.contactEmail}`} class="rounded-xl border border-line bg-card p-6 transition-colors hover:border-accent">
+          <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Privacy and sensitive contact</p>
+          <h3 class="mt-3 text-lg font-medium">Email {noMoreAgo.contactEmail}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">Use email for privacy questions or concerns that should not be posted in a public issue.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="mt-16 rounded-2xl bg-[#166534] px-6 py-12 text-center text-white sm:px-12 sm:py-14" aria-labelledby="reinstall-title">
+      <h2 id="reinstall-title" class="font-display text-3xl font-medium sm:text-4xl">Need a clean reinstall?</h2>
+      <p class="mx-auto mt-4 max-w-xl leading-relaxed text-[#dcfce7]">Install the current public build from Chrome Web Store or Firefox Add-ons.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={noMoreAgo.storeUrl} target="_blank" rel="noopener" class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#166534] transition-transform hover:-translate-y-0.5">Chrome Web Store ↗</a>
+        <a href={noMoreAgo.firefoxStoreUrl} target="_blank" rel="noopener" class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/50 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10">Firefox Add-ons ↗</a>
+      </div>
+    </section>
+  </article>
+</NoMoreAgoShell>

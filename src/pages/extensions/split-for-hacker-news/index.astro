@@ -6,7 +6,7 @@ import discussionResults from '../../../assets/extensions/split-for-hacker-news/
 import privateDefaults from '../../../assets/extensions/split-for-hacker-news/private-defaults.png';
 
 const description =
-  'Find the exact Hacker News discussion for the article you are reading and open the comments beside it in Chrome. Free, open source, and no telemetry.';
+  'Find the exact Hacker News discussion for the article you are reading. Available for Chrome, Firefox, and Edge. Free, open source, and no telemetry.';
 
 const features = [
   {
@@ -37,12 +37,15 @@ const softwareApplicationSchema = {
   applicationCategory: 'UtilitiesApplication',
   applicationSubCategory: 'Browser extension',
   operatingSystem: 'ChromeOS, Windows, macOS, Linux',
-  browserRequirements: 'Requires Google Chrome 140 or newer',
-  softwareVersion: '0.1.0',
+  browserRequirements: 'Requires a supported version of Chrome, Firefox, or Edge',
   isAccessibleForFree: true,
   downloadUrl: splitForHackerNews.storeUrl,
   featureList: features.map((feature) => feature.title),
-  offers: [splitForHackerNews.storeUrl, splitForHackerNews.edgeStoreUrl].map(
+  offers: [
+    splitForHackerNews.storeUrl,
+    splitForHackerNews.edgeStoreUrl,
+    splitForHackerNews.firefoxStoreUrl,
+  ].map(
     (url) => ({
       '@type': 'Offer',
       price: 0,
@@ -61,6 +64,7 @@ const softwareApplicationSchema = {
     splitForHackerNews.githubUrl,
     splitForHackerNews.storeUrl,
     splitForHackerNews.edgeStoreUrl,
+    splitForHackerNews.firefoxStoreUrl,
   ],
 };
 
@@ -95,7 +99,7 @@ const breadcrumbSchema = {
     <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_9rem] lg:gap-16">
       <div>
         <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
-          Free, open-source Chrome extension
+          Free, open-source browser extension
         </p>
         <h1
           id="page-title"
@@ -128,12 +132,26 @@ const breadcrumbSchema = {
             <span aria-hidden="true" class="ml-2">↗</span>
           </a>
           <a
+            href={splitForHackerNews.firefoxStoreUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+          >
+            Add to Firefox
+            <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <a
             href={`${splitForHackerNews.baseUrl}find-hacker-news-discussion/`}
             class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
           >
             Learn how discussion matching works
           </a>
         </div>
+        <p class="mt-5 max-w-3xl text-sm leading-relaxed text-muted">
+          Firefox uses its Sidebar for companion reading. The Chrome Split View
+          and Hacker News story-click flows described below are not included in
+          the Firefox version.
+        </p>
         <ul
           class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted"
           aria-label="Extension highlights"
@@ -417,6 +435,14 @@ const breadcrumbSchema = {
           class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
         >
           Add to Edge ↗
+        </a>
+        <a
+          href={splitForHackerNews.firefoxStoreUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+        >
+          Add to Firefox ↗
         </a>
       </div>
     </div>
