@@ -1,0 +1,77 @@
+---
+import NoMoreAgoShell from '../../../../components/NoMoreAgoShell.astro';
+import { noMoreAgo } from '../../../../data/no-more-ago';
+
+const description =
+  'No More Ago privacy policy: page data, local settings, optional diagnostics, Bluesky public lookups, support reports, and permissions.';
+---
+
+<NoMoreAgoShell
+  title="No More Ago Privacy Policy"
+  description={description}
+  current="privacy"
+  ogType="article"
+  articleModifiedTime="2026-09-11"
+>
+  <nav aria-label="Breadcrumb" class="pt-8 text-xs text-muted">
+    <ol class="flex flex-wrap items-center gap-2">
+      <li><a href="/" class="hover:text-accent">Home</a></li><li aria-hidden="true">/</li>
+      <li><a href={noMoreAgo.baseUrl} class="hover:text-accent">No More Ago</a></li><li aria-hidden="true">/</li>
+      <li aria-current="page" class="text-secondary">Privacy</li>
+    </ol>
+  </nav>
+  <article class="pt-10 sm:pt-16">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">Privacy policy</p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">No More Ago Privacy Policy</h1>
+      <p class="mt-6 text-sm text-muted">Last updated: <time datetime="2026-09-11">September 11, 2026</time></p>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary">No More Ago replaces supported relative timestamp labels with exact dates. It does not require an account, collect analytics or telemetry, sell data, or send browsing activity to a developer-operated server.</p>
+    </header>
+
+    <aside class="mt-12 rounded-2xl border border-accent/25 bg-accent-soft p-6 sm:p-8" aria-labelledby="summary-title">
+      <h2 id="summary-title" class="font-display text-2xl font-medium">Plain-language summary</h2>
+      <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-secondary sm:grid-cols-2">
+        <li class="rounded-lg bg-card/70 px-4 py-3">Timestamp processing happens in your browser</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Settings and optional logs stay in local extension storage</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">No advertising, profiling, analytics, or developer telemetry</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Bluesky public lookups are the limited network exception</li>
+      </ul>
+    </aside>
+
+    <div class="mt-16 max-w-4xl space-y-14 sm:mt-20">
+      <section aria-labelledby="pages-title">
+        <h2 id="pages-title" class="font-display text-3xl font-medium">Data processed on pages</h2>
+        <p class="mt-5 leading-relaxed text-secondary">The extension reads supported timestamp elements and limited associated page data to identify and display dates. It does not infer a date by counting backwards from relative text. Processing happens in the browser, and unsupported or uncertain cases remain unchanged.</p>
+        <p class="mt-5 leading-relaxed text-secondary">Facebook support examines selected loaded page payloads while processing is enabled. It keeps only bounded associations between opaque tracking tokens and timestamps in document memory. It does not retain response bodies, post content, authors, or account data in logs, and discards the associations when processing stops.</p>
+      </section>
+      <section aria-labelledby="bluesky-title">
+        <h2 id="bluesky-title" class="font-display text-3xl font-medium">Bluesky public lookups</h2>
+        <p class="mt-5 leading-relaxed text-secondary">For supported public Bluesky posts, No More Ago sends public actor and post identifiers to <code>https://public.api.bsky.app</code> to retrieve a server-observed timestamp. Requests are anonymous and credential-free: they do not include cookies, account tokens, authorization headers, settings, or post text. The connection still exposes ordinary network information, such as your IP address, to that service.</p>
+        <p class="mt-5 leading-relaxed text-secondary">Successful results remain temporarily in document memory while relevant page elements are connected. Disable No More Ago on <code>bsky.app</code>, disable it globally, or close the page to stop this processing and discard that state.</p>
+      </section>
+      <section aria-labelledby="storage-title">
+        <h2 id="storage-title" class="font-display text-3xl font-medium">Local settings and optional diagnostics</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Browser-local extension storage holds the enabled state, site lists, date and time-zone preferences, appearance, and a recovery copy of settings. No developer service synchronizes this data.</p>
+        <p class="mt-5 leading-relaxed text-secondary">Diagnostics are off by default. If enabled, a sanitized technical journal may include relevant hostnames, browser and extension versions, adapter identifiers, counts, and error categories. It is capped at 5,000,000 bytes. You can clear or download it; disabling diagnostics removes the stored logs. Downloading never uploads the file.</p>
+      </section>
+      <section aria-labelledby="reports-title">
+        <h2 id="reports-title" class="font-display text-3xl font-medium">Support reports</h2>
+        <p class="mt-5 leading-relaxed text-secondary">“Report this site” opens GitHub with a prefilled issue form. Its URL may include the current page URL, browser, reason, and extension version. Opening the form sends those URL parameters to GitHub; submitting is a separate action you control. Review the form and remove private URLs or details before posting.</p>
+      </section>
+      <section aria-labelledby="permissions-title">
+        <h2 id="permissions-title" class="font-display text-3xl font-medium">Why the extension needs permissions</h2>
+        <dl class="mt-6 divide-y divide-line overflow-hidden rounded-xl border border-line bg-card">
+          <div class="grid gap-2 p-5 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-medium">Website access</dt><dd class="text-sm leading-relaxed text-secondary">Inspects eligible timestamps on HTTP and HTTPS pages and restores labels when processing is disabled.</dd></div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-medium">Scripting</dt><dd class="text-sm leading-relaxed text-secondary">Runs the timestamp processor in eligible documents and refreshes open pages when settings change.</dd></div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-medium">Navigation</dt><dd class="text-sm leading-relaxed text-secondary">Finds reachable frames so a settings change can be applied throughout the current tab.</dd></div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-medium">Storage</dt><dd class="text-sm leading-relaxed text-secondary">Keeps settings, their recovery copy, and optional diagnostic logs locally.</dd></div>
+        </dl>
+      </section>
+      <section aria-labelledby="use-title">
+        <h2 id="use-title" class="font-display text-3xl font-medium">Limited use and contact</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Information received from browser APIs is used only for timestamp functionality and user-requested support features. It is not used or transferred for advertising, profiling, or unrelated purposes.</p>
+        <p class="mt-5 leading-relaxed text-secondary">For privacy questions, email <a href={`mailto:${noMoreAgo.contactEmail}`} class="text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent">{noMoreAgo.contactEmail}</a> or follow the <a href={`${noMoreAgo.baseUrl}support/`} class="text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent">support instructions</a>.</p>
+      </section>
+    </div>
+  </article>
+</NoMoreAgoShell>

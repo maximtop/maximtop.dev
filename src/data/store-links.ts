@@ -9,6 +9,10 @@ export const extensionStoreLinks = {
       label: 'Chrome',
       url: 'https://chromewebstore.google.com/detail/no-more-ago/pcaimklimkjljhmbfkhidealekkiopbd',
     },
+    firefox: {
+      label: 'Firefox',
+      url: 'https://addons.mozilla.org/en-US/firefox/addon/no-more-ago/',
+    },
   },
   splitForHackerNews: {
     chrome: {
@@ -18,6 +22,10 @@ export const extensionStoreLinks = {
     edge: {
       label: 'Edge',
       url: 'https://microsoftedge.microsoft.com/addons/detail/bofpcafdmcaidmhbcnndgeagmcjhmboa',
+    },
+    firefox: {
+      label: 'Firefox',
+      url: 'https://addons.mozilla.org/en-US/firefox/addon/split-for-hacker-news/',
     },
   },
   hideUpgradeButton: {
@@ -76,6 +84,10 @@ export const extensionStoreLinks = {
     edge: {
       label: 'Edge',
       url: 'https://microsoftedge.microsoft.com/addons/detail/ihcdcnlbngigimopaainepmmhlgljikc',
+    },
+    firefox: {
+      label: 'Firefox',
+      url: 'https://addons.mozilla.org/en-US/firefox/addon/website-blocker-mt/',
     },
   },
 } as const satisfies Record<string, Record<string, StoreLink>>;

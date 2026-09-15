@@ -1,0 +1,183 @@
+---
+import { Image } from 'astro:assets';
+import ExtensionShell from '../../../components/ExtensionShell.astro';
+import { aiAdBlocker, aiAdBlockerNav } from '../../../data/ai-adblocker';
+import demo from '../../../assets/extensions/ai-adblocker/vision-rule-demo.png';
+
+const description =
+  'Create custom Chrome rules that blur unwanted page elements by text meaning, prompts, or visual appearance. AI AdBlocker is free and open source.';
+
+const product = {
+  ...aiAdBlocker,
+  ogImageAlt: 'AI AdBlocker — AI-powered content filtering',
+  footerNote:
+    'AI AdBlocker is an experimental Chrome extension. Results depend on the rule, page, and selected model.',
+};
+
+const features = [
+  {
+    title: 'Semantic similarity',
+    description:
+      'Compare element text with a meaning you describe, instead of maintaining a list of exact phrases.',
+  },
+  {
+    title: 'Prompt classification',
+    description:
+      'Ask a language model whether selected page text matches a plain-language rule.',
+  },
+  {
+    title: 'Visual analysis',
+    description:
+      'Evaluate a screenshot of a matched element when appearance matters more than its text.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    '@id': `${aiAdBlocker.pageUrl}#software`,
+    name: aiAdBlocker.name,
+    description,
+    url: aiAdBlocker.pageUrl,
+    image: `https://maximtop.dev${aiAdBlocker.ogImageUrl}`,
+    applicationCategory: 'UtilitiesApplication',
+    applicationSubCategory: 'Browser extension',
+    operatingSystem: 'Chrome',
+    browserRequirements: 'Requires Google Chrome 149 or later',
+    isAccessibleForFree: true,
+    downloadUrl: aiAdBlocker.storeUrl,
+    featureList: features.map(({ title }) => title),
+    offers: {
+      '@type': 'Offer',
+      price: 0,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: aiAdBlocker.storeUrl,
+    },
+    author: {
+      '@type': 'Person',
+      name: 'Maxim Topciu',
+      url: 'https://maximtop.dev/',
+    },
+    sameAs: [aiAdBlocker.githubUrl, aiAdBlocker.storeUrl],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://maximtop.dev/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: aiAdBlocker.name,
+        item: aiAdBlocker.pageUrl,
+      },
+    ],
+  },
+];
+---
+
+<ExtensionShell
+  title="AI AdBlocker — Custom AI Content-Filtering Rules for Chrome"
+  description={description}
+  current="overview"
+  product={product}
+  nav={aiAdBlockerNav}
+  structuredData={schema}
+>
+  <nav aria-label="Breadcrumb" class="pt-10 text-sm text-muted sm:pt-14">
+    <a href="/" class="transition-colors hover:text-accent">Home</a>
+    <span aria-hidden="true" class="px-2">/</span>
+    <span aria-current="page">AI AdBlocker</span>
+  </nav>
+
+  <section class="pt-10 sm:pt-14" aria-labelledby="page-title">
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_9rem] lg:gap-16">
+      <div>
+        <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+          Experimental, open-source Chrome extension
+        </p>
+        <h1 id="page-title" class="font-display max-w-4xl text-5xl leading-[1.04] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl lg:text-7xl">
+          Blur page content by what it means
+        </h1>
+        <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+          AI AdBlocker combines CSS selectors with semantic, prompt, and vision checks. You decide what a rule should recognize; matching elements are blurred on the page.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a href={aiAdBlocker.storeUrl} target="_blank" rel="noopener" class="inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#075443] dark:text-[#08261f] dark:hover:bg-[#6ee7b7]">
+            Add to Chrome <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <a href={aiAdBlocker.githubUrl} target="_blank" rel="noopener" class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent">
+            View source <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+        </div>
+        <p class="mt-4 text-sm text-muted">Requires desktop Chrome 149 or later.</p>
+      </div>
+      <img src={aiAdBlocker.iconUrl} width="128" height="128" alt="" class="order-first h-24 w-24 rounded-[1.35rem] shadow-lg lg:order-none lg:h-36 lg:w-36 lg:rounded-[2rem]" />
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="features-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Three ways to match</p>
+    <h2 id="features-title" class="font-display max-w-3xl text-3xl font-medium sm:text-4xl">
+      Go beyond a static selector when the page is ambiguous
+    </h2>
+    <div class="mt-8 grid gap-4 sm:grid-cols-3">
+      {features.map((feature) => (
+        <article class="rounded-xl border border-line bg-card p-6">
+          <h3 class="text-lg font-medium">{feature.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-secondary">{feature.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-y border-line py-20 sm:py-24" aria-labelledby="workflow-title">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div>
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">A rule you can test</p>
+        <h2 id="workflow-title" class="font-display text-3xl font-medium sm:text-4xl">Start with the page, then add meaning</h2>
+        <ol class="mt-7 space-y-5 text-secondary">
+          <li><strong class="text-primary">1. Select elements.</strong> Use a CSS selector to narrow the candidates.</li>
+          <li><strong class="text-primary">2. Describe the match.</strong> Add an embedding, prompt, or vision condition.</li>
+          <li><strong class="text-primary">3. Test and refine.</strong> Preview the result before relying on the rule.</li>
+        </ol>
+      </div>
+      <figure class="overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:p-5">
+        <Image src={demo} alt="A test page used to check whether an AI AdBlocker vision rule recognizes an advertisement-like panel" widths={[440, 880]} sizes="(max-width: 1024px) calc(100vw - 3rem), 440px" class="mx-auto h-auto w-full max-w-md rounded-lg" />
+        <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted sm:text-sm">
+          Store listing example: a deliberately obvious panel used to test a visual rule.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="providers-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Choose where analysis runs</p>
+    <h2 id="providers-title" class="font-display text-3xl font-medium sm:text-4xl">Local and cloud model options</h2>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <article class="rounded-xl border border-line bg-card p-6">
+        <h3 class="text-lg font-medium">Local options</h3>
+        <p class="mt-3 leading-relaxed text-secondary">Use Chrome’s built-in AI where available, or connect LM Studio on your computer. Availability and model support depend on your setup.</p>
+      </article>
+      <article class="rounded-xl border border-line bg-card p-6">
+        <h3 class="text-lg font-medium">Cloud options</h3>
+        <p class="mt-3 leading-relaxed text-secondary">Choose OpenAI or OpenRouter with your own API key. Selected text or screenshots are sent directly to that provider for analysis and may incur provider charges.</p>
+        <a href={`${aiAdBlocker.baseUrl}privacy/`} class="mt-4 inline-block text-sm font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent">Read the privacy details →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="rounded-2xl bg-[#0f766e] px-6 py-12 text-white sm:px-12 sm:py-14" aria-labelledby="limits-title">
+    <h2 id="limits-title" class="font-display text-3xl font-medium sm:text-4xl">Experimental by design</h2>
+    <p class="mt-5 max-w-3xl leading-relaxed text-[#ccfbf1]">
+      AI results vary by page, model, and rule. This tool blurs matched elements; it does not block network requests or guarantee that every advertisement or unwanted item will be recognized. Cloud models require an account, API key, and may cost money.
+    </p>
+  </section>
+</ExtensionShell>

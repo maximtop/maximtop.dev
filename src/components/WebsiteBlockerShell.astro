@@ -1,0 +1,37 @@
+---
+import ExtensionShell from './ExtensionShell.astro';
+import {
+  websiteBlocker,
+  websiteBlockerNav,
+  type WebsiteBlockerPage,
+} from '../data/website-blocker';
+
+interface Props {
+  title: string;
+  description: string;
+  current: WebsiteBlockerPage;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, current, structuredData } = Astro.props;
+---
+
+<ExtensionShell
+  title={title}
+  description={description}
+  current={current}
+  product={{
+    name: websiteBlocker.name,
+    baseUrl: websiteBlocker.baseUrl,
+    iconUrl: websiteBlocker.iconUrl,
+    ogImageUrl: websiteBlocker.ogImageUrl,
+    ogImageAlt: 'Website Blocker: MT app icon',
+    githubUrl: websiteBlocker.githubUrl,
+    footerNote:
+      'Website Blocker: MT is a free, independent, open-source browser extension. It is not affiliated with Google, Mozilla, or Microsoft.',
+  }}
+  nav={websiteBlockerNav}
+  structuredData={structuredData}
+>
+  <slot />
+</ExtensionShell>

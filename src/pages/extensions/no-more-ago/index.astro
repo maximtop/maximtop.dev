@@ -1,0 +1,229 @@
+---
+import { Image } from 'astro:assets';
+import NoMoreAgoShell from '../../../components/NoMoreAgoShell.astro';
+import { noMoreAgo } from '../../../data/no-more-ago';
+import appearance from '../../../assets/extensions/no-more-ago/appearance.png';
+import control from '../../../assets/extensions/no-more-ago/control.png';
+import replacement from '../../../assets/extensions/no-more-ago/replacement.png';
+
+const description =
+  'Replace supported relative timestamps such as “3 months ago” with exact, localized dates. No More Ago is available for Chrome and Firefox.';
+
+const supportedSites = [
+  ['Standard web timestamps', 'Eligible time elements on HTTP and HTTPS pages, including public Telegram channel pages.'],
+  ['GitHub and Hacker News', 'Specialized sources recognize their supported relative-time widgets.'],
+  ['Stack Exchange', 'Supported Q&A and per-site Meta hosts, including localized Stack Overflow sites.'],
+  ['Facebook and Instagram', 'Supported Facebook story timestamps and standard Instagram timestamp labels.'],
+  ['Telegram Web K', 'Supported message timestamps on web.telegram.org/k/. Telegram Web A is not supported.'],
+  ['TikTok', 'Direct video and photo pages only; profile cards do not expose an eligible label.'],
+  ['LinkedIn', 'Best-effort post and comment dates derived from supported public ID shapes.'],
+  ['Bluesky', 'Public post timestamps resolved with anonymous requests to Bluesky’s public AppView API.'],
+  ['YouTube', 'Canonical desktop watch pages only; Home, Search, Channel, Shorts, and embeds stay unchanged.'],
+] as const;
+
+const softwareApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': `${noMoreAgo.pageUrl}#software`,
+  name: noMoreAgo.name,
+  description,
+  url: noMoreAgo.pageUrl,
+  image: `https://maximtop.dev${noMoreAgo.ogImageUrl}`,
+  applicationCategory: 'BrowserApplication',
+  applicationSubCategory: 'Productivity',
+  operatingSystem: 'Google Chrome, Mozilla Firefox',
+  browserRequirements: 'Requires a compatible Chrome or Firefox browser',
+  isAccessibleForFree: true,
+  downloadUrl: noMoreAgo.storeUrl,
+  offers: [noMoreAgo.storeUrl, noMoreAgo.firefoxStoreUrl].map((url) => ({
+    '@type': 'Offer',
+    price: 0,
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url,
+  })),
+  author: {
+    '@type': 'Person',
+    name: 'Maxim Topciu',
+    url: 'https://maximtop.dev/',
+  },
+  sameAs: [noMoreAgo.githubUrl, noMoreAgo.storeUrl, noMoreAgo.firefoxStoreUrl],
+};
+---
+
+<NoMoreAgoShell
+  title="No More Ago — Replace Relative Timestamps with Exact Dates"
+  description={description}
+  current="overview"
+  structuredData={softwareApplicationSchema}
+>
+  <nav aria-label="Breadcrumb" class="pt-8 text-xs text-muted">
+    <ol class="flex flex-wrap items-center gap-2">
+      <li><a href="/" class="hover:text-accent">Home</a></li>
+      <li aria-hidden="true">/</li>
+      <li><a href="/#extensions" class="hover:text-accent">Extensions</a></li>
+      <li aria-hidden="true">/</li>
+      <li aria-current="page" class="text-secondary">No More Ago</li>
+    </ol>
+  </nav>
+
+  <section class="pt-10 sm:pt-16" aria-labelledby="page-title">
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_9rem] lg:gap-16">
+      <div>
+        <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+          Exact dates for the web
+        </p>
+        <h1
+          id="page-title"
+          class="font-display max-w-4xl text-5xl leading-[1.04] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl lg:text-7xl"
+        >
+          Turn relative timestamps into exact dates
+        </h1>
+        <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+          No More Ago replaces supported labels such as “3 months ago” with an exact,
+          localized date when the page exposes a trustworthy timestamp. Absolute,
+          unknown, and unsupported labels stay unchanged.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a
+            href={noMoreAgo.storeUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#075443] dark:text-[#08261f] dark:hover:bg-[#6ee7b7]"
+          >
+            Add to Chrome <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <a
+            href={noMoreAgo.firefoxStoreUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-line bg-card px-5 py-3 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+          >
+            Add to Firefox <span aria-hidden="true" class="ml-2">↗</span>
+          </a>
+          <span class="inline-flex min-h-12 items-center px-2 py-3 text-sm text-muted">
+            Edge listing in review
+          </span>
+        </div>
+        <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted" aria-label="Extension highlights">
+          <li>✓ No account</li>
+          <li>✓ No analytics or telemetry</li>
+          <li>✓ 40 interface languages</li>
+          <li>✓ Local settings</li>
+        </ul>
+      </div>
+      <img
+        src={noMoreAgo.iconUrl}
+        width="128"
+        height="128"
+        alt=""
+        class="order-first h-24 w-24 rounded-[1.35rem] shadow-lg lg:order-none lg:h-36 lg:w-36 lg:rounded-[2rem]"
+      />
+    </div>
+
+    <figure class="mt-14 overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:mt-20 sm:p-5">
+      <Image
+        src={replacement}
+        alt="A relative label reading 3 days ago becomes the exact date Sep 2, 2026, 9:30 AM"
+        widths={[640, 960, 1280]}
+        sizes="(max-width: 1024px) calc(100vw - 3rem), 1024px"
+        loading="eager"
+        fetchpriority="high"
+        class="h-auto w-full rounded-lg"
+      />
+      <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted sm:text-sm">
+        A real release-build demonstration. No More Ago reads a trusted timestamp; it never counts backwards from the relative words.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="controls-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Your format, your time zone</p>
+    <h2 id="controls-title" class="font-display max-w-3xl text-3xl font-medium sm:text-4xl">
+      Exact does not have to mean inflexible
+    </h2>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <article class="rounded-xl border border-line bg-card p-6">
+        <h3 class="font-medium">Choose the presentation</h3>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">Use a localized default, an ISO-style date, or a custom date-fns pattern with a live preview.</p>
+      </article>
+      <article class="rounded-xl border border-line bg-card p-6">
+        <h3 class="font-medium">Choose where it runs</h3>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">Run on all supported sites with exclusions, or only on hostnames you explicitly allow.</p>
+      </article>
+      <article class="rounded-xl border border-line bg-card p-6">
+        <h3 class="font-medium">Choose the time zone</h3>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">Use your system zone, UTC, or an IANA time-zone identifier. Calendar-only dates stay on the same day.</p>
+      </article>
+      <article class="rounded-xl border border-line bg-card p-6">
+        <h3 class="font-medium">Pause cleanly</h3>
+        <p class="mt-2 text-sm leading-relaxed text-secondary">Disable the extension globally or for the current site, and it restores the page’s original labels.</p>
+      </article>
+    </div>
+    <figure class="mt-12 overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:p-5">
+      <Image
+        src={control}
+        alt="No More Ago settings showing a custom date format, Europe/London time zone, and formatted preview"
+        widths={[640, 960, 1280]}
+        sizes="(max-width: 1024px) calc(100vw - 3rem), 1024px"
+        class="h-auto w-full rounded-lg"
+      />
+    </figure>
+  </section>
+
+  <section class="border-y border-line py-20 sm:py-24" aria-labelledby="sites-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Supported sources</p>
+    <h2 id="sites-title" class="font-display max-w-3xl text-3xl font-medium sm:text-4xl">
+      Broad standard support, careful site integrations
+    </h2>
+    <p class="mt-5 max-w-3xl leading-relaxed text-secondary">
+      Every replacement needs both a recognized relative label and trusted timestamp evidence. Website markup can change, so specialized support is best-effort.
+    </p>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {supportedSites.map(([name, detail]) => (
+        <article class="rounded-xl border border-line bg-card p-5">
+          <h3 class="font-medium">{name}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary">{detail}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="appearance-title">
+    <div class="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center lg:gap-16">
+      <div>
+        <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">40 interface languages</p>
+        <h2 id="appearance-title" class="font-display text-3xl font-medium sm:text-4xl">At home in light and dark</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Follow the system appearance or choose light or dark yourself. The popup and settings interface use the browser-selected language with an English fallback.</p>
+      </div>
+      <figure class="overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:p-5">
+        <Image
+          src={appearance}
+          alt="No More Ago popup shown in light and dark appearance modes"
+          widths={[640, 960, 1280]}
+          sizes="(max-width: 1024px) calc(100vw - 3rem), 640px"
+          class="h-auto w-full rounded-lg"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="rounded-2xl border border-accent/25 bg-accent-soft p-7 sm:p-10" aria-labelledby="privacy-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Privacy by design</p>
+    <h2 id="privacy-title" class="font-display text-3xl font-medium sm:text-4xl">No developer telemetry</h2>
+    <p class="mt-5 max-w-3xl leading-relaxed text-secondary">Settings stay in browser-local extension storage. No More Ago has no account, analytics, advertising, or developer-operated telemetry endpoint. Bluesky is the limited network exception: supported public posts use anonymous, credential-free requests to the public AppView API.</p>
+    <div class="mt-7 flex flex-wrap gap-5 text-sm">
+      <a href={`${noMoreAgo.baseUrl}privacy/`} class="font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent">Read the privacy policy →</a>
+      <a href={`${noMoreAgo.baseUrl}support/`} class="font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent">Get support →</a>
+    </div>
+  </section>
+
+  <section class="mt-20 rounded-2xl bg-[#166534] px-6 py-12 text-center text-white sm:px-12 sm:py-14" aria-labelledby="install-title">
+    <h2 id="install-title" class="font-display text-3xl font-medium sm:text-4xl">Turn “ago” into a date</h2>
+    <p class="mx-auto mt-4 max-w-xl leading-relaxed text-[#dcfce7]">Install No More Ago for Chrome or Firefox. The Microsoft Edge listing is still in review.</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a href={noMoreAgo.storeUrl} target="_blank" rel="noopener" class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#166534] transition-transform hover:-translate-y-0.5">Chrome Web Store ↗</a>
+      <a href={noMoreAgo.firefoxStoreUrl} target="_blank" rel="noopener" class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/50 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10">Firefox Add-ons ↗</a>
+    </div>
+  </section>
+</NoMoreAgoShell>

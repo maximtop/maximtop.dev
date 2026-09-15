@@ -1,0 +1,54 @@
+---
+import ExtensionShell from './ExtensionShell.astro';
+import {
+  noMoreAgo,
+  noMoreAgoNav,
+  type NoMoreAgoPage,
+} from '../data/no-more-ago';
+
+interface Props {
+  title: string;
+  description: string;
+  current: NoMoreAgoPage;
+  ogType?: 'website' | 'article';
+  articlePublishedTime?: string;
+  articleModifiedTime?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  current,
+  ogType,
+  articlePublishedTime,
+  articleModifiedTime,
+  structuredData,
+} = Astro.props;
+const product = {
+  name: noMoreAgo.name,
+  baseUrl: noMoreAgo.baseUrl,
+  iconUrl: noMoreAgo.iconUrl,
+  ogImageUrl: noMoreAgo.ogImageUrl,
+  ogImageAlt: 'No More Ago turns supported relative timestamps into exact dates',
+  ogImageWidth: 1280,
+  ogImageHeight: 800,
+  githubUrl: noMoreAgo.githubUrl,
+  footerNote:
+    'No More Ago is an independent browser extension. Website integrations are best-effort and are not affiliated with or endorsed by the sites they support.',
+};
+---
+
+<ExtensionShell
+  title={title}
+  description={description}
+  current={current}
+  product={product}
+  nav={noMoreAgoNav}
+  ogType={ogType}
+  articlePublishedTime={articlePublishedTime}
+  articleModifiedTime={articleModifiedTime}
+  structuredData={structuredData}
+>
+  <slot />
+</ExtensionShell>

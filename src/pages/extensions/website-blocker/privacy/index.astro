@@ -1,0 +1,104 @@
+---
+import WebsiteBlockerShell from '../../../../components/WebsiteBlockerShell.astro';
+import { websiteBlocker } from '../../../../data/website-blocker';
+
+const description =
+  'Website Blocker: MT privacy policy: local hostname matching, browser sync storage, no analytics, advertising, telemetry, browsing-history log, or developer backend.';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${websiteBlocker.pageUrl}privacy/#breadcrumbs`,
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'maximtop.dev',
+      item: 'https://maximtop.dev/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: websiteBlocker.name,
+      item: websiteBlocker.pageUrl,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Privacy',
+      item: `${websiteBlocker.pageUrl}privacy/`,
+    },
+  ],
+};
+---
+
+<WebsiteBlockerShell
+  title="Website Blocker: MT Privacy Policy"
+  description={description}
+  current="privacy"
+  structuredData={breadcrumbSchema}
+>
+  <article class="pt-16 sm:pt-24">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">Privacy policy</p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">Website Blocker: MT Privacy Policy</h1>
+      <p class="mt-6 text-sm text-muted">Effective date: <time datetime="2026-09-15">September 15, 2026</time></p>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">Website Blocker: MT applies a block list that you create. It does not operate a developer backend or send your block list or browsing history to the developer.</p>
+    </header>
+
+    <aside class="mt-12 rounded-2xl border border-accent/25 bg-accent-soft p-6 sm:p-8" aria-labelledby="summary-title">
+      <h2 id="summary-title" class="font-display text-2xl font-medium">Plain-language summary</h2>
+      <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-secondary sm:grid-cols-2">
+        <li class="rounded-lg bg-card/70 px-4 py-3">No account, advertising, analytics, telemetry, or developer-operated backend</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Hostnames and blocking preferences stay in browser extension storage</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Hostname comparisons and redirect decisions happen in the browser</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Browser Sync may copy settings between your own devices when you enable it</li>
+      </ul>
+    </aside>
+
+    <div class="mt-16 max-w-4xl space-y-14 sm:mt-20">
+      <section aria-labelledby="processed-title">
+        <h2 id="processed-title" class="font-display text-3xl font-medium">Information the extension processes</h2>
+        <p class="mt-5 leading-relaxed text-secondary">The extension processes the hostname of a top-level HTTP or HTTPS navigation to determine whether it matches an enabled entry. It does not need to read page text, form input, messages, or the contents of pages.</p>
+        <p class="mt-5 leading-relaxed text-secondary">The settings you create can include a normalized hostname, whether blocking is enabled, an optional expiration time for a timed entry, and list-order metadata. These values are used only to provide the block-list behavior.</p>
+      </section>
+
+      <section aria-labelledby="storage-title">
+        <h2 id="storage-title" class="font-display text-3xl font-medium">Storage, Sync, and retention</h2>
+        <p class="mt-5 leading-relaxed text-secondary">Website Blocker: MT stores its settings in the browser’s built-in extension sync storage. If you turn on your browser’s sync feature, the browser may synchronize those settings between devices signed into your browser account. That browser service is controlled by your browser settings and its provider’s policies.</p>
+        <p class="mt-5 leading-relaxed text-secondary">You can remove a saved entry in the extension settings. Timed entries stop blocking and disappear from the visible list after their deadline; their underlying saved record is not necessarily erased at that moment. Clearing extension data or uninstalling the extension removes locally stored extension data under the browser’s normal behavior.</p>
+      </section>
+
+      <section aria-labelledby="sharing-title">
+        <h2 id="sharing-title" class="font-display text-3xl font-medium">No developer collection or sharing</h2>
+        <p class="mt-5 leading-relaxed text-secondary">The extension has no analytics, advertising, telemetry, browsing-history log, external API call, or developer-operated backend. The developer does not receive the block list, browsing history, or blocking preferences, and does not sell or share them with advertisers or data brokers.</p>
+        <p class="mt-5 leading-relaxed text-secondary">Links to the browser stores, GitHub, or email open only after you choose them. Those services handle connection data under their own policies.</p>
+      </section>
+
+      <section aria-labelledby="permissions-title">
+        <h2 id="permissions-title" class="font-display text-3xl font-medium">Why the extension asks for permissions</h2>
+        <dl class="mt-6 divide-y divide-line overflow-hidden rounded-xl border border-line bg-card">
+          <div class="grid gap-2 p-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt class="font-medium">Navigation</dt>
+            <dd class="text-sm leading-relaxed text-secondary">To observe top-level HTTP and HTTPS navigations and compare their hostnames with the block list in the browser.</dd>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt class="font-medium">Storage</dt>
+            <dd class="text-sm leading-relaxed text-secondary">To save the hostnames and preferences that you add.</dd>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt class="font-medium">Blocked page</dt>
+            <dd class="text-sm leading-relaxed text-secondary">The extension’s own packaged reminder page is available so a blocked navigation can display it.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="contact-title">
+        <h2 id="contact-title" class="font-display text-3xl font-medium">Contact</h2>
+        <p class="mt-5 leading-relaxed text-secondary">For a privacy question, email <a class="text-accent underline underline-offset-4" href={`mailto:${websiteBlocker.contactEmail}`}>{websiteBlocker.contactEmail}</a>. For a public bug report or feature request, use <a class="text-accent underline underline-offset-4" href={websiteBlocker.issuesUrl} target="_blank" rel="noopener">GitHub Issues</a>.</p>
+      </section>
+    </div>
+
+    <p class="mt-16 border-t border-line pt-6 text-sm leading-relaxed text-muted">This policy reflects the extension’s public source and Firefox listing materials. The source is available at <a class="text-accent underline underline-offset-4" href={websiteBlocker.githubUrl} target="_blank" rel="noopener">github.com/maximtop/website-blocker</a>.</p>
+  </article>
+</WebsiteBlockerShell>
