@@ -10,6 +10,7 @@ export const extensionsUpdateTracker = {
   githubUrl: 'https://github.com/maximtop/extensions-update-tracker',
   issuesUrl: 'https://github.com/maximtop/extensions-update-tracker/issues',
   iconUrl: '/extensions/update-tracker/icon.png',
+  ogImageUrl: '/extensions/update-tracker/og.png',
   contactEmail: 'me@maximtop.dev',
 } as const;
 

@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import ExtensionsUpdateTrackerShell from '../../../components/ExtensionsUpdateTrackerShell.astro';
 import { extensionsUpdateTracker as tracker } from '../../../data/extensions-update-tracker';
+import historyScreenshot from '../../../assets/extensions/update-tracker/history.webp';
 
 const description = 'See when your browser extensions update, review version history, and get local notifications. Free and open source for Chrome, Edge, and Firefox.';
 const features = [
@@ -9,7 +11,7 @@ const features = [
   ['Unread queue', 'A toolbar badge counts updates you have not reviewed; mark them read and undo if needed.'],
   ['Controls for noisy updates', 'Mute notifications for individual extensions while continuing to record their update history.'],
   ['Optional auto-disable', 'On Chrome and Edge, keep an updated extension disabled until you review it and turn it back on.'],
-  ['Search and sort', 'Find extensions by name and order the list by the most recent or most frequently updated.'],
+  ['Search and sort', 'Find extensions by name and order the list by the most recent update or alphabetically.'],
 ];
 const schema = {
   '@context': 'https://schema.org', '@type': 'SoftwareApplication', '@id': `${tracker.pageUrl}#software`,
@@ -42,6 +44,10 @@ const schema = {
       <img src={tracker.iconUrl} width="128" height="128" alt="" class="order-first h-24 w-24 rounded-[1.35rem] shadow-lg lg:order-none lg:h-36 lg:w-36 lg:rounded-[2rem]" />
     </div>
   </section>
+  <figure class="mt-14 overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:mt-20 sm:p-5">
+    <Image src={historyScreenshot} alt="Extensions Update Tracker showing recent browser extension version changes and their detection times" widths={[640, 960, 1280]} sizes="(max-width: 1024px) calc(100vw - 3rem), 1024px" loading="eager" fetchpriority="high" class="h-auto w-full rounded-lg" />
+    <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted sm:text-sm">Review recorded version changes, unread state, and detection times in one local history.</figcaption>
+  </figure>
   <section class="py-20 sm:py-28" aria-labelledby="features-title">
     <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">A record instead of a surprise</p>
     <h2 id="features-title" class="font-display max-w-3xl text-3xl font-medium sm:text-4xl">Review updates on your own terms</h2>
