@@ -1,0 +1,39 @@
+---
+import ExtensionShell from './ExtensionShell.astro';
+import {
+  hideUpgradeButton,
+  hideUpgradeButtonNav,
+  type HideUpgradeButtonPage,
+} from '../data/hide-upgrade-button';
+
+interface Props {
+  title: string;
+  description: string;
+  current: HideUpgradeButtonPage;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, current, structuredData } = Astro.props;
+const product = {
+  name: hideUpgradeButton.name,
+  baseUrl: hideUpgradeButton.baseUrl,
+  iconUrl: hideUpgradeButton.iconUrl,
+  ogImageUrl: hideUpgradeButton.ogImageUrl,
+  ogImageAlt:
+    'Hide Upgrade Button for Gmail, Drive and Docs — no upsell in your header',
+  githubUrl: hideUpgradeButton.githubUrl,
+  footerNote:
+    'Hide Upgrade Button for Gmail, Drive & Docs is an independent project. It is not affiliated with, endorsed by, or sponsored by Google. Gmail, Google Drive, Google Docs, Google Calendar, and Gemini are trademarks of Google LLC and are referenced only to describe compatibility.',
+};
+---
+
+<ExtensionShell
+  title={title}
+  description={description}
+  current={current}
+  product={product}
+  nav={hideUpgradeButtonNav}
+  structuredData={structuredData}
+>
+  <slot />
+</ExtensionShell>

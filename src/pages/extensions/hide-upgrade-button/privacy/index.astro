@@ -1,0 +1,130 @@
+---
+import HideUpgradeButtonShell from '../../../../components/HideUpgradeButtonShell.astro';
+import { hideUpgradeButton } from '../../../../data/hide-upgrade-button';
+
+const description =
+  'Hide Upgrade Button privacy policy: no data collection or network requests, two local preferences, in-memory header processing, permissions, deletion, and contact details.';
+---
+
+<HideUpgradeButtonShell
+  title="Hide Upgrade Button Privacy Policy"
+  description={description}
+  current="privacy"
+>
+  <article class="pt-16 sm:pt-24">
+    <header class="max-w-4xl">
+      <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
+        Privacy policy
+      </p>
+      <h1 class="font-display text-5xl leading-[1.06] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl">
+        Hide Upgrade Button Privacy Policy
+      </h1>
+      <p class="mt-6 text-sm text-muted">
+        Effective date: <time datetime="2026-08-21">August 21, 2026</time>
+      </p>
+      <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">
+        Hide Upgrade Button for Gmail, Drive & Docs does not collect, transmit,
+        sell, or share any data. It makes no network requests. The only thing it
+        stores is your two on/off preferences, locally in your own browser.
+      </p>
+    </header>
+
+    <aside class="mt-12 rounded-2xl border border-accent/25 bg-accent-soft p-6 sm:p-8" aria-labelledby="summary-title">
+      <h2 id="summary-title" class="font-display text-2xl font-medium">Plain-language summary</h2>
+      <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-secondary sm:grid-cols-2">
+        <li class="rounded-lg bg-card/70 px-4 py-3">No accounts, analytics, telemetry, crash reporting, advertising, or identifiers</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">No browsing history, email, document, file, or form contents are collected</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Two on/off settings stay in local extension storage and cache</li>
+        <li class="rounded-lg bg-card/70 px-4 py-3">Header controls are inspected in memory; nothing is sent to a server</li>
+      </ul>
+    </aside>
+
+    <div class="mt-16 max-w-4xl space-y-14 sm:mt-20">
+      <section aria-labelledby="processing-title">
+        <h2 id="processing-title" class="font-display text-3xl font-medium">What the extension processes</h2>
+        <div class="mt-7 divide-y divide-line overflow-hidden rounded-xl border border-line">
+          <div class="grid gap-2 bg-card p-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
+            <h3 class="font-medium">Your two settings</h3>
+            <p class="text-sm leading-relaxed text-secondary">
+              “Hide the Upgrade button” and “Hide the Ask Gemini button” are each a single on/off value. They are stored in <code>chrome.storage.local</code>, private to this extension inside your browser profile, plus a copy in the extension’s own local cache so the popup can open instantly. Neither ever leaves your device.
+            </p>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
+            <h3 class="font-medium">Header markup</h3>
+            <p class="text-sm leading-relaxed text-secondary">
+              To find the buttons, the content script inspects the header area of Gmail, Google Drive, Google Docs and, when you grant optional access, Google Calendar pages while they are open. This happens in memory only. Nothing it sees is recorded, persisted, or transmitted: it never reads your email, files, or documents, only the toolbar controls it exists to hide.
+            </p>
+          </div>
+        </div>
+        <p class="mt-5 leading-relaxed text-secondary">
+          The extension does not use <code>chrome.storage.sync</code> and does not send data to any server. There is no server.
+        </p>
+      </section>
+
+      <section aria-labelledby="not-collected-title">
+        <h2 id="not-collected-title" class="font-display text-3xl font-medium">What is not collected</h2>
+        <ul class="mt-5 list-disc space-y-3 pl-6 leading-relaxed text-secondary marker:text-accent">
+          <li>No accounts, sign-in, or identifiers of any kind.</li>
+          <li>No analytics, telemetry, or crash reporting.</li>
+          <li>No browsing history, email contents, document contents, or form input.</li>
+          <li>No advertising, and no sharing or sale of data to third parties.</li>
+          <li>No remote code: every script the extension runs ships inside the Manifest V3 package, and nothing is loaded from the network.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="permissions-title">
+        <h2 id="permissions-title" class="font-display text-3xl font-medium">Permissions and why they are needed</h2>
+        <dl class="mt-7 divide-y divide-line overflow-hidden rounded-xl border border-line bg-card">
+          <div class="grid gap-2 p-5 sm:grid-cols-[14rem_1fr] sm:gap-6">
+            <dt><code class="rounded bg-accent-soft px-2 py-1 text-sm text-accent">storage</code></dt>
+            <dd class="text-sm leading-relaxed text-secondary">Keeps your two toggle values on your device.</dd>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[14rem_1fr] sm:gap-6">
+            <dt><code class="rounded bg-accent-soft px-2 py-1 text-sm text-accent">scripting</code></dt>
+            <dd class="text-sm leading-relaxed text-secondary">Applies the extension to supported tabs that were already open when access was granted.</dd>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[14rem_1fr] sm:gap-6">
+            <dt><code class="rounded bg-accent-soft px-2 py-1 text-sm text-accent">mail.google.com</code>, <code class="rounded bg-accent-soft px-2 py-1 text-sm text-accent">drive.google.com</code>, <code class="rounded bg-accent-soft px-2 py-1 text-sm text-accent">docs.google.com</code></dt>
+            <dd class="text-sm leading-relaxed text-secondary">Required access for the extension’s original supported sites.</dd>
+          </div>
+          <div class="grid gap-2 p-5 sm:grid-cols-[14rem_1fr] sm:gap-6">
+            <dt><code class="rounded bg-accent-soft px-2 py-1 text-sm text-accent">calendar.google.com</code> <span class="text-xs text-muted">(optional)</span></dt>
+            <dd class="text-sm leading-relaxed text-secondary">Works automatically after you enable Calendar once in the popup.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="removing-title">
+        <h2 id="removing-title" class="font-display text-3xl font-medium">Removing your data</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          Uninstall the extension from <code>chrome://extensions</code>, <code>edge://extensions</code>, or <code>about:addons</code> in Firefox. The browser deletes the extension’s storage together with it—that is all the data there is. Hidden buttons reappear when the pages are next reloaded or re-rendered.
+        </p>
+      </section>
+
+      <section aria-labelledby="changes-title">
+        <h2 id="changes-title" class="font-display text-3xl font-medium">Changes to this policy</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          Any change will be published in the <a class="text-accent underline underline-offset-4" href={hideUpgradeButton.privacySourceUrl} target="_blank" rel="noopener">policy file in the project repository</a>, with the effective date above updated accordingly.
+        </p>
+      </section>
+
+      <section aria-labelledby="contact-title">
+        <h2 id="contact-title" class="font-display text-3xl font-medium">Contact</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          Questions or concerns can be sent to <a class="text-accent underline underline-offset-4" href={`mailto:${hideUpgradeButton.contactEmail}`}>{hideUpgradeButton.contactEmail}</a> or filed through <a class="text-accent underline underline-offset-4" href={hideUpgradeButton.issuesUrl} target="_blank" rel="noopener">GitHub Issues</a>.
+        </p>
+      </section>
+
+      <section aria-labelledby="affiliation-title">
+        <h2 id="affiliation-title" class="font-display text-3xl font-medium">Affiliation</h2>
+        <p class="mt-5 leading-relaxed text-secondary">
+          This project is independent. It is not affiliated with, endorsed by, or sponsored by Google. Gmail, Google Drive, Google Docs, Google Calendar, and Gemini are trademarks of Google LLC and are referenced only to describe compatibility.
+        </p>
+      </section>
+    </div>
+
+    <p class="mt-16 border-t border-line pt-6 text-sm leading-relaxed text-muted">
+      Version-controlled source: <a class="text-accent underline underline-offset-4" href={hideUpgradeButton.privacySourceUrl} target="_blank" rel="noopener">PRIVACY.md on GitHub</a>.
+    </p>
+  </article>
+</HideUpgradeButtonShell>

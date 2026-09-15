@@ -1,19 +1,20 @@
 ---
 import { Image } from 'astro:assets';
-import ThemeToggle from '../../../components/ThemeToggle.astro';
 import beforeAfter from '../../../assets/extensions/hide-upgrade-button/before-after.png';
-import Layout from '../../../layouts/Layout.astro';
+import HideUpgradeButtonShell from '../../../components/HideUpgradeButtonShell.astro';
+import { hideUpgradeButton } from '../../../data/hide-upgrade-button';
 import { extensionStoreLinks } from '../../../data/store-links';
 
-const pageUrl = 'https://maximtop.dev/extensions/hide-upgrade-button/';
-const storeUrl = extensionStoreLinks.hideUpgradeButton.chrome.url;
-const edgeStoreUrl = extensionStoreLinks.hideUpgradeButton.edge.url;
-const firefoxStoreUrl = extensionStoreLinks.hideUpgradeButton.firefox.url;
-const githubUrl = 'https://github.com/maximtop/hide-gmail-upgrade-button';
-const privacyUrl = `${githubUrl}/blob/master/PRIVACY.md`;
-const issuesUrl = `${githubUrl}/issues`;
+const pageUrl = hideUpgradeButton.pageUrl;
+const storeUrl = hideUpgradeButton.storeUrl;
+const edgeStoreUrl = hideUpgradeButton.edgeStoreUrl;
+const firefoxStoreUrl = hideUpgradeButton.firefoxStoreUrl;
+const githubUrl = hideUpgradeButton.githubUrl;
+const privacyUrl = `${hideUpgradeButton.baseUrl}privacy/`;
+const supportUrl = `${hideUpgradeButton.baseUrl}support/`;
+const issuesUrl = hideUpgradeButton.issuesUrl;
 const description =
-  'Hide the Upgrade and Ask Gemini buttons in Gmail, Google Drive, and Google Docs. Free, open-source Chrome extension with no tracking or data collection.';
+  'Hide the Upgrade and Ask Gemini buttons in Gmail, Drive, and Docs, plus the Upgrade button in Calendar. Free, open-source browser extension with no tracking.';
 
 const products = [
   {
@@ -28,6 +29,10 @@ const products = [
     name: 'Google Docs',
     description: 'Works in Docs, Sheets, Slides, and their home screens.',
   },
+  {
+    name: 'Google Calendar',
+    description: 'Optionally hide the Upgrade button after granting access once.',
+  },
 ];
 
 const permissions = [
@@ -38,7 +43,7 @@ const permissions = [
   {
     name: 'scripting',
     description:
-      'Applies your settings to supported tabs that were already open when the extension was installed or updated.',
+      'Applies your settings to supported tabs that were already open when access was granted.',
   },
   {
     name: 'mail.google.com',
@@ -51,6 +56,10 @@ const permissions = [
   {
     name: 'docs.google.com',
     description: 'Lets the extension work in Google Docs, Sheets, and Slides only.',
+  },
+  {
+    name: 'calendar.google.com',
+    description: 'Optional access, enabled once in the popup, for Google Calendar only.',
   },
 ];
 
@@ -65,8 +74,8 @@ const softwareApplicationSchema = {
   image: `${pageUrl}og.png`,
   applicationCategory: 'BrowserApplication',
   applicationSubCategory: 'Productivity',
-  operatingSystem: 'Google Chrome',
-  browserRequirements: 'Requires Google Chrome with Manifest V3 support',
+  operatingSystem: 'Google Chrome, Mozilla Firefox, Microsoft Edge',
+  browserRequirements: 'Requires a supported browser with WebExtensions support',
   isAccessibleForFree: true,
   downloadUrl: storeUrl,
   offers: Object.values(extensionStoreLinks.hideUpgradeButton).map((store) => ({
@@ -86,30 +95,18 @@ const softwareApplicationSchema = {
 };
 ---
 
-<Layout
+<HideUpgradeButtonShell
   title="Hide Upgrade Button for Gmail, Drive & Docs"
   description={description}
-  ogImage="/extensions/hide-upgrade-button/og.png"
-  ogImageAlt="Hide Upgrade Button for Gmail, Drive and Docs — no upsell in your header"
+  current="overview"
   structuredData={softwareApplicationSchema}
 >
-  <div class="mx-auto max-w-5xl px-6 py-8 sm:py-12">
-    <header class="flex items-center justify-between">
-      <a
-        href="/"
-        class="text-xs tracking-[0.2em] text-muted transition-colors hover:text-accent"
-      >
-        MAXIMTOP.DEV
-      </a>
-      <ThemeToggle />
-    </header>
-
-    <main class="pt-16 sm:pt-24">
+    <div class="pt-16 sm:pt-24">
       <section aria-labelledby="page-title">
         <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_10rem] lg:gap-16">
           <div>
             <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">
-              Free, open-source Chrome extension
+              Free, open-source browser extension
             </p>
             <h1
               id="page-title"
@@ -195,9 +192,9 @@ const softwareApplicationSchema = {
       <section class="py-20 sm:py-28" aria-labelledby="products-title">
         <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Supported products</p>
         <h2 id="products-title" class="font-display text-3xl font-medium sm:text-4xl">
-          One clean header. Three Google products.
+          One clean header across Google’s workspace.
         </h2>
-        <div class="mt-8 grid gap-4 sm:grid-cols-3">
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {
             products.map((product) => (
               <article class="rounded-xl border border-line bg-card p-5">
@@ -262,11 +259,9 @@ const softwareApplicationSchema = {
           </div>
           <a
             href={privacyUrl}
-            target="_blank"
-            rel="noopener"
             class="mt-8 inline-block text-sm font-medium text-accent underline decoration-accent/35 underline-offset-4 hover:decoration-accent"
           >
-            Read the full privacy policy ↗
+            Read the full privacy policy →
           </a>
         </div>
       </section>
@@ -310,7 +305,7 @@ const softwareApplicationSchema = {
               What exactly does Hide Upgrade Button remove?
             </summary>
             <p class="mt-3 max-w-3xl leading-relaxed text-secondary">
-              It hides the Upgrade subscription button and the Ask Gemini button in Gmail, Google Drive, and Google Docs. Each can be enabled or disabled separately.
+              It hides the Upgrade subscription button and the Ask Gemini button in Gmail, Google Drive, and Google Docs. It also hides the Upgrade button in Google Calendar after you grant optional access. The Upgrade and Ask Gemini settings can be enabled or disabled separately.
             </p>
           </details>
           <details class="group py-5">
@@ -326,7 +321,7 @@ const softwareApplicationSchema = {
               Why does it need access to Google sites?
             </summary>
             <p class="mt-3 max-w-3xl leading-relaxed text-secondary">
-              That access lets its content script run only on Gmail, Drive, and Docs, where it finds and hides the selected buttons. It cannot run on other sites.
+              Required access lets its content script run on Gmail, Drive, and Docs, where it finds and hides the selected buttons. Calendar access is optional and starts only after you enable it once in the popup.
             </p>
           </details>
           <details class="group py-5">
@@ -334,8 +329,8 @@ const softwareApplicationSchema = {
               What happens if Google changes its interface?
             </summary>
             <p class="mt-3 max-w-3xl leading-relaxed text-secondary">
-              The extension fails safely: if a match is ambiguous, it leaves the page unchanged. If a button comes back, report it in
-              <a class="text-accent underline underline-offset-4" href={issuesUrl} target="_blank" rel="noopener">GitHub Issues</a>
+              The extension fails safely: if a match is ambiguous, it leaves the page unchanged. If a button comes back, report it in{' '}
+              <a class="text-accent underline underline-offset-4" href={issuesUrl} target="_blank" rel="noopener">GitHub Issues</a>{' '}
               and an extension update can restore hiding.
             </p>
           </details>
@@ -379,19 +374,8 @@ const softwareApplicationSchema = {
           </a>
         </div>
       </section>
-    </main>
-
-    <footer class="mt-20 border-t border-line pt-8 pb-4 sm:mt-24">
-      <nav aria-label="Product links" class="flex flex-wrap gap-x-5 gap-y-3 text-sm">
-        <a href="/" class="text-secondary hover:text-accent">maximtop.dev</a>
-        <a href={githubUrl} target="_blank" rel="noopener" class="text-secondary hover:text-accent">GitHub</a>
-        <a href={privacyUrl} target="_blank" rel="noopener" class="text-secondary hover:text-accent">Privacy</a>
-        <a href={issuesUrl} target="_blank" rel="noopener" class="text-secondary hover:text-accent">Support & issues</a>
-      </nav>
-      <p class="mt-7 max-w-3xl text-xs leading-relaxed text-muted">
-        Hide Upgrade Button for Gmail, Drive & Docs is an independent project and is not affiliated with, endorsed by, or sponsored by Google. Gmail, Google Drive, Google Docs, and Gemini are trademarks of Google LLC and are referenced only to describe compatibility.
+      <p class="mt-8 text-center text-sm text-secondary">
+        Need help? <a class="font-medium text-accent underline underline-offset-4" href={supportUrl}>Open the support guide</a>.
       </p>
-      <p class="mt-5 text-xs text-muted">© {new Date().getFullYear()} Maxim Topciu</p>
-    </footer>
-  </div>
-</Layout>
+    </div>
+</HideUpgradeButtonShell>
