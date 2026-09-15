@@ -48,9 +48,10 @@ export const site = {
     },
     {
       name: 'Extensions Update Tracker',
-      description: 'Track and manage your Chrome extension updates in one place.',
-      url: extensionStoreLinks.extensionsUpdateTracker.chrome.url,
+      description: 'Track browser extension updates and review local version history.',
+      url: '/extensions/update-tracker/',
       icon: 'refresh',
+      meta: 'Product page',
       storeLinks: Object.values(extensionStoreLinks.extensionsUpdateTracker),
     },
     {

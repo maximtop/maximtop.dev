@@ -1,0 +1,23 @@
+---
+import ExtensionsUpdateTrackerShell from '../../../../components/ExtensionsUpdateTrackerShell.astro';
+import { extensionsUpdateTracker as tracker } from '../../../../data/extensions-update-tracker';
+const description = 'Extensions Update Tracker FAQ: update detection, first-run behavior, local history, permissions, notifications, auto-disable, Firefox, and troubleshooting.';
+const faqs = [
+  ['Does it check browser stores for updates?', 'No. It observes the extensions installed in your browser. It detects version changes through browser management events and a startup comparison; it does not poll store listings or fetch release notes.'],
+  ['Will installing it create alerts for every existing extension?', 'No. The first scan establishes a baseline. A notification and history entry appear only after the tracker later sees a version change.'],
+  ['Where is update history stored?', 'In extension-local storage inside the current browser profile. It is not synced to another device or browser profile and is never uploaded.'],
+  ['Why did the toolbar badge disappear when I opened the history?', 'Opening the options page clears the visible badge. Your history remains available, and items keep their read state until you mark them as read.'],
+  ['Can I stop alerts for one frequently updated extension?', 'Yes. Mute that extension in settings. Its history will still be recorded while its notifications are muted.'],
+  ['What does auto-disable on update do?', 'When enabled on Chrome or Edge, an extension that updates is disabled until you review it and turn it back on. The setting is off by default and is unavailable on Firefox.'],
+  ['Why are some controls different in Firefox?', 'Firefox does not allow an ordinary extension to enable or disable other extensions, so auto-disable is unavailable. Firefox notifications also lack the Chromium action buttons; clicking the notification body opens the update history. Browser capabilities differ for notification sound as well.'],
+  ['What happens when I uninstall a tracked extension?', 'Its stored update history is deleted automatically. Uninstalling Extensions Update Tracker removes all of its local storage, including the complete history.'],
+  ['Can the tracker see websites or form data?', 'No. It has no host permissions and injects no content scripts. It cannot read the pages you visit or what you enter on them.'],
+  ['Why was an update not detected?', 'Confirm that the tracker remained installed, the browser profile is the same one, and the extension version actually changed. If the issue continues, include your browser and tracker versions in a GitHub issue.'],
+];
+const schema = { '@context': 'https://schema.org', '@type': 'FAQPage', '@id': `${tracker.pageUrl}faq/#faq`, mainEntity: faqs.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) };
+---
+<ExtensionsUpdateTrackerShell title="Extensions Update Tracker FAQ & Troubleshooting" description={description} current="faq" structuredData={schema}>
+  <article class="pt-16 sm:pt-24"><header class="max-w-4xl"><p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">Answers and troubleshooting</p><h1 class="font-display text-5xl leading-[1.06] font-medium text-balance sm:text-6xl">Extensions Update Tracker FAQ</h1><p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">The tracker watches installed versions inside one browser profile. It does not monitor store pages or sync history between devices.</p></header>
+  <section class="py-16 sm:py-20" aria-label="Frequently asked questions"><div class="divide-y divide-line border-y border-line">{faqs.map(([question, answer], index) => <details class="group py-6" open={index === 0 ? true : undefined}><summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium marker:hidden"><span>{question}</span><span aria-hidden="true" class="text-accent group-open:rotate-45">+</span></summary><p class="mt-4 max-w-3xl leading-relaxed text-secondary">{answer}</p></details>)}</div></section>
+  <section class="grid gap-4 sm:grid-cols-2"><a href={`${tracker.baseUrl}how-it-works/`} class="rounded-xl border border-line bg-card p-6 hover:border-accent"><p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Product guide</p><h2 class="mt-3 text-lg font-medium">See how detection works</h2></a><a href={`${tracker.baseUrl}support/`} class="rounded-xl border border-line bg-card p-6 hover:border-accent"><p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">Still need help?</p><h2 class="mt-3 text-lg font-medium">Contact support</h2></a></section></article>
+</ExtensionsUpdateTrackerShell>

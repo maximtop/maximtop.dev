@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import ExtensionsUpdateTrackerShell from '../../../components/ExtensionsUpdateTrackerShell.astro';
+import { extensionsUpdateTracker as tracker } from '../../../data/extensions-update-tracker';
+import historyScreenshot from '../../../assets/extensions/update-tracker/history.webp';
+
+const description = 'See when your browser extensions update, review version history, and get local notifications. Free and open source for Chrome, Edge, and Firefox.';
+const features = [
+  ['Update alerts', 'See the extension name and its previous and new version when an update is detected.'],
+  ['Local update history', 'Review recorded version changes together with the time each update was first detected.'],
+  ['Unread queue', 'A toolbar badge counts updates you have not reviewed; mark them read and undo if needed.'],
+  ['Controls for noisy updates', 'Mute notifications for individual extensions while continuing to record their update history.'],
+  ['Optional auto-disable', 'On Chrome and Edge, keep an updated extension disabled until you review it and turn it back on.'],
+  ['Search and sort', 'Find extensions by name and order the list by the most recent update or alphabetically.'],
+];
+const schema = {
+  '@context': 'https://schema.org', '@type': 'SoftwareApplication', '@id': `${tracker.pageUrl}#software`,
+  name: tracker.name, description, url: tracker.pageUrl, applicationCategory: 'SecurityApplication',
+  image: `https://maximtop.dev${tracker.iconUrl}`,
+  applicationSubCategory: 'Browser extension', operatingSystem: 'Chrome, Microsoft Edge, Mozilla Firefox',
+  isAccessibleForFree: true, downloadUrl: tracker.chromeStoreUrl,
+  featureList: features.map(([title]) => title),
+  offers: [tracker.chromeStoreUrl, tracker.edgeStoreUrl, tracker.firefoxStoreUrl].map((url) => ({ '@type': 'Offer', price: 0, priceCurrency: 'USD', availability: 'https://schema.org/InStock', url })),
+  author: { '@type': 'Person', name: 'Maxim Topciu', url: 'https://maximtop.dev/' },
+  license: `${tracker.githubUrl}/blob/master/LICENSE`,
+  sameAs: [tracker.githubUrl, tracker.chromeStoreUrl, tracker.edgeStoreUrl, tracker.firefoxStoreUrl],
+};
+---
+<ExtensionsUpdateTrackerShell title="Extensions Update Tracker — See What Changed and When" description={description} current="overview" structuredData={schema}>
+  <section class="pt-16 sm:pt-24" aria-labelledby="page-title">
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_9rem] lg:gap-16">
+      <div>
+        <p class="mb-5 text-xs font-medium tracking-[0.18em] text-accent uppercase">Free, open-source browser extension</p>
+        <h1 id="page-title" class="font-display max-w-4xl text-5xl leading-[1.04] font-medium text-balance [font-variation-settings:'WONK'_1,'SOFT'_40] sm:text-6xl lg:text-7xl">Know when your extensions change</h1>
+        <p class="mt-7 max-w-3xl text-lg leading-relaxed text-secondary sm:text-xl">Browser extensions update silently. Extensions Update Tracker records the old version, new version, and detection time so you have a history to review.</p>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          {[[tracker.chromeStoreUrl, 'Add to Chrome'], [tracker.edgeStoreUrl, 'Add to Edge'], [tracker.firefoxStoreUrl, 'Add to Firefox']].map(([href, label], index) => (
+            <a href={href} target="_blank" rel="noopener" class:list={['inline-flex min-h-12 items-center justify-center rounded-lg px-5 py-3 text-sm font-semibold transition-[background-color,transform] hover:-translate-y-0.5', index === 0 ? 'bg-accent text-white hover:bg-[#075443] dark:text-[#08261f] dark:hover:bg-[#6ee7b7]' : 'border border-line bg-card text-secondary hover:border-accent hover:text-accent']}>{label}<span aria-hidden="true" class="ml-2">↗</span></a>
+          ))}
+          <a href={`${tracker.baseUrl}how-it-works/`} class="inline-flex min-h-12 items-center px-2 py-3 text-sm font-medium text-secondary hover:text-accent">See how it works</a>
+        </div>
+        <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted"><li>✓ No account</li><li>✓ No analytics</li><li>✓ No network requests</li><li>✓ Local history</li></ul>
+      </div>
+      <img src={tracker.iconUrl} width="128" height="128" alt="" class="order-first h-24 w-24 rounded-[1.35rem] shadow-lg lg:order-none lg:h-36 lg:w-36 lg:rounded-[2rem]" />
+    </div>
+  </section>
+  <figure class="mt-14 overflow-hidden rounded-2xl border border-line bg-card p-3 shadow-sm sm:mt-20 sm:p-5">
+    <Image src={historyScreenshot} alt="Extensions Update Tracker showing recent browser extension version changes and their detection times" widths={[640, 960, 1280]} sizes="(max-width: 1024px) calc(100vw - 3rem), 1024px" loading="eager" fetchpriority="high" class="h-auto w-full rounded-lg" />
+    <figcaption class="px-2 pt-4 pb-1 text-center text-xs leading-relaxed text-muted sm:text-sm">Review recorded version changes, unread state, and detection times in one local history.</figcaption>
+  </figure>
+  <section class="py-20 sm:py-28" aria-labelledby="features-title">
+    <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">A record instead of a surprise</p>
+    <h2 id="features-title" class="font-display max-w-3xl text-3xl font-medium sm:text-4xl">Review updates on your own terms</h2>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{features.map(([title, copy]) => <article class="rounded-xl border border-line bg-card p-6"><h3 class="font-medium">{title}</h3><p class="mt-2 text-sm leading-relaxed text-secondary">{copy}</p></article>)}</div>
+  </section>
+  <section class="border-y border-line py-20 sm:py-24" aria-labelledby="privacy-title">
+    <div class="grid gap-10 lg:grid-cols-2 lg:gap-16"><div><p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">Private by design</p><h2 id="privacy-title" class="font-display text-3xl font-medium sm:text-4xl">History stays in your browser</h2></div><div><p class="leading-relaxed text-secondary">There is no account, backend, telemetry, or access to the pages you visit. The extension reads installed-extension metadata through the browser management API and saves history in extension-local storage.</p><a href={`${tracker.baseUrl}privacy/`} class="mt-6 inline-block text-sm font-medium text-accent underline underline-offset-4">Read the privacy policy →</a></div></div>
+  </section>
+  <section class="py-20 text-center sm:py-28"><h2 class="font-display text-3xl font-medium sm:text-4xl">Ready to keep an update history?</h2><p class="mx-auto mt-4 max-w-xl leading-relaxed text-secondary">Install the tracker, then let your browser update extensions as usual.</p><a href={tracker.chromeStoreUrl} target="_blank" rel="noopener" class="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white dark:text-[#08261f]">Add to Chrome ↗</a></section>
+</ExtensionsUpdateTrackerShell>

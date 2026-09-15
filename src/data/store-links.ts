@@ -43,6 +43,10 @@ export const extensionStoreLinks = {
       label: 'Edge',
       url: 'https://microsoftedge.microsoft.com/addons/detail/mcblolcgepoahkfedfkjohdgnpgbfnpf',
     },
+    firefox: {
+      label: 'Firefox',
+      url: 'https://addons.mozilla.org/en-US/firefox/addon/extensions-update-tracker/',
+    },
   },
   aiAdBlocker: {
     chrome: {
