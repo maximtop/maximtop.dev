@@ -188,19 +188,17 @@ const breadcrumbSchema = {
       <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
         <div>
           <p class="mb-3 text-xs font-medium tracking-[0.18em] text-accent uppercase">
-            The missing Chrome API
+            The extension’s reading modes
           </p>
           <h2 id="why-side-panel-title" class="font-display text-3xl font-medium sm:text-4xl">
-            Why a Chrome extension cannot open Split View automatically
+            Why Split for Hacker News uses the side panel
           </h2>
         </div>
         <div class="space-y-5 leading-relaxed text-secondary">
           <p>
-            Chrome provides native Split View in the browser interface, but its
-            current public extension APIs do not expose a way to create a split,
-            place specific tabs into it, or manage that layout on your behalf.
-            Chrome’s official workflow still starts with you choosing Split View
-            in the browser UI.
+            Split for Hacker News does not create or manage native Chrome Split View.
+            Its adjacent-tab flow leaves the final pairing to you in the browser UI.
+            Its side-panel flow opens the selected discussion beside the current article after your explicit action.
           </p>
           <p>
             The goal for Split was a one-action workflow that leaves the article
@@ -221,9 +219,8 @@ const breadcrumbSchema = {
             <h3 class="font-medium text-ink">A deliberate constraint</h3>
             <p class="mt-2 leading-relaxed">
               The extension does not simulate browser clicks, move your current
-              tab, or depend on an undocumented API. The side panel is the
-              reliable one-click layout Chrome extensions can support today;
-              native Split View stays an explicit user action.
+              tab, or depend on an undocumented API. This extension uses the side panel for its one-action companion flow;
+              native Split View pairing stays an explicit user action.
             </p>
           </div>
         </div>
@@ -352,7 +349,7 @@ const breadcrumbSchema = {
         Why the real HN page can appear in a panel
       </h2>
       <p class="mt-5 max-w-3xl leading-relaxed text-secondary">
-        Hacker News normally sends headers that prevent subframe embedding. While a Split side panel is open, the extension temporarily removes those framing and content-security-policy headers from Hacker News subframe responses. The rule is removed when the panel closes, never affects top-level HN navigation, and never applies to another host.
+        Hacker News normally sends headers that prevent subframe embedding. While a Split side panel is open, the extension temporarily removes those framing and content-security-policy headers from Hacker News subframe responses. The rule lasts from the first open panel to the last panel closing. It covers all Hacker News subframes in that browser profile, including frames outside the panel, and removes their CSP script restrictions too. Top-level HN pages and other hosts retain their headers.
       </p>
       <p class="mt-4 max-w-3xl leading-relaxed text-secondary">
         Split does not read the framed page, its cookies, or your HN session. The full scope and limitation are documented in the{' '}

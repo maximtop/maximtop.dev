@@ -6,7 +6,7 @@ import discussionResults from '../../../assets/extensions/split-for-hacker-news/
 import privateDefaults from '../../../assets/extensions/split-for-hacker-news/private-defaults.png';
 
 const description =
-  'Find the exact Hacker News discussion for the article you are reading. Available for Chrome, Firefox, and Edge. Free, open source, and no telemetry.';
+  'Find the exact Hacker News discussion for the article you are reading. Available for Chrome, Firefox, and Edge. Free, open source, unofficial, and no telemetry.';
 
 const features = [
   {
@@ -148,7 +148,7 @@ const breadcrumbSchema = {
           </a>
         </div>
         <p class="mt-5 max-w-3xl text-sm leading-relaxed text-muted">
-          Firefox uses its Sidebar for companion reading. The Chrome Split View
+          Chrome requires version 140 or newer. Firefox 140 or newer uses its Sidebar for companion reading. The Chrome Split View
           and Hacker News story-click flows described below are not included in
           the Firefox version.
         </p>
@@ -249,7 +249,7 @@ const breadcrumbSchema = {
             Keep the current tab untouched while the real Hacker News discussion opens in Chrome’s side panel.
           </p>
           <p class="mt-4 text-xs leading-relaxed text-muted">
-            The extension temporarily relaxes Hacker News subframe headers only while the panel is open so the page can be embedded.
+            While a panel is open, a temporary rule removes framing and CSP headers from all Hacker News subframes in the browser profile, including frames outside this panel. The full scope is explained in the privacy summary.
           </p>
         </article>
         <article class="rounded-xl border border-line bg-card p-6">
@@ -259,7 +259,7 @@ const breadcrumbSchema = {
             Open and reuse a discussion tab next to the article, then pair the two tabs yourself with Chrome Split View.
           </p>
           <p class="mt-4 text-xs leading-relaxed text-muted">
-            Split for Hacker News cannot create native Split View automatically; Chrome leaves that final layout choice to you.
+            Split for Hacker News does not create native Split View automatically. Pair the two tabs yourself in Chrome.
           </p>
         </article>
       </div>
@@ -269,13 +269,13 @@ const breadcrumbSchema = {
       aria-labelledby="why-side-panel-title"
     >
       <p class="text-xs font-medium tracking-[0.18em] text-accent uppercase">
-        The missing Chrome API
+        Choose your reading layout
       </p>
       <h3 id="why-side-panel-title" class="mt-3 font-display text-2xl font-medium">
         Why Side Panel instead of automatic Split View?
       </h3>
       <p class="mt-4 max-w-4xl leading-relaxed text-secondary">
-        Chrome has native Split View, but its public extension API does not currently expose a way to create or manage that layout. We wanted one explicit action to keep the article and its Hacker News discussion visible together, so Split uses Chrome’s supported Side Panel API for the automatic path. Native Split View remains available as a manual, user-controlled option.
+        Split for Hacker News opens Chrome’s side panel after your explicit action to keep an article and its discussion visible together. If you prefer native Chrome Split View, open an adjacent discussion tab and pair the two tabs yourself. The extension does not create or manage native Split View.
       </p>
     </aside>
   </section>
@@ -307,6 +307,9 @@ const breadcrumbSchema = {
         </p>
       </article>
     </div>
+    <p class="mt-7 max-w-3xl leading-relaxed text-secondary">
+      <strong>Follow tabs automatically</strong> is a separate opt-in that checks active public articles only while a panel is already open. <strong>Check this tab</strong> checks once without enabling following. Following never opens the panel or rearranges tabs.
+    </p>
   </section>
 
   <section class="border-y border-line py-20 sm:py-24" aria-labelledby="privacy-title">
@@ -323,7 +326,7 @@ const breadcrumbSchema = {
             In manual mode, the popup reads the current page URL and its optional canonical URL only after you open it. Eligible sanitized public URLs go directly to Algolia’s public Hacker News Search API.
           </p>
           <p>
-            Split for Hacker News has no analytics, telemetry, account, advertising, or developer backend. It never reads or sends article text.
+            Split for Hacker News is free, open source (MIT), and unofficial, with no analytics, telemetry, extension account, advertising, or developer-operated backend. It never reads or sends article text. Opened discussions connect directly to Hacker News, with ordinary request metadata and any cookies allowed by browser policy.
           </p>
         </div>
         <div class="mt-7 flex flex-wrap gap-5 text-sm">
