@@ -3,7 +3,7 @@ import SplitForHackerNewsShell from '../../../../components/SplitForHackerNewsSh
 import { splitForHackerNews } from '../../../../data/split-for-hacker-news';
 
 const description =
-  'Answers to common questions about installing, using, and troubleshooting Split for Hacker News in Google Chrome.';
+  'Answers to common questions about installing, using, and troubleshooting Split for Hacker News in Chrome, Edge, and Firefox.';
 
 const faqs = [
   {
@@ -14,7 +14,7 @@ const faqs = [
   {
     question: 'Which browsers are supported?',
     answer:
-      'The public release supports Google Chrome 140 or newer. Other browser packages may exist in the source repository, but they are not offered here as supported public releases.',
+      'Chrome, Edge, and Firefox store links are on the overview page. Chrome requires version 140 or newer; Firefox requires 140 or newer and uses Firefox Sidebar. The Firefox package omits the HN story-click shortcut and Chrome Split View guidance. The Chrome workflows on this site should not be assumed to work identically in every browser. Safari is not an implemented target.',
   },
   {
     question: 'How does it find the matching Hacker News discussion?',
@@ -34,12 +34,12 @@ const faqs = [
   {
     question: 'Does the extension read article text or track browsing?',
     answer:
-      'No article text is read. There is no telemetry, advertising, account, or developer backend. Eligible sanitized URL candidates go to Algolia only for a requested lookup or the optional automatic badge feature.',
+      'No article text is read. The extension is free, open source (MIT), and unofficial, with no telemetry, advertising, extension account, or developer-operated backend. Eligible sanitized URL candidates go to Algolia for requested lookups, the optional automatic badge, or following active tabs while the panel is open. Opened discussions connect directly to Hacker News with ordinary request metadata and any cookies allowed by browser policy.',
   },
   {
     question: 'Why does the side panel need special access to Hacker News?',
     answer:
-      'The panel embeds the real Hacker News site. While the panel is open, the extension temporarily removes Hacker News framing headers from Hacker News sub-frame responses; the rule is removed when the panel closes.',
+      'The panel embeds the real Hacker News site. From the first open panel to the last panel closing, a rule removes framing and CSP headers from every Hacker News sub-frame in the browser profile, including frames outside the panel. This also removes HN script restrictions inside those frames. Top-level HN pages and other hosts keep their headers. See the privacy summary for details.',
   },
   {
     question: 'Is this an official Hacker News extension?',
