@@ -80,6 +80,7 @@ export const site = {
   ],
   links: [
     { name: 'GitHub', url: 'https://github.com/maximtop' },
+    { name: 'X', url: 'https://x.com/maximtop' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/maximtop/' },
     { name: 'Email', url: 'mailto:me@maximtop.dev' },
   ],
