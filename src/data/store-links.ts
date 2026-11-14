@@ -9,6 +9,10 @@ export const extensionStoreLinks = {
       label: 'Chrome',
       url: 'https://chromewebstore.google.com/detail/no-more-ago/pcaimklimkjljhmbfkhidealekkiopbd',
     },
+    edge: {
+      label: 'Edge',
+      url: 'https://microsoftedge.microsoft.com/addons/detail/mpgekpchclaplfofhpbnpmbcnafkkjne',
+    },
     firefox: {
       label: 'Firefox',
       url: 'https://addons.mozilla.org/en-US/firefox/addon/no-more-ago/',
